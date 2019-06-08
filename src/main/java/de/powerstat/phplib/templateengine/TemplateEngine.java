@@ -58,15 +58,37 @@ public final class TemplateEngine
    * "comment" =&gt; replace undefined variables with comments
    * "keep"    =&gt; keep undefined variables
    */
-  private transient String unknowns = "remove"; //$NON-NLS-1$
+  private transient HandleUndefined unknowns = HandleUndefined.remove;
+
+  /**
+   * Enum for handling of undefined variables.
+   */
+  public enum HandleUndefined
+   {
+    /**
+     * Keep variables.
+     */
+    keep,
+
+    /**
+     * Change to XML comments.
+     */
+    comment,
+
+    /**
+     * Remove variables.
+     */
+    remove
+   }
 
 
   /**
    * Constructor.
    *
-   * @param unknowns Handling of unknown template variables (remove,comment,keep)
+   * @param unknowns Handling of unknown template variables
+   * @see HandleUndefined
    */
-  public TemplateEngine(final String unknowns)
+  public TemplateEngine(final HandleUndefined unknowns)
    {
     this.unknowns = unknowns;
    }
@@ -77,22 +99,17 @@ public final class TemplateEngine
    */
   public TemplateEngine()
    {
-    this("remove"); //$NON-NLS-1$
+    this(HandleUndefined.remove);
    }
 
 
   /**
    * Handling of unknown template variables during parsing.
    *
-   * @param newUnknowns Could be "remove", "comment", "keep"
-   *
-   * "remove"  =&gt; remove undefined variables
-   * "comment" =&gt; replace undefined variables with comments
-   * "keep"    =&gt; keep undefined variables
-   *
-   * TODO Make unknowns an enum
+   * @param newUnknowns How to handle unknown variables.
+   * @see HandleUndefined
    */
-  public void setUnknowns(final String newUnknowns)
+  public void setUnknowns(final HandleUndefined newUnknowns)
    {
     this.unknowns = newUnknowns;
    }
@@ -107,7 +124,7 @@ public final class TemplateEngine
    */
   public boolean setFile(final String newVarname, final File newFile)
    {
-    final boolean exists = newFile.exists();
+    final boolean exists = newFile.exists(); // TODO Does this work for classpath/jar resources?
     if (exists)
      {
       this.files.put(newVarname, newFile);
@@ -132,14 +149,14 @@ public final class TemplateEngine
      }
     final StringBuilder fileBuffer = new StringBuilder();
     final File file = this.files.get(varname);
-    if (file.length() == 0)
+    if (file.length() == 0) // TODO Does this work for classpath/jar resources?
      {
       return false;
      }
-    InputStream istream = this.getClass().getResourceAsStream("/" + file.getName()); //$NON-NLS-1$
+    InputStream istream = Files.newInputStream(this.files.get(varname).toPath(), StandardOpenOption.READ); // Read from filesystem
     if (istream == null)
      {
-      istream = Files.newInputStream(this.files.get(varname).toPath(), StandardOpenOption.READ);
+      istream = this.getClass().getResourceAsStream("/" + file.getName()); //$NON-NLS-1$ // Read from classpath/jar
      }
     try (BufferedReader reader = new BufferedReader(new InputStreamReader(istream, StandardCharsets.UTF_8)))
      {
@@ -255,7 +272,7 @@ public final class TemplateEngine
    *
    * @param varname Variable name
    * @return Replaced variable content or null
-   * @throws IOException
+   * @throws IOException File not found or IO exception
    *
    * TODO Performance optimization:
    * The replace loop is a bootleneck, because some applications pollute the template class with a lot of variable settings
@@ -294,7 +311,7 @@ public final class TemplateEngine
    * @param varname Parse the content of this variable
    * @param append true for appending blocks to target, otherwise false for replacing targets content
    * @return Variables content after parsing
-   * @throws IOException IO exception
+   * @throws IOException File not found or IO exception
    */
   public String parse(final String target, final String varname, final boolean append) throws IOException
    {
@@ -312,7 +329,7 @@ public final class TemplateEngine
    * @param target Target for parsing operation
    * @param varname Parse the content of this variable
    * @return Variables content after parsing
-   * @throws IOException IO exception
+   * @throws IOException File not found or IO exception
    */
   public String parse(final String target, final String varname) throws IOException
    {
@@ -349,7 +366,7 @@ public final class TemplateEngine
    *
    * @param varname Variable to parse for undefined variables
    * @return List with undefined template variables names
-   * @throws IOException IO exception
+   * @throws IOException  File not found or IO exception
    */
   public List<String> getUndefined(final String varname) throws IOException
    {
@@ -387,20 +404,21 @@ public final class TemplateEngine
     final Matcher matcher = pattern.matcher(result);
     switch (this.unknowns)
      {
-      case "keep": //$NON-NLS-1$
+      case keep:
         break;
-      case "remove": //$NON-NLS-1$
+      case remove:
         result = matcher.replaceAll(""); //$NON-NLS-1$
         break;
-      case "comment": //$NON-NLS-1$
+      case comment:
         result = matcher.replaceAll("<!-- Template variable '$1' undefined -->"); //$NON-NLS-1$
         break;
-      default:
+      /*
+      default: // Only for the case that enum HandleUndefined will be extended.
         if (LOGGER.isDebugEnabled())
          {
           LOGGER.debug("Unsupported unknowns: " + this.unknowns); //$NON-NLS-1$
          }
-        // TODO throw exception
+      */
      }
     return result;
    }

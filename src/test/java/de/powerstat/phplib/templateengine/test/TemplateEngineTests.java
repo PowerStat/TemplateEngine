@@ -21,6 +21,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import de.powerstat.phplib.templateengine.TemplateEngine;
+import de.powerstat.phplib.templateengine.TemplateEngine.HandleUndefined;
 
 
 /**
@@ -203,7 +204,7 @@ public final class TemplateEngineTests
   @Test
   public void getKeep() throws IOException
    {
-    final TemplateEngine engine = new TemplateEngine("keep"); //$NON-NLS-1$
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.keep);
     /* final boolean success = */ engine.setFile("file1", new File("target/test-classes/template1.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
     /* String substResult = */ engine.subst("file1"); //$NON-NLS-1$
     /* String parseResult = */ engine.parse("output", "file1"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -220,7 +221,7 @@ public final class TemplateEngineTests
   @Test
   public void getComment() throws IOException
    {
-    final TemplateEngine engine = new TemplateEngine("comment"); //$NON-NLS-1$
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
     /* final boolean success = */ engine.setFile("file1", new File("target/test-classes/template1.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
     /* String subsrResult = */ engine.subst("file1"); //$NON-NLS-1$
     /* String parseResult = */ engine.parse("output", "file1");
@@ -239,7 +240,7 @@ public final class TemplateEngineTests
    {
     assertThrows(IllegalStateException.class, () ->
      {
-      final TemplateEngine engine = new TemplateEngine("comment"); //$NON-NLS-1$
+      final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
       /* final boolean successFile = */ engine.setFile("file1", new File("target/test-classes/template2.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
       /* String substResult = */ engine.subst("file1"); //$NON-NLS-1$
       /* final boolean successBlock = */ engine.setBlock("file1", "blk2"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -256,7 +257,7 @@ public final class TemplateEngineTests
   @Test
   public void setBlock() throws IOException
    {
-    final TemplateEngine engine = new TemplateEngine("comment"); //$NON-NLS-1$
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
     /* final boolean successFile = */ engine.setFile("file1", new File("target/test-classes/template2.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
     /* String substResult = */ engine.subst("file1"); //$NON-NLS-1$
     final boolean successBlock = engine.setBlock("file1", "BLK1", "BLK1_BLK"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -276,7 +277,7 @@ public final class TemplateEngineTests
   @Test
   public void parseNonAppend() throws IOException
    {
-    final TemplateEngine engine = new TemplateEngine("comment"); //$NON-NLS-1$
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
     /* final boolean successFile = */ engine.setFile("file1", new File("target/test-classes/template2.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
     /* String substResult = */ engine.subst("file1"); //$NON-NLS-1$
     engine.setVar("variable1", "TEST1"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -297,7 +298,7 @@ public final class TemplateEngineTests
   @Test
   public void parseAppend() throws IOException
    {
-    final TemplateEngine engine = new TemplateEngine("comment"); //$NON-NLS-1$
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
     /* final boolean successFile = */ engine.setFile("file1", new File("target/test-classes/template2.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
     /* String substResult = */ engine.subst("file1"); //$NON-NLS-1$
     engine.setVar("variable1", "TEST1"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -329,7 +330,7 @@ public final class TemplateEngineTests
   @Test
   public void parseProblem() throws IOException
    {
-    final TemplateEngine engine = new TemplateEngine("keep"); //$NON-NLS-1$
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.keep);
     /* final boolean successFile = */ engine.setFile("file1", new File("target/test-classes/template3.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
     /* String substResult = */ engine.subst("file1"); //$NON-NLS-1$
     engine.setVar("test0", "000"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -353,7 +354,7 @@ public final class TemplateEngineTests
   @Test
   public void getVarsEmpty()
    {
-    final TemplateEngine engine = new TemplateEngine("comment"); //$NON-NLS-1$
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
     final String[] variables = engine.getVars();
     assertTrue(variables.length == 0, "Variables within empty template found!"); //$NON-NLS-1$
    }
@@ -365,7 +366,7 @@ public final class TemplateEngineTests
   @Test
   public void getVars()
    {
-    final TemplateEngine engine = new TemplateEngine("comment"); //$NON-NLS-1$
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
     engine.setVar("variable1", "TEST"); //$NON-NLS-1$ //$NON-NLS-2$
     engine.setVar("variable2", "TEST"); //$NON-NLS-1$ //$NON-NLS-2$
     final String[] variables = engine.getVars();
@@ -384,7 +385,7 @@ public final class TemplateEngineTests
   @Test
   public void substEmptyFile() throws IOException
    {
-    final TemplateEngine engine = new TemplateEngine("comment"); //$NON-NLS-1$
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
     /* final boolean successFile = */ engine.setFile("file1", new File("target/test-classes/template4.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
     final String result = engine.subst("file1"); //$NON-NLS-1$
     assertNull(result, "Template not empty!"); //$NON-NLS-1$
@@ -399,7 +400,7 @@ public final class TemplateEngineTests
   @Test
   public void setBlockEmptyFile() throws IOException
    {
-    final TemplateEngine engine = new TemplateEngine("comment"); //$NON-NLS-1$
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
     /* final boolean successFile = */ engine.setFile("file1", new File("target/test-classes/template4.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
     // /* final String result = */ engine.subst("file1"); //$NON-NLS-1$
     final boolean successBlock = engine.setBlock("file1", "BLK1", "BLK1_BLK"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -420,6 +421,24 @@ public final class TemplateEngineTests
     // /* final String variableValue = */ engine.subst("file1"); //$NON-NLS-1$
     final List<String> undefinedVars = engine.getUndefined("file1"); //$NON-NLS-1$
     assertEquals(0, undefinedVars.size());
+   }
+
+
+  /**
+   * Test get keep variable parsing.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void setUnknowns() throws IOException
+   {
+    final TemplateEngine engine = new TemplateEngine();
+    engine.setUnknowns(HandleUndefined.keep);
+    /* final boolean success = */ engine.setFile("file1", new File("target/test-classes/template1.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
+    /* String substResult = */ engine.subst("file1"); //$NON-NLS-1$
+    /* String parseResult = */ engine.parse("output", "file1"); //$NON-NLS-1$ //$NON-NLS-2$
+    final String output = engine.get("output"); //$NON-NLS-1$
+    assertEquals("123\n{variable1}\n456\n", output); //$NON-NLS-1$
    }
 
  }
