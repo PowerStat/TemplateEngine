@@ -124,10 +124,25 @@ public final class TemplateEngine
    */
   public boolean setFile(final String newVarname, final File newFile)
    {
-    final boolean exists = newFile.exists(); // TODO Does this work for classpath/jar resources?
+    boolean exists = newFile.exists();
     if (exists)
      {
       this.files.put(newVarname, newFile);
+     }
+    else
+     {
+      try (InputStream stream = this.getClass().getResourceAsStream("/" + newFile.getName())) //$NON-NLS-1$
+       {
+        if (stream != null)
+         {
+          exists = true;
+          this.files.put(newVarname, newFile);
+         }
+       }
+      catch (final IOException e)
+        {
+         // ignore
+        }
      }
     return exists;
    }
@@ -143,41 +158,35 @@ public final class TemplateEngine
    */
   private boolean loadfile(final String varname) throws IOException
    {
-    if (!this.files.containsKey(varname) || this.tempVars.containsKey(varname))
+    if (this.tempVars.containsKey(varname)) // Already loaded?
      {
       return true;
      }
     final StringBuilder fileBuffer = new StringBuilder();
     final File file = this.files.get(varname);
-    if (file.length() == 0) // TODO Does this work for classpath/jar resources?
+    if (file == null)
      {
       return false;
      }
-    InputStream istream = Files.newInputStream(this.files.get(varname).toPath(), StandardOpenOption.READ); // Read from filesystem
+    InputStream istream = this.getClass().getResourceAsStream("/" + file.getName()); //$NON-NLS-1$ // Read from classpath/jar
     if (istream == null)
      {
-      istream = this.getClass().getResourceAsStream("/" + file.getName()); //$NON-NLS-1$ // Read from classpath/jar
+      istream = Files.newInputStream(this.files.get(varname).toPath(), StandardOpenOption.READ); // Read from filesystem
      }
     try (BufferedReader reader = new BufferedReader(new InputStreamReader(istream, StandardCharsets.UTF_8)))
      {
-      String line;
-      do
+      String line = reader.readLine();
+      while (line != null)
        {
+        fileBuffer.append(line);
+        fileBuffer.append('\n');
         line = reader.readLine();
-        if (line != null)
-         {
-          fileBuffer.append(line);
-          fileBuffer.append('\n');
-         }
        }
-      while (line != null);
      }
-    /*
     if (fileBuffer.length() == 0)
      {
       return false;
      }
-    */
     setVar(varname, fileBuffer.toString());
     return true;
    }
@@ -278,7 +287,6 @@ public final class TemplateEngine
    * The replace loop is a bootleneck, because some applications pollute the template class with a lot of variable settings
    * that will often not been used when parsing a block.
    * So it is much faster to extract the used variables from a block first and only replace the really used variables.
-
    */
   public String subst(final String varname) throws IOException
    {
