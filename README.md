@@ -21,6 +21,14 @@ For example when using Apache Maven you could add the following dependency to yo
 
 Other build tools like gradle will work analogous.
 
+To compile this project yourself you could use:
+
+    mvn clean install org.pitest:pitest-maven:mutationCoverage site
+    
+or simply:
+
+     mvn clean install
+
 ## Usage
 
 For usage in your own projects please read the Javadoc's and follow the examples in the unittests.
