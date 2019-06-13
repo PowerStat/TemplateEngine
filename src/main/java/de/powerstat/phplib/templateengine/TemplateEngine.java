@@ -284,7 +284,7 @@ public final class TemplateEngine
    * @throws IOException File not found or IO exception
    *
    * TODO Performance optimization:
-   * The replace loop is a bootleneck, because some applications pollute the template class with a lot of variable settings
+   * The replace loop is a bottleneck, because some applications pollute the template class with a lot of variable settings
    * that will often not been used when parsing a block.
    * So it is much faster to extract the used variables from a block first and only replace the really used variables.
    */
