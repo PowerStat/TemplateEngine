@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -228,6 +229,17 @@ public final class TemplateEngine
 
 
   /**
+   * Unset template variable.
+   *
+   * @param varname Template variable name
+   */
+  public void unsetVar(final String varname)
+   {
+    /* String value = */ this.tempVars.remove(varname);
+   }
+
+
+  /**
    * Set template block (cut it from parent template and replace it with a variable).
    *
    * Used for repeatable blocks
@@ -277,24 +289,15 @@ public final class TemplateEngine
 
 
   /**
-   * Substitute variable with its content.
+   * Replace variables old version.
    *
-   * @param varname Variable name
-   * @return Replaced variable content or null
-   * @throws IOException File not found or IO exception
-   *
-   * TODO Performance optimization:
-   * The replace loop is a bottleneck, because some applications pollute the template class with a lot of variable settings
-   * that will often not been used when parsing a block.
-   * So it is much faster to extract the used variables from a block first and only replace the really used variables.
+   * @param varname Template/Block name
+   * @return Template/Block with replaced variables
    */
-  public String subst(final String varname) throws IOException
+  /*
+  private String replaceVarsOld(String varname)
    {
-    if (!loadfile(varname))
-     {
-      return null;
-     }
-    String str = getVar(varname);
+    // loop over all known variables an replace them
     if (!this.tempVars.isEmpty())
      {
       final Set<Entry<String, String>> tempVarsSet = this.tempVars.entrySet();
@@ -304,11 +307,58 @@ public final class TemplateEngine
         final Map.Entry<String, String> mapEntry = iter.next();
         // convert into regexp (special char filter)
         final Pattern pattern = Pattern.compile("\\{" + mapEntry.getKey() + "\\}"); //$NON-NLS-1$ //$NON-NLS-2$
-        final Matcher matcher = pattern.matcher(str);
-        str = matcher.replaceAll(mapEntry.getValue());
+        final Matcher matcher = pattern.matcher(varname);
+        varname = matcher.replaceAll(mapEntry.getValue());
        }
      }
-    return str;
+    return varname;
+   }
+  */
+
+
+  /**
+   * Replace variables new version.
+   *
+   * @param varname Template/Block name
+   * @return Template/Block with replaced variables
+   */
+  private String replaceVarsNew(String varname)
+   {
+    // Get variable names to replace from varname
+    final Pattern patternTemplate = Pattern.compile("\\{([^}\n\r\t :]+)\\}"); //$NON-NLS-1$
+    final Matcher matcherTemplate = patternTemplate.matcher(varname);
+    final Set<String> varsSetTemplate = new TreeSet<>();
+    while (matcherTemplate.find())
+     {
+      final String varnameTemplate = varname.substring(matcherTemplate.start() + 1, matcherTemplate.end() - 1);
+      if (this.tempVars.containsKey(varnameTemplate))
+       {
+        varsSetTemplate.add(varnameTemplate);
+       }
+     }
+    for (final String varName : varsSetTemplate)
+     {
+      varname = varname.replaceAll("\\{" + varName + "\\}", getVar(varName));
+     }
+    return varname;
+       }
+
+
+  /**
+   * Substitute variable with its content.
+   *
+   * @param varname Variable name
+   * @return Replaced variable content or null
+   * @throws IOException File not found or IO exception
+   */
+  public String subst(final String varname) throws IOException
+   {
+    if (!loadfile(varname))
+     {
+      return null;
+     }
+    // return replaceVarsOld(getVar(varname));
+    return replaceVarsNew(getVar(varname));
    }
 
 
