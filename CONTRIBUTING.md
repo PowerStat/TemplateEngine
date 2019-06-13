@@ -2,13 +2,13 @@
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [powerstat@github.com](mailto:powerstat@github.com).
+This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [powerstat@web.de](mailto:powerstat@web.de).
 
 ## I don't want to read this whole thing I just have a question!!!
 
 > **Note:** Please don't file an issue to ask a question. You'll get faster results by using the resources below.
 
-* [EMail](mailto:powerstat@github.com)
+* [EMail](mailto:powerstat@web.de)
 
 ## How to report bugs or enhancements
 
