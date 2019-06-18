@@ -114,9 +114,9 @@ pipeline
      {
       steps
        {
-        bat 'mvn --batch-mode site'
+        bat 'mvn --batch-mode -Dweb.server=www.powerstat.de site'
         // Change history
-        // docbook generate handbook web and pdf
+        // asciidoc generate handbook web and pdf
        }
       post
        {
