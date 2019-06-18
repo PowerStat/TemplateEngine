@@ -449,6 +449,8 @@ public final class TemplateEngineTests
 
   /**
    * Test read template file from classpath.
+   *
+   * @throws IOException IO exception
    */
   @Test
   public void readFromClasspath() throws IOException
@@ -465,6 +467,8 @@ public final class TemplateEngineTests
 
   /**
    * Test read template file from classpath.
+   *
+   * @throws IOException IO exception
    */
   @Test
   public void readNonExisting() throws IOException
