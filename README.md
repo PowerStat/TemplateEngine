@@ -1,6 +1,6 @@
 # PowerStat's TemplateEngine
 
-This TemplateEngine is a Java port with optimizations of the original PHPLib TemplateEngine
+This TemplateEngine is a Java port with optimizations of the original PHPLib TemplateEngine.
 
 See:
 

@@ -277,6 +277,7 @@ public final class TemplateEngineTests
   @Test
   public void parseNonAppend() throws IOException
    {
+    // tag::NonAppendBlock[]
     final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
     /* final boolean successFile = */ engine.setFile("file2", new File("target/test-classes/templates/template2.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
     /* String substResult = */ engine.subst("file2"); //$NON-NLS-1$
@@ -286,6 +287,7 @@ public final class TemplateEngineTests
     /* final boolean successBlock = */ engine.setBlock("file2", "BLK1", "BLK1_BLK"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
     /* String parseResult = */ engine.parse("BLK1_BLK", "BLK1", false); //$NON-NLS-1$ //$NON-NLS-2$
     /* String parseResult = */ engine.parse("BLK1_BLK", "BLK1", false); //$NON-NLS-1$ //$NON-NLS-2$
+    // end::NonAppendBlock[]
     assertEquals("\n789\nTEST2\nabc\n", engine.getVar("BLK1_BLK")); //$NON-NLS-1$ //$NON-NLS-2$
    }
 

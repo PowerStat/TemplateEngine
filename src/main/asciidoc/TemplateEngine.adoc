@@ -1,0 +1,61 @@
+= PHPLib template engine =
+Kai Hofmann <hofmann@hofmann-int.de>
+18.06.2019
+
+== Background ==
+
+This TemplateEngine is a Java port with optimizations of the original PHPLib TemplateEngine.
+
+See:
+
+https://sourceforge.net/projects/phplib/
+
+https://pear.php.net/package/HTML_Template_PHPLIB
+
+== Improvements ==
+
+- unsetVar() has been added to allow to remove template variables.
+- JUnit 5 tests have been added and improved with pitest.
+
+== Optimizations ==
+
+- The handling of unkown template variables has been changed to an enum instead of a string.
+- The substitution algorithm for variables in templates has been changed so that the variables will be first extracted from the template/block and only these will be replaced (instead of always looping over all known variables).
+
+== Usage example ==
+
+include::../../test/java/de/powerstat/phplib/templateengine/test/TemplateEngineTests.java[tags=NonAppendBlock]
+
+== Known problems ==
+
+There is a known and not fixable problem with this TemplateEngine.
+
+Assuming the following template file and for test1, test3 a value has been set:
+
+    {test1} 
+    <!-- BEGIN test2 --> 
+    {test1} {test3}
+    <!-- END test2 --> 
+    {test3} 
+
+Then after you did:
+
+    engine.setBlock("file3", "test2");
+    
+and make the final template parse:
+
+    engine.parse("output", "file3", false);
+    
+The result would be:
+
+    test1value 
+    {test1} test3value
+    test3value
+
+That's because the engine iterates over the template variables in alpabetical order.
+This means that test1 will be replaced first, then test2 (block) will be replaced and makes the {test1} {test3} visible to the main template.
+After this test3 ist replaced.
+As you could see test3 from the block is replaced, because it is replaced later that test2 (block), while test1 is not replaced, because it was already replaced before the replacement of test2 (block).
+
+This behaviour could be avoided when blocks always have names that are earlier in sort order than variable names (like using uppercase letters for blocks and lower case for variables).
+
