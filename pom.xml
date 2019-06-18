@@ -94,6 +94,10 @@
       <id>ossrh</id>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
+    <site>
+      <id>powerstat</id>
+      <url>sftp://${web.server}/TemplateEngine/</url>
+    </site>
   </distributionManagement>
 
   <scm>
@@ -423,6 +427,12 @@
             <groupId>org.asciidoctor</groupId>
             <artifactId>asciidoctor-maven-plugin</artifactId>
             <version>1.6.0</version>
+          </dependency>
+          
+          <dependency>
+            <groupId>org.apache.maven.wagon</groupId>
+            <artifactId>wagon-ssh</artifactId>
+            <version>3.3.3</version>
           </dependency>
           
         </dependencies>
