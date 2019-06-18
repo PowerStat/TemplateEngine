@@ -9,7 +9,7 @@
 
   <name>PowerStatsTemplateEngine</name>
   <description>Java port of phplib template engine. See https://sourceforge.net/projects/phplib/ or https://pear.php.net/package/HTML_Template_PHPLIB for more.</description>
-  <url>https://www.powerstat.de/</url>
+  <url>https://www.powerstat.de/TemplateEngine.html</url>
   
   <organization>
     <name>Dipl.-Inform Kai Hofmann</name>
