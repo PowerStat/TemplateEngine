@@ -271,11 +271,15 @@
             <artifactId>maven-scm-provider-gitexe</artifactId>
             <version>1.11.2</version>
           </dependency>
+          
+          <!-- 
           <dependency>
             <groupId>org.apache.maven.scm</groupId>
             <artifactId>maven-scm-provider-git-commons</artifactId>
             <version>1.11.2</version>
           </dependency>
+          -->
+          
         </dependencies>
       </plugin>
       
