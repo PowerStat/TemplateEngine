@@ -8,9 +8,9 @@ This TemplateEngine is a Java port with optimizations of the original PHPLib Tem
 
 See:
 
-https://sourceforge.net/projects/phplib/
+https://sourceforge.net/projects/phplib/[PHPLIB]
 
-https://pear.php.net/package/HTML_Template_PHPLIB
+https://pear.php.net/package/HTML_Template_PHPLIB[Pear::HTML_Template_PHPLIB]
 
 == Improvements ==
 
@@ -27,6 +27,8 @@ https://pear.php.net/package/HTML_Template_PHPLIB
 include::../../test/java/de/powerstat/phplib/templateengine/test/TemplateEngineTests.java[tags=NonAppendBlock]
 
 == Known problems ==
+
+=== TemplateEngine replacement order ===
 
 There is a known and not fixable problem with this TemplateEngine.
 
@@ -59,3 +61,17 @@ As you could see test3 from the block is replaced, because it is replaced later 
 
 This behaviour could be avoided when blocks always have names that are earlier in sort order than variable names (like using uppercase letters for blocks and lower case for variables).
 
+=== Maven javadoc generation ===
+
+The generation of javadoc's failed during 
+
+    mvn site
+    
+Please see 
+https://stackoverflow.com/questions/55676341/java-11-12-javadoc-with-maven-results-in-not-generating-javadocs-for-tests[Stackoverflow]
+for more.
+
+== Maven site ==
+
+The maven generated site could be found here
+https://www.powerstat.de/TemplateEngine/[TemplateEngine]
