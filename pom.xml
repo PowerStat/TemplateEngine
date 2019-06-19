@@ -258,7 +258,6 @@
           <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
           <tagNameFormat>V@{project.version}</tagNameFormat>
           <autoVersionSubmodules>true</autoVersionSubmodules>
-          <releaseProfiles>releases</releaseProfiles>
         </configuration>
         <dependencies>
           <dependency>
