@@ -101,8 +101,8 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:git:git://github.com/PowerStat/TemplateEngine.git</connection>
-    <developerConnection>scm:git:git@github.com:PowerStat/TemplateEngine.git</developerConnection>
+    <connection>scm:git:https://github.com/PowerStat/TemplateEngine.git</connection>
+    <developerConnection>scm:git:https://github.com/PowerStat/TemplateEngine.git</developerConnection>
     <url>https://github.com/PowerStat/TemplateEngine</url>
     <tag>HEAD</tag>
   </scm>
@@ -196,14 +196,6 @@
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-scm-plugin</artifactId>
-        <version>1.11.2</version>
-        <configuration>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.1.1</version>
         <configuration>
@@ -264,6 +256,9 @@
           <pushChanges>false</pushChanges>
           <mavenExecutorId>forked-path</mavenExecutorId>
           <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+          <tagNameFormat>V@{project.version}</tagNameFormat>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <releaseProfiles>releases</releaseProfiles>
         </configuration>
         <dependencies>
           <dependency>
