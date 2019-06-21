@@ -49,6 +49,7 @@ public final class TemplateEngineTests
    *
    * @param engine TemplateEngine
    */
+  /*
   private static void logVars(final TemplateEngine engine)
    {
     final String[] variables = engine.getVars();
@@ -58,6 +59,7 @@ public final class TemplateEngineTests
       LOGGER.info("variables: " + varname + " = " + engine.getVar(varname));  //$NON-NLS-1$//$NON-NLS-2$
      }
    }
+  */
 
 
   /**
@@ -67,6 +69,7 @@ public final class TemplateEngineTests
    * @param varname Variable name for which get the undefined variables
    * @throws IOException IO exception
    */
+  /*
   private static void logUndefVars(final TemplateEngine engine, final String varname) throws IOException
    {
     final List<String> undefinedVariables = engine.getUndefined(varname);
@@ -76,6 +79,7 @@ public final class TemplateEngineTests
       LOGGER.info("variables: " + undefVarname); //$NON-NLS-1$
      }
    }
+  */
 
 
   /**
@@ -151,7 +155,7 @@ public final class TemplateEngineTests
     final List<String> undefinedVars = engine.getUndefined("file1"); //$NON-NLS-1$
     assertAll(
       () -> assertTrue(undefinedVars.isEmpty(), "Undefined variable(s) found!"), //$NON-NLS-1$
-      () -> assertTrue(engine.getVar("variable1").isEmpty(), "variable1 is not empty!") //$NON-NLS-1$
+      () -> assertTrue(engine.getVar("variable1").isEmpty(), "variable1 is not empty!") //$NON-NLS-1$ //$NON-NLS-2$
     );
    }
 
@@ -190,7 +194,7 @@ public final class TemplateEngineTests
     final String parseResult = engine.parse("output", "file1");  //$NON-NLS-1$//$NON-NLS-2$
     final String output = engine.get("output"); //$NON-NLS-1$
     assertAll(
-      () -> assertNotNull(parseResult, "Parse result is null!"),
+      () -> assertNotNull(parseResult, "Parse result is null!"), //$NON-NLS-1$
       () -> assertEquals("123\n\n456\n", output) //$NON-NLS-1$
     );
    }
@@ -224,7 +228,7 @@ public final class TemplateEngineTests
     final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
     /* final boolean success = */ engine.setFile("file1", new File("target/test-classes/templates/template1.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
     /* String subsrResult = */ engine.subst("file1"); //$NON-NLS-1$
-    /* String parseResult = */ engine.parse("output", "file1");
+    /* String parseResult = */ engine.parse("output", "file1"); //$NON-NLS-1$ //$NON-NLS-2$
     final String output = engine.get("output"); //$NON-NLS-1$
     assertEquals("123\n<!-- Template variable 'variable1' undefined -->\n456\n", output); //$NON-NLS-1$
    }
@@ -377,7 +381,7 @@ public final class TemplateEngineTests
     final String[] variables = engine.getVars();
     assertAll(
       () -> assertTrue(variables.length > 0, "No variables within template found!"), //$NON-NLS-1$
-      () -> assertNotNull(variables[0], "No variable in list!")
+      () -> assertNotNull(variables[0], "No variable in list!") //$NON-NLS-1$
     );
    }
 

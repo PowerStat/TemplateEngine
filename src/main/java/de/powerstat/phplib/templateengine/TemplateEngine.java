@@ -24,9 +24,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 
 /**
  * PHPLib compatible template engine.
@@ -40,7 +37,7 @@ public final class TemplateEngine
   /**
    * Logger.
    */
-  private static final Logger LOGGER = LogManager.getLogger(TemplateEngine.class);
+  // private static final Logger LOGGER = LogManager.getLogger(TemplateEngine.class);
 
   /**
    * File name map.
@@ -338,7 +335,7 @@ public final class TemplateEngine
      }
     for (final String varName : varsSetTemplate)
      {
-      varname = varname.replaceAll("\\{" + varName + "\\}", getVar(varName));
+      varname = varname.replaceAll("\\{" + varName + "\\}", getVar(varName)); //$NON-NLS-1$ //$NON-NLS-2$
      }
     return varname;
        }
