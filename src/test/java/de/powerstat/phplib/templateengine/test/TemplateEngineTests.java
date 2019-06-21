@@ -116,7 +116,10 @@ public final class TemplateEngineTests
     final TemplateEngine engine = new TemplateEngine();
     /* final boolean success = */ engine.setFile("file1", new File("target/test-classes/templates/template1.tmpl")); //$NON-NLS-1$ //$NON-NLS-2$
     final String variableValue = engine.subst("file1"); //$NON-NLS-1$
-    LOGGER.debug("file1 = " + variableValue); //$NON-NLS-1$
+    if (LOGGER.isDebugEnabled())
+     {
+      LOGGER.debug("file1 = " + variableValue); //$NON-NLS-1$
+     }
     assertEquals("123\n{variable1}\n456\n", variableValue); //$NON-NLS-1$
    }
 

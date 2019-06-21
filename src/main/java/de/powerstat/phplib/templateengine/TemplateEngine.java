@@ -24,6 +24,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 /**
  * PHPLib compatible template engine.
@@ -37,7 +40,7 @@ public final class TemplateEngine
   /**
    * Logger.
    */
-  // private static final Logger LOGGER = LogManager.getLogger(TemplateEngine.class);
+  private static final Logger LOGGER = LogManager.getLogger(TemplateEngine.class);
 
   /**
    * File name map.
@@ -160,7 +163,6 @@ public final class TemplateEngine
      {
       return true;
      }
-    final StringBuilder fileBuffer = new StringBuilder();
     final File file = this.files.get(varname);
     if (file == null)
      {
@@ -171,6 +173,7 @@ public final class TemplateEngine
      {
       istream = Files.newInputStream(this.files.get(varname).toPath(), StandardOpenOption.READ); // Read from filesystem
      }
+    final StringBuilder fileBuffer = new StringBuilder();
     try (BufferedReader reader = new BufferedReader(new InputStreamReader(istream, StandardCharsets.UTF_8)))
      {
       String line = reader.readLine();
@@ -319,7 +322,7 @@ public final class TemplateEngine
    * @param varname Template/Block name
    * @return Template/Block with replaced variables
    */
-  private String replaceVarsNew(String varname)
+  private String replaceVarsNew(final String varname)
    {
     // Get variable names to replace from varname
     final Pattern patternTemplate = Pattern.compile("\\{([^}\n\r\t :]+)\\}"); //$NON-NLS-1$
@@ -333,11 +336,12 @@ public final class TemplateEngine
         varsSetTemplate.add(varnameTemplate);
        }
      }
+    String resVarname = varname;
     for (final String varName : varsSetTemplate)
      {
-      varname = varname.replaceAll("\\{" + varName + "\\}", getVar(varName)); //$NON-NLS-1$ //$NON-NLS-2$
+      resVarname = resVarname.replaceAll("\\{" + varName + "\\}", getVar(varName)); //$NON-NLS-1$ //$NON-NLS-2$
      }
-    return varname;
+    return resVarname;
        }
 
 
@@ -467,13 +471,12 @@ public final class TemplateEngine
       case comment:
         result = matcher.replaceAll("<!-- Template variable '$1' undefined -->"); //$NON-NLS-1$
         break;
-      /*
-      default: // Only for the case that enum HandleUndefined will be extended.
+      default: // For the case that enum HandleUndefined will be extended!
         if (LOGGER.isDebugEnabled())
          {
           LOGGER.debug("Unsupported unknowns: " + this.unknowns); //$NON-NLS-1$
          }
-      */
+        // Same as keep
      }
     return result;
    }
