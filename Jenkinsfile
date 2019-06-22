@@ -5,10 +5,25 @@ pipeline
     label 'windows' // linux, docker
    }
 
+  parameters
+   {
+    // string(name: 'WITH_CONFIG', defaultValue: 'localhost', description: 'Build with configuration for a specific host.')
+    // booleanParam(name: 'DEBUG_BUILD', defaultValue: true, description: 'Build as debug or production version.')
+    // text(name: 'DEPLOY_TEXT', defaultValue: 'One\nTwo\nThree\n', description: '')
+    // choice(name: 'CHOICES', choices: ['one', 'two', 'three'], description: '')
+    // file(name: 'FILE', description: 'Some file to upload')
+    // password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'A secret password')
+   }
+
   tools
    {
     maven 'Maven3'
     jdk 'JDK11'
+   }
+
+  environment
+   {
+    DISABLE_AUTH = 'true'
    }
 
   options
@@ -16,6 +31,9 @@ pipeline
     buildDiscarder(logRotator(numToKeepStr: '4'))
     skipStagesAfterUnstable()
     disableConcurrentBuilds()
+    // timestamps()
+    // timeout(time: 1, unit: 'HOURS')
+    // parallelsAlwaysFailFast()
    }
 
 
@@ -49,10 +67,6 @@ pipeline
       steps
        {
         bat 'mvn --batch-mode compiler:testCompile surefire:test -Dmaven.test.failure.ignore=true'
-        // bat 'mvn --batch-mode clover:check -Dmaven.clover.targetPercentage=10%'
-        // cobertura
-        // jacoco
-        // publishCoverage
        }
       post
        {
@@ -116,13 +130,13 @@ pipeline
        {
         bat 'mvn --batch-mode -Dweb.server=www.powerstat.de site'
         // Change history
-        // asciidoc generate handbook web and pdf
        }
       post
        {
         always
          {
           publishHTML(target: [reportName: 'Site', reportDir: 'target/site', reportFiles: 'index.html', keepAll: false])
+          // publishHTML(target: [reportName: 'Manual', reportDir: 'target/generated-docs', reportFiles: 'TemplateEngine.html', keepAll: false])
          }
        }
      }
@@ -131,7 +145,7 @@ pipeline
      {
       steps
        {
-        bat 'mvn --batch-mode source:jar install:install'
+        bat 'mvn --batch-mode install:install'
        }
      }
           
@@ -148,13 +162,13 @@ pipeline
     // Performance tests cucumber
     
     /*
-    stage('Build release')
+    stage('Release')
      {
       steps
        {
         bat 'mvn --batch-mode release:clean'
         bat 'mvn --batch-mode release:prepare'
-        bat 'mvn --batch-mode release:perform' // depoy, site-deploy included!
+        bat 'mvn --batch-mode release:perform'
        }
      }
     */
@@ -162,46 +176,12 @@ pipeline
     /*
     stage('Deliver')
      {
-      / *
-      when
-       {
-        allOf
-         {
-          environment name: 'DEBUG_BUILD', value: 'false'
-          not {environment name: 'WITH_CONFIG', value: 'localhost'}
-         }
-       }
-      * /
-
       steps
        {
-        // to maven central
-        bat 'mvn --batch-mode deploy:deploy'
+        bat 'mvn --batch-mode deploy:deploy deploy-site'
        }
      }
     */
-
-   }
-
-  post
-   {
-    success
-     {
-      echo 'This will run only if successful'
-      // publish to github releases
-     }
-
-    failure
-     {
-      echo 'This will run only if failed'
-      // mail to: 'powerstat@web.de',  subject: "Failed Pipeline: ${currentBuild.fullDisplayName}", body: "Something is wrong with ${env.BUILD_URL}"
-     }
-
-    unstable
-     {
-      echo 'This will run only if the run was marked as unstable'
-      // mail to: 'powerstat@web.de',  subject: "Failed Pipeline: ${currentBuild.fullDisplayName}", body: "Something is wrong with ${env.BUILD_URL}"
-     }
 
    }
 
