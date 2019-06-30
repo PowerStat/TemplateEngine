@@ -114,7 +114,8 @@ pipeline
        {
         always
          {
-          recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc(), checkStyle(), spotBugs(), cpd(pattern: '**/target/cpd.xml'), pmdParser(pattern: '**/target/pmd.xml')]
+          recordIssues enabledForFailure: true, tools: [java(), javaDoc(), checkStyle(), spotBugs(), cpd(pattern: '**/target/cpd.xml'), pmdParser(pattern: '**/target/pmd.xml')]
+          // mavenConsole()
          }
        }
      }
