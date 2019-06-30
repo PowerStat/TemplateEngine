@@ -79,7 +79,7 @@ pipeline
          }
        }
      }
-
+/*
     stage('MutationTests')
      {
       steps
@@ -87,7 +87,7 @@ pipeline
         bat 'mvn --batch-mode org.pitest:pitest-maven:mutationCoverage'
        }
      }
-
+*/
     stage('Sanity check')
      {
       steps
