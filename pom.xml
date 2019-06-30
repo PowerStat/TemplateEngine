@@ -615,6 +615,7 @@
         <version>5.0.0</version>
       </plugin>
       
+      <!-- 
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
@@ -627,6 +628,7 @@
           </reportSet>
         </reportSets>      
       </plugin>
+      -->
 
     </plugins>
 
