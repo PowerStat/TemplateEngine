@@ -129,6 +129,22 @@ pipeline
        }
      }
 
+    stage('install local')
+     {
+      steps
+       {
+        bat 'mvn --batch-mode install:install'
+       }
+     }
+          
+    stage('Integration tests')
+     {
+      steps
+       {
+        bat 'mvn --batch-mode failsafe:integration-test failsafe:verify'
+       }
+     }
+
     stage('Documentation')
      {
       steps
@@ -146,22 +162,6 @@ pipeline
        }
      }
 
-    stage('install local')
-     {
-      steps
-       {
-        bat 'mvn --batch-mode install:install'
-       }
-     }
-          
-    stage('Integration tests')
-     {
-      steps
-       {
-        bat 'mvn --batch-mode failsafe:integration-test failsafe:verify'
-       }
-     }
-     
     // Security tests
     // Fault tolerance tests
     // Performance tests cucumber
