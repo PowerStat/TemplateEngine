@@ -172,8 +172,7 @@
 
         </dependencies>
         <configuration>
-          <!-- <forkCount>0</forkCount> -->
-          <useSystemClassLoader>false</useSystemClassLoader>
+          <forkCount>0</forkCount>
         </configuration>
       </plugin>
 
