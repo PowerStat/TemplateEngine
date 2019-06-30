@@ -68,7 +68,7 @@ pipeline
      {
       steps
        {
-        bat 'mvn --batch-mode compiler:testCompile surefire:test'
+        bat 'mvn --batch-mode resources:testResources compiler:testCompile surefire:test'
         //  -Dmaven.test.failure.ignore=true
        }
       post
