@@ -5,6 +5,7 @@ pipeline
     label 'windows' // linux, docker
    }
 
+  /*
   parameters
    {
     // string(name: 'WITH_CONFIG', defaultValue: 'localhost', description: 'Build with configuration for a specific host.')
@@ -14,6 +15,7 @@ pipeline
     // file(name: 'FILE', description: 'Some file to upload')
     // password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'A secret password')
    }
+  */
 
   tools
    {
