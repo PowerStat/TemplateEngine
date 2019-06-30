@@ -110,14 +110,15 @@ pipeline
         waitForQualityGate
         */
        }
+      /*
       post
        {
         always
          {
-          recordIssues enabledForFailure: true
-          // tools: [mavenConsole(), java(), javaDoc(), checkStyle(), spotBugs(), cpd(pattern: '**/target/cpd.xml'), pmdParser(pattern: '**/target/pmd.xml')]
+          // recordIssues enabledForFailure: true, tools: [mavenConsole(), java(), javaDoc(), checkStyle(), spotBugs(), cpd(pattern: '** /target/cpd.xml'), pmdParser(pattern: '** /target/pmd.xml')]
          }
        }
+      */
      }
 
     stage('Packaging')
