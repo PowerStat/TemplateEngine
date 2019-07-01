@@ -1,9 +1,6 @@
 pipeline
  {
-  agent // any
-   {
-    label 'windows' // linux, docker
-   }
+  agent none
 
   /*
   parameters
@@ -46,26 +43,62 @@ pipeline
    }
 
 
-  stages // windows, linux
+  stages
    {
-    stage('Clean')
+    stage('Clean windows')
      {
+      agent 
+       { 
+        label 'windows'
+       }
       steps
        {
         bat 'mvn --batch-mode clean'
        }
      }
 
-    stage('Build')
+    stage('Clean linux')
      {
+      agent 
+       { 
+        label 'linux'
+       }
+      steps
+       {
+        sh 'mvn --batch-mode clean'
+       }
+     }
+
+    stage('Build windows')
+     {
+      agent 
+       { 
+        label 'windows'
+       }
       steps
        {
         bat 'mvn --batch-mode compile'
        }
      }
 
-    stage('UnitTests')
+    stage('Build linux')
      {
+      agent 
+       { 
+        label 'linux'
+       }
+      steps
+       {
+        sh 'mvn --batch-mode compile'
+       }
+     }
+
+    stage('UnitTests windows')
+     {
+      agent 
+       { 
+        label 'windows'
+       }
       steps
        {
         bat 'mvn --batch-mode resources:testResources compiler:testCompile surefire:test'
@@ -79,17 +112,58 @@ pipeline
          }
        }
      }
-/*
-    stage('MutationTests')
+
+    stage('UnitTests linux')
      {
+      agent 
+       { 
+        label 'linux'
+       }
+      steps
+       {
+        sh 'mvn --batch-mode resources:testResources compiler:testCompile surefire:test'
+       }
+      post
+       {
+        always
+         {
+          junit testResults: 'target/surefire-reports/*.xml'
+         }
+       }
+     }
+
+/*
+    stage('MutationTests windows')
+     {
+      agent 
+       { 
+        label 'windows'
+       }
       steps
        {
         bat 'mvn --batch-mode org.pitest:pitest-maven:mutationCoverage'
        }
      }
-*/
-    stage('Sanity check')
+
+    stage('MutationTests linux')
      {
+      agent 
+       { 
+        label 'linux'
+       }
+      steps
+       {
+        sh 'mvn --batch-mode org.pitest:pitest-maven:mutationCoverage'
+       }
+     }
+*/
+
+    stage('Sanity check windows')
+     {
+      agent 
+       { 
+        label 'windows'
+       }
       steps
        {
         bat 'mvn --batch-mode checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:spotbugs'
@@ -121,32 +195,96 @@ pipeline
       */
      }
 
-    stage('Packaging')
+    stage('Sanity check linux')
      {
+      agent 
+       { 
+        label 'linux'
+       }
+      steps
+       {
+        sh 'mvn --batch-mode checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:spotbugs'
+       }
+     }
+
+    stage('Packaging windows')
+     {
+      agent 
+       { 
+        label 'windows'
+       }
       steps
        {
         bat 'mvn --batch-mode jar:jar'
        }
      }
 
-    stage('install local')
+    stage('Packaging linux')
      {
+      agent 
+       { 
+        label 'linux'
+       }
+      steps
+       {
+        sh 'mvn --batch-mode jar:jar'
+       }
+     }
+
+    stage('install local windows')
+     {
+      agent 
+       { 
+        label 'windows'
+       }
       steps
        {
         bat 'mvn --batch-mode jar:jar install:install' // maven-jar-plugin falseCreation default is false, so no doubled jar construction here, but required for maven-install-plugin internal data
        }
      }
-          
-    stage('Integration tests')
+
+    stage('Install local linux')
      {
+      agent 
+       { 
+        label 'linux'
+       }
+      steps
+       {
+        sh 'mvn --batch-mode jar:jar install:install' // maven-jar-plugin falseCreation default is false, so no doubled jar construction here, but required for maven-install-plugin internal data
+       }
+     }
+      
+    stage('Integration tests windows')
+     {
+      agent 
+       { 
+        label 'windows'
+       }
       steps
        {
         bat 'mvn --batch-mode failsafe:integration-test failsafe:verify'
        }
      }
 
-    stage('Documentation')
+    stage('Integration tests linux')
      {
+      agent 
+       { 
+        label 'linux'
+       }
+      steps
+       {
+        sh 'mvn --batch-mode failsafe:integration-test failsafe:verify'
+       }
+     }
+
+    stage('Documentation windows')
+     {
+      agent 
+       { 
+        label 'windows'
+       }
       steps
        {
         bat 'mvn --batch-mode -Dweb.server=www.powerstat.de site'
@@ -162,13 +300,36 @@ pipeline
        }
      }
 
+    stage('Documentation linux')
+     {
+      agent 
+       { 
+        label 'linux'
+       }
+      steps
+       {
+        sh 'mvn --batch-mode -Dweb.server=www.powerstat.de site'
+       }
+      post
+       {
+        always
+         {
+          publishHTML(target: [reportName: 'Site', reportDir: 'target/site', reportFiles: 'index.html', keepAll: false])
+         }
+       }
+     }
+
     // Security tests
     // Fault tolerance tests
     // Performance tests cucumber
     
     /*
-    stage('Release')
+    stage('Release windows')
      {
+      agent 
+       { 
+        label 'windows'
+       }
       steps
        {
         bat 'mvn --batch-mode release:clean'
@@ -179,8 +340,12 @@ pipeline
     */
 
     /*
-    stage('Deliver')
+    stage('Deliver windows')
      {
+      agent 
+       { 
+        label 'windows'
+       }
       steps
        {
         bat 'mvn --batch-mode deploy:deploy deploy-site'
