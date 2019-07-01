@@ -1,9 +1,7 @@
 pipeline
  {
-  agent 
-   {
-    label 'windows'
-   }
+  agent any
+
 
   tools
    {
@@ -50,7 +48,17 @@ pipeline
      {
       steps
        {
-        bat 'mvn --batch-mode compile'
+        script
+         {
+          if (isUnix()) 
+           {           
+            sh 'mvn --batch-mode compile'
+           }
+          else
+           {
+            bat 'mvn --batch-mode compile'
+           }
+         }
        }
      }
 
@@ -58,8 +66,18 @@ pipeline
      {
       steps
        {
-        bat 'mvn --batch-mode resources:testResources compiler:testCompile surefire:test'
-        //  -Dmaven.test.failure.ignore=true
+        script
+         {
+          if (isUnix()) 
+           {           
+            sh 'mvn --batch-mode resources:testResources compiler:testCompile surefire:test'
+           }
+          else
+           {
+            bat 'mvn --batch-mode resources:testResources compiler:testCompile surefire:test'
+            // -Dmaven.test.failure.ignore=true
+           }
+         }
        }
       post
        {
@@ -75,7 +93,17 @@ pipeline
      {
       steps
        {
-        bat 'mvn --batch-mode org.pitest:pitest-maven:mutationCoverage'
+        script
+         {
+          if (isUnix()) 
+           {           
+            sht 'mvn --batch-mode org.pitest:pitest-maven:mutationCoverage'
+           }
+          else
+           {
+            bat 'mvn --batch-mode org.pitest:pitest-maven:mutationCoverage'
+           }
+         }
        }
      }
 */
@@ -84,7 +112,17 @@ pipeline
      {
       steps
        {
-        bat 'mvn --batch-mode checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:spotbugs'
+        script
+         {
+          if (isUnix()) 
+           {           
+            sh 'mvn --batch-mode checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:spotbugs'
+           }
+          else
+           {
+            bat 'mvn --batch-mode checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:spotbugs'
+           }
+         }
         // scanForIssues tools: [java(), javaDoc(), eclipse(), cssLint(), groovyScript(), jsLint()]
         // sonarQube
         // yuiCompressor
@@ -117,7 +155,17 @@ pipeline
      {
       steps
        {
-        bat 'mvn --batch-mode jar:jar'
+        script
+         {
+          if (isUnix()) 
+           {           
+            sh 'mvn --batch-mode jar:jar'
+           }
+          else
+           {
+            bat 'mvn --batch-mode jar:jar'
+           }
+         }
        }
      }
 
@@ -125,7 +173,17 @@ pipeline
      {
       steps
        {
-        bat 'mvn --batch-mode jar:jar install:install' // maven-jar-plugin falseCreation default is false, so no doubled jar construction here, but required for maven-install-plugin internal data
+        script
+         {
+          if (isUnix()) 
+           {           
+            sh 'mvn --batch-mode jar:jar install:install'
+           }
+          else
+           {
+            bat 'mvn --batch-mode jar:jar install:install' // maven-jar-plugin falseCreation default is false, so no doubled jar construction here, but required for maven-install-plugin internal data
+           }
+         }
        }
      }
 
@@ -133,7 +191,17 @@ pipeline
      {
       steps
        {
-        bat 'mvn --batch-mode failsafe:integration-test failsafe:verify'
+        script
+         {
+          if (isUnix()) 
+           {           
+            sh 'mvn --batch-mode failsafe:integration-test failsafe:verify'
+           }
+          else
+           {
+            bat 'mvn --batch-mode failsafe:integration-test failsafe:verify'
+           }
+         }
        }
      }
 
@@ -141,8 +209,18 @@ pipeline
      {
       steps
        {
-        bat 'mvn --batch-mode -Dweb.server=www.powerstat.de site'
-        // Change history
+        script
+         {
+          if (isUnix()) 
+           {           
+            sh 'mvn --batch-mode -Dweb.server=www.powerstat.de site'
+           }
+          else
+           {
+            bat 'mvn --batch-mode -Dweb.server=www.powerstat.de site'
+            // Change history
+           }
+         }
        }
       post
        {
