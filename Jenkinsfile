@@ -133,7 +133,7 @@ pipeline
      {
       steps
        {
-        bat 'mvn --batch-mode install:install'
+        bat 'mvn --batch-mode jar:jar install:install' // maven-jar-plugin falseCreation default is false, so no doubled jar construction here, but required for maven-install-plugin internal data
        }
      }
           
