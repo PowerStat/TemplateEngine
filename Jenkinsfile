@@ -1,6 +1,3 @@
-def expectedRemoteUrl = "https://github.com/PowerStat/TemplateEngine.git"
-
-
 pipeline
  {
   agent any
@@ -12,6 +9,7 @@ pipeline
     jdk 'JDK11'
     git 'GIT'
    }
+
 
   options
    {
@@ -27,6 +25,12 @@ pipeline
     pollSCM('H 6-18/4 * * 1-5')
    }
 
+
+  environment 
+   {
+    expectedRemoteUrl = "https://github.com/PowerStat/TemplateEngine.git"
+    remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
+   }
 
   stages
    {
@@ -242,7 +246,7 @@ pipeline
        {
         expression 
          {
-          def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
+          // def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
           return expectedRemoteUrl == remoteUrl
          }
        }
