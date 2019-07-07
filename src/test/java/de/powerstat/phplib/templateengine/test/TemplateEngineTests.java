@@ -175,7 +175,7 @@ public final class TemplateEngineTests
      {
       LOGGER.debug("file1 = " + variableValue); //$NON-NLS-1$
      }
-    assertEquals("123\n{variable1}\n456\n", variableValue); //$NON-NLS-1$
+    assertEquals("123\n{variable1}\n456\n", variableValue, "Variable value not as expected"); //$NON-NLS-1$ //$NON-NLS-2$
    }
 
 
@@ -192,8 +192,8 @@ public final class TemplateEngineTests
     /* final String variableValue = */ engine.subst(FILE1);
     final List<String> undefinedVars = engine.getUndefined(FILE1);
     assertAll(
-      () -> assertEquals(1, undefinedVars.size()),
-      () -> assertEquals(VARIABLE1, undefinedVars.get(0))
+      () -> assertEquals(1, undefinedVars.size(), "Found more or less undefined variables"), //$NON-NLS-1$
+      () -> assertEquals(VARIABLE1, undefinedVars.get(0), "Not found expected undefined variable") //$NON-NLS-1$
     );
    }
 
@@ -233,7 +233,7 @@ public final class TemplateEngineTests
     final List<String> undefinedVars = engine.getUndefined(FILE1);
     assertAll(
       () -> assertTrue(undefinedVars.isEmpty(), "Undefined variable(s) found!"), //$NON-NLS-1$
-      () -> assertEquals(TEST, engine.getVar(VARIABLE1))
+      () -> assertEquals(TEST, engine.getVar(VARIABLE1), "Variable value not as expected") //$NON-NLS-1$
     );
    }
 
@@ -253,7 +253,7 @@ public final class TemplateEngineTests
     final String output = engine.get(OUTPUT);
     assertAll(
       () -> assertNotNull(parseResult, "Parse result is null!"), //$NON-NLS-1$
-      () -> assertEquals("123\n\n456\n", output) //$NON-NLS-1$
+      () -> assertEquals("123\n\n456\n", output, "Output not as expected") //$NON-NLS-1$ //$NON-NLS-2$
     );
    }
 
@@ -271,7 +271,7 @@ public final class TemplateEngineTests
     /* String substResult = */ engine.subst(FILE1);
     /* String parseResult = */ engine.parse(OUTPUT, FILE1);
     final String output = engine.get(OUTPUT);
-    assertEquals("123\n{variable1}\n456\n", output); //$NON-NLS-1$
+    assertEquals("123\n{variable1}\n456\n", output, "Output not as exptected"); //$NON-NLS-1$ //$NON-NLS-2$
    }
 
 
@@ -288,7 +288,7 @@ public final class TemplateEngineTests
     /* String subsrResult = */ engine.subst(FILE1);
     /* String parseResult = */ engine.parse(OUTPUT, FILE1);
     final String output = engine.get(OUTPUT);
-    assertEquals("123\n<!-- Template variable 'variable1' undefined -->\n456\n", output); //$NON-NLS-1$
+    assertEquals("123\n<!-- Template variable 'variable1' undefined -->\n456\n", output, "Output not as expected"); //$NON-NLS-1$ //$NON-NLS-2$
    }
 
 
@@ -326,7 +326,7 @@ public final class TemplateEngineTests
     final String block = engine.getVar(BLK1);
     assertAll(
       () -> assertTrue(successBlock, "Block could not be cut out successfully!"), //$NON-NLS-1$
-      () -> assertEquals("\n789\n{variable2}\nabc\n", block) //$NON-NLS-1$
+      () -> assertEquals("\n789\n{variable2}\nabc\n", block, "Block value not as expected") //$NON-NLS-1$ //$NON-NLS-2$
     );
    }
 
@@ -350,7 +350,7 @@ public final class TemplateEngineTests
     /* String parseResult = */ engine.parse(BLK1_BLK, BLK1, false);
     /* String parseResult = */ engine.parse(BLK1_BLK, BLK1, false);
     // end::NonAppendBlock[]
-    assertEquals("\n789\nTEST2\nabc\n", engine.getVar(BLK1_BLK)); //$NON-NLS-1$
+    assertEquals("\n789\nTEST2\nabc\n", engine.getVar(BLK1_BLK), "Block value not as expected"); //$NON-NLS-1$ //$NON-NLS-2$
    }
 
 
@@ -371,7 +371,7 @@ public final class TemplateEngineTests
     /* final boolean successBlock = */ engine.setBlock(FILE2, BLK1, BLK1_BLK);
     /* String parseResult = */ engine.parse(BLK1_BLK, BLK1, true);
     /* String parseResult = */ engine.parse(BLK1_BLK, BLK1, true);
-    assertEquals("\n789\nTEST2\nabc\n\n789\nTEST2\nabc\n", engine.getVar(BLK1_BLK)); //$NON-NLS-1$
+    assertEquals("\n789\nTEST2\nabc\n\n789\nTEST2\nabc\n", engine.getVar(BLK1_BLK), "Block value not as expected"); //$NON-NLS-1$ //$NON-NLS-2$
    }
 
 
@@ -405,7 +405,7 @@ public final class TemplateEngineTests
     final String output = engine.parse(OUTPUT, FILE3, false);
     assertAll(
       () -> assertTrue(successBlock, "Could not cut out block!"), //$NON-NLS-1$
-      () -> assertEquals("000 \n111 \n \nabc {test1} def 333 ghi \n \n333 \n000 \n", output) // Buggy result, because of order problem //$NON-NLS-1$
+      () -> assertEquals("000 \n111 \n \nabc {test1} def 333 ghi \n \n333 \n000 \n", output, "Output value not as expected") // Buggy result, because of order problem //$NON-NLS-1$ //$NON-NLS-2$
       // () -> assertEquals("000 \n111 \n \nabc {test1} def {test3} ghi \n \n333 \n000 \n", output) // Wanted result without block parsing //$NON-NLS-1$
       // () -> assertEquals("000 \n111 \n \nabc 111 def 333 ghi \n \n333 \n000 \n", output) // Result with block parsing //$NON-NLS-1$
     );
@@ -487,7 +487,7 @@ public final class TemplateEngineTests
     /* final boolean success = */ engine.setFile(FILE4, new File("target/test-classes/templates/template4.tmpl")); //$NON-NLS-1$
     // /* final String variableValue = */ engine.subst("file4"); //$NON-NLS-1$
     final List<String> undefinedVars = engine.getUndefined(FILE4);
-    assertEquals(0, undefinedVars.size());
+    assertEquals(0, undefinedVars.size(), "Found undefined variables"); //$NON-NLS-1$
    }
 
 
@@ -505,7 +505,7 @@ public final class TemplateEngineTests
     /* String substResult = */ engine.subst(FILE1);
     /* String parseResult = */ engine.parse(OUTPUT, FILE1);
     final String output = engine.get(OUTPUT);
-    assertEquals("123\n{variable1}\n456\n", output); //$NON-NLS-1$
+    assertEquals("123\n{variable1}\n456\n", output, "Output value not as expected"); //$NON-NLS-1$ //$NON-NLS-2$
    }
 
 
@@ -561,7 +561,7 @@ public final class TemplateEngineTests
     final List<String> undefinedVars = engine.getUndefined(FILE1);
     assertAll(
       () -> assertFalse(undefinedVars.isEmpty(), "No undefined variable(s) found!"), //$NON-NLS-1$
-      () -> assertEquals(VARIABLE1, undefinedVars.get(0))
+      () -> assertEquals(VARIABLE1, undefinedVars.get(0), "Undefined variable not as expected") //$NON-NLS-1$
     );
    }
 
