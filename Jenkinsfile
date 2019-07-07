@@ -245,7 +245,8 @@ pipeline
        {
         expression 
          {
-          def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
+          // def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
+          def remoteUrl = scm.userRemoteConfigs?.first()?.url
           return expectedRemoteUrl == remoteUrl
          }
        }
