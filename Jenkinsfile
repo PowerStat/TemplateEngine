@@ -242,7 +242,8 @@ pipeline
           expression 
            {
             def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
-            return "https://github.com/PowerStat/TemplateEngine.git" == remoteUrl
+            echo remoteUrl
+            return 'https://github.com/PowerStat/TemplateEngine.git' == remoteUrl
            }
          }
        }
