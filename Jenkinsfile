@@ -234,6 +234,7 @@ pipeline
      
     stage('Release')
      {
+      /*
       when
        {
         allOf 
@@ -247,8 +248,13 @@ pipeline
            }
          }
        }
+      */
       steps
        {
+        def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
+        echo remoteUrl
+        echo 'https://github.com/PowerStat/TemplateEngine.git' == remoteUrl
+
         script
          {
           if (isUnix()) 
