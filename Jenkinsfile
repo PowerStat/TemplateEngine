@@ -231,6 +231,37 @@ pipeline
          }
        }
      }
+     
+    stage('Release')
+     {
+      when
+       {
+        allOf 
+         {
+          branch 'master'
+          expression 
+           {
+            def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
+            return "https://github.com/PowerStat/TemplateEngine.git" == remoteUrl
+           }
+         }
+       }
+      steps
+       {
+        script
+         {
+          if (isUnix()) 
+           {           
+            echo "doing release on unix"
+           }
+          else
+           {
+            echo "doing release on windows"
+           }
+         }
+       }
+     }
+
 
    }
 
