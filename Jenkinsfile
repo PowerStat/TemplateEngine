@@ -7,6 +7,7 @@ pipeline
    {
     maven 'Maven3'
     jdk 'JDK11'
+    git 'GIT'
    }
 
   options
@@ -239,7 +240,7 @@ pipeline
         // branch 'master' //  only works on a multibranch Pipeline
         expression 
          {
-          def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git.exe config remote.origin.url", returnStdout: true)?.trim()
+          def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
           return 'https://github.com/PowerStat/TemplateEngine.git' == remoteUrl
          }
        }
