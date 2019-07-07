@@ -29,7 +29,6 @@ pipeline
   environment 
    {
     expectedRemoteUrl = "https://github.com/PowerStat/TemplateEngine.git"
-    remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
    }
 
   stages
@@ -246,7 +245,7 @@ pipeline
        {
         expression 
          {
-          // def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
+          def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
           return expectedRemoteUrl == remoteUrl
          }
        }
