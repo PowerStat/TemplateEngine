@@ -236,17 +236,12 @@ pipeline
      {
       when
        {
-        // allOf 
-        // {
-          branch 'master'
-          /*
-          expression 
-           {
-            def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
-            return 'https://github.com/PowerStat/TemplateEngine.git' == remoteUrl
-           }
-          */
-        // }
+        // branch 'master' //  only works on a multibranch Pipeline
+        expression 
+         {
+          def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
+          return 'https://github.com/PowerStat/TemplateEngine.git' == remoteUrl
+         }
        }
       steps
        {
