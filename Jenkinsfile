@@ -1,3 +1,6 @@
+def expectedRemoteUrl = "https://github.com/PowerStat/TemplateEngine.git"
+
+
 pipeline
  {
   agent any
@@ -237,11 +240,10 @@ pipeline
      {
       when
        {
-        // branch 'master' //  only works on a multibranch Pipeline
         expression 
          {
           def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
-          return 'https://github.com/PowerStat/TemplateEngine.git' == remoteUrl
+          return expectedRemoteUrl == remoteUrl
          }
        }
       steps
