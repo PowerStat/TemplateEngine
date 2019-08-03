@@ -85,6 +85,25 @@ public final class TemplateEngine
 
 
   /**
+   * Copy constructor.
+   *
+   * @param engine Template engine
+   */
+  public TemplateEngine(final TemplateEngine engine)
+   {
+    this.unknowns = engine.unknowns;
+    for (final Map.Entry<String, String> entry : engine.tempVars.entrySet())
+     {
+      this.tempVars.put(entry.getKey(), entry.getValue());
+     }
+    for (final Map.Entry<String, File> entry : engine.files.entrySet())
+     {
+      this.files.put(entry.getKey(), entry.getValue());
+     }
+   }
+
+
+  /**
    * Constructor.
    *
    * @param unknowns Handling of unknown template variables
@@ -102,6 +121,18 @@ public final class TemplateEngine
   public TemplateEngine()
    {
     this(HandleUndefined.remove);
+   }
+
+
+  /**
+   * Copy factory.
+   *
+   * @param engine TemplateEngine to copy
+   * @return A new TemplateEngine instance that is a copy of engine.
+   */
+  public static TemplateEngine newInstance(final TemplateEngine engine)
+   {
+    return new TemplateEngine(engine);
    }
 
 
@@ -457,7 +488,7 @@ public final class TemplateEngine
    {
     if (!loadfile(varname))
      {
-      return null;
+      return null; // Use "" ?
      }
     // return replaceVarsOld(getVar(varname));
     return replaceVarsNew(getVar(varname));

@@ -724,4 +724,33 @@ public final class TemplateEngineTests
     );
    }
 
+
+  /**
+   * Test newInstance from TemplateEngine copy.
+   */
+  @Test
+  public void newInstanceCopy()
+   {
+    final String template = "123\r\n{variable1}\r\n456\r\n"; //$NON-NLS-1$
+    final TemplateEngine engine1 = TemplateEngine.newInstance(template);
+    final TemplateEngine engine2 = TemplateEngine.newInstance(engine1);
+    final String value = engine2.getVar("template"); //$NON-NLS-1$
+    assertAll(
+      () -> assertNotNull(value, "No 'template' found"), //$NON-NLS-1$
+      () -> assertFalse(value.isEmpty(), "No 'template' found") //$NON-NLS-1$
+    );
+   }
+
+
+  /**
+   * Test copy constructor.
+   */
+  @Test
+  public void copyConstructor()
+   {
+    final TemplateEngine engine1 = new TemplateEngine();
+    final TemplateEngine engine2 = new TemplateEngine(engine1);
+    assertNotNull(engine2, "Copy constructor failed!"); //$NON-NLS-1$
+   }
+
  }
