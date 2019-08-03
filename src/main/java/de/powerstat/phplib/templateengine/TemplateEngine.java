@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -105,6 +106,101 @@ public final class TemplateEngine
 
 
   /**
+   * Get new instance from a UTF-8 encoded text file.
+   *
+   * @param file Text file (UTF-8 encoded) to load as template
+   * @return A new TemplateEngine instance where the template variable name is 'template'
+   * @throws FileNotFoundException When the given file does not exist
+   * @throws IllegalArgumentException When the given file is null
+   */
+  public static TemplateEngine newInstance(final File file) throws FileNotFoundException
+   {
+    if (file == null)
+     {
+      throw new IllegalArgumentException();
+     }
+    if (!file.isFile())
+     {
+      if (!file.exists())
+       {
+        throw new FileNotFoundException(file.getAbsolutePath());
+       }
+      // Load all files from directory?
+      throw new AssertionError(file.getAbsolutePath() + " is a directory and not a file!"); //$NON-NLS-1$
+     }
+    assert file.length() < 1048576 : "Template file >= 1MB!"; //$NON-NLS-1$
+    final TemplateEngine templ = new TemplateEngine();
+    /*
+    String filename = file.getName();
+    final int extPos = filename.lastIndexOf('.');
+    if (extPos > -1)
+     {
+      filename = filename.substring(0, extPos);
+     }
+    filename = filename.toLowerCase(Locale.getDefault());
+    templ.setFile(filename, file);
+    */
+    templ.setFile("template", file); //$NON-NLS-1$
+    return templ;
+   }
+
+
+  /**
+   * Get new instance from a stream.
+   *
+   * @param stream UTF-8 stream to read the template from
+   * @return A new TemplateEngine instance where the template variable name is 'template'.
+   * @throws IOException If an I/O error occurs
+   * @throws IllegalArgumentException When the given stream is null
+   * @throws IllegalStateException If the stream is empty
+   */
+  public static TemplateEngine newInstance(final InputStream stream) throws IOException
+   {
+    if (stream == null)
+     {
+      throw new IllegalArgumentException();
+     }
+    final StringBuilder fileBuffer = new StringBuilder();
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)))
+     {
+      String line = reader.readLine();
+      while (line != null)
+       {
+        fileBuffer.append(line);
+        fileBuffer.append('\n');
+        line = reader.readLine();
+       }
+     }
+    if (fileBuffer.length() == 0)
+     {
+      throw new IllegalStateException();
+     }
+    final TemplateEngine templ = new TemplateEngine();
+    templ.setVar("template", fileBuffer.toString()); //$NON-NLS-1$
+    return templ;
+   }
+
+
+  /**
+   * Get new instance from a string.
+   *
+   * @param template Template string
+   * @return A new TemplateEngine instance where the template variable name is 'template'.
+   * @throws IllegalArgumentException When the given string is null or empty
+   */
+  public static TemplateEngine newInstance(final String template)
+   {
+    if ((template == null) || template.isEmpty())
+     {
+      throw new IllegalArgumentException();
+     }
+    final TemplateEngine templ = new TemplateEngine();
+    templ.setVar("template", template); //$NON-NLS-1$
+    return templ;
+   }
+
+
+  /**
    * Handling of unknown template variables during parsing.
    *
    * @param newUnknowns How to handle unknown variables.
@@ -120,7 +216,7 @@ public final class TemplateEngine
    * Set template file for variable.
    *
    * @param newVarname Variable that should hold the template
-   * @param newFile Template file
+   * @param newFile Template file UTF-8 encoded
    * @return true when successful (file exists) otherwise false
    */
   public boolean setFile(final String newVarname, final File newFile)
@@ -142,7 +238,10 @@ public final class TemplateEngine
        }
       catch (final IOException e)
         {
-         // ignore
+         if (LOGGER.isWarnEnabled())
+          {
+           LOGGER.warn("File does not exist: " + newFile.getAbsolutePath()); //$NON-NLS-1$
+          }
         }
      }
     return exists;
@@ -150,7 +249,7 @@ public final class TemplateEngine
 
 
   /**
-   * Load template file if required.
+   * Load template file (UTF-8 encoded) if required.
    *
    * @param varname Variable to read from file
    * @return true if successful otherwise false
@@ -159,6 +258,7 @@ public final class TemplateEngine
    */
   private boolean loadfile(final String varname) throws IOException
    {
+    assert (varname != null) && !varname.isEmpty();
     if (this.tempVars.containsKey(varname)) // Already loaded?
      {
       return true;
@@ -251,7 +351,7 @@ public final class TemplateEngine
    * @throws IOException IO exception
    * @throws IllegalStateException When no block with varname is found.
    */
-  public boolean setBlock(final String parent, final String varname, final String name) throws IOException, IllegalStateException
+  public boolean setBlock(final String parent, final String varname, final String name) throws IOException
    {
     if (!loadfile(parent))
      {
@@ -282,7 +382,7 @@ public final class TemplateEngine
    * @throws IOException IO exception
    * @throws IllegalStateException When no block with varname is found.
    */
-  public boolean setBlock(final String parent, final String varname) throws IOException, IllegalStateException
+  public boolean setBlock(final String parent, final String varname) throws IOException
    {
     return setBlock(parent, varname, ""); //$NON-NLS-1$
    }
@@ -324,6 +424,7 @@ public final class TemplateEngine
    */
   private String replaceVarsNew(final String varname)
    {
+    assert (varname != null) && !varname.isEmpty();
     // Get variable names to replace from varname
     final Pattern patternTemplate = Pattern.compile("\\{([^}\n\r\t :]+)\\}"); //$NON-NLS-1$
     final Matcher matcherTemplate = patternTemplate.matcher(varname);
@@ -375,6 +476,7 @@ public final class TemplateEngine
   public String parse(final String target, final String varname, final boolean append) throws IOException
    {
     final String str = subst(varname);
+    assert str != null;
     setVar(target, (append ? getVar(target) : "") + str); //$NON-NLS-1$
     return str;
    }
@@ -472,11 +574,7 @@ public final class TemplateEngine
         result = matcher.replaceAll("<!-- Template variable '$1' undefined -->"); //$NON-NLS-1$
         break;
       default: // For the case that enum HandleUndefined will be extended!
-        if (LOGGER.isDebugEnabled())
-         {
-          LOGGER.debug("Unsupported unknowns: " + this.unknowns); //$NON-NLS-1$
-         }
-        // Same as keep
+        throw new AssertionError(this.unknowns);
      }
     return result;
    }
@@ -492,5 +590,23 @@ public final class TemplateEngine
    {
     return finish(getVar(varname));
    }
+
+
+  /**
+   * Returns the string representation of this TemplatEngine.
+   *
+   * The exact details of this representation are unspecified and subject to change, but the following may be regarded as typical:
+   *
+   * "TemplateEngine[unknowns=REMOVE, vars=[name, ...]]"
+   *
+   * @return String representation of this TemplatEngine.
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString()
+   {
+    return "TemplateEngine[unknowns=" + this.unknowns + ", files=" + this.files.values().stream().map(file -> file.getName()).reduce((s1, s2) -> s1 + ", " + s2) + ", vars=" + Arrays.toString(getVars()) + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+   }
+
 
  }

@@ -31,6 +31,7 @@ pipeline
     expectedRemoteUrl = "https://github.com/PowerStat/TemplateEngine.git"
    }
 
+
   stages
    {
     stage('Clean')

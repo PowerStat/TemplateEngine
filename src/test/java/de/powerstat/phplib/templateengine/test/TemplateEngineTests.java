@@ -13,7 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -562,6 +564,163 @@ public final class TemplateEngineTests
     assertAll(
       () -> assertFalse(undefinedVars.isEmpty(), "No undefined variable(s) found!"), //$NON-NLS-1$
       () -> assertEquals(VARIABLE1, undefinedVars.get(0), "Undefined variable not as expected") //$NON-NLS-1$
+    );
+   }
+
+
+  /**
+   * Test toString.
+   */
+  @Test
+  public void testToString()
+   {
+    final TemplateEngine engine = new TemplateEngine();
+    /* final boolean success = */ engine.setFile(FILE1, new File(TEMPLATE1_TMPL));
+    /* final boolean success = */ engine.setFile(FILE2, new File(TEMPLATE2_TMPL));
+    engine.setVar(VARIABLE1, TEST);
+    final String string = engine.toString();
+    assertEquals("TemplateEngine[unknowns=REMOVE, files=Optional[template2.tmpl, template1.tmpl], vars=[variable1]]", string, "toString() result not as expected"); //$NON-NLS-1$ //$NON-NLS-2$
+   }
+
+
+  /**
+   * Test newInstance from file.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void newInstanceFile1() throws IOException
+   {
+    final TemplateEngine engine = TemplateEngine.newInstance(new File(TEMPLATE1_TMPL));
+    /* String result = */ engine.subst("template"); //$NON-NLS-1$
+    final String value = engine.getVar("template"); //$NON-NLS-1$
+    assertAll(
+      () -> assertNotNull(value, "No 'template' found"), //$NON-NLS-1$
+      () -> assertFalse(value.isEmpty(), "No 'template' found") //$NON-NLS-1$
+    );
+   }
+
+
+  /**
+   * Test newInstance from non existing file.
+   */
+  @Test
+  public void newInstanceFileNonExisting()
+   {
+    assertThrows(FileNotFoundException.class, () ->
+     {
+      final TemplateEngine engine = TemplateEngine.newInstance(new File("template0.tmpl")); //$NON-NLS-1$
+     }
+    );
+   }
+
+
+  /**
+   * Test newInstance from directory.
+   */
+  @Test
+  public void newInstanceFileFromDirectory()
+   {
+    assertThrows(AssertionError.class, () ->
+     {
+      final TemplateEngine engine = TemplateEngine.newInstance(new File("target/test-classes/templates/")); //$NON-NLS-1$
+     }
+    );
+   }
+
+
+  /**
+   * Test newInstance from File with null.
+   */
+  @Test
+  public void newInstanceFileNull()
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final File file = null;
+      final TemplateEngine engine = TemplateEngine.newInstance(file);
+     }
+    );
+   }
+
+
+  /**
+   * Test newInstance from InputStream with null.
+   */
+  @Test
+  public void newInstanceInputStreamNull()
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final InputStream stream = null;
+      final TemplateEngine engine = TemplateEngine.newInstance(stream);
+     }
+    );
+   }
+
+
+  /**
+   * Test newInstance from InputStream.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void newInstanceInputStream() throws IOException
+   {
+    try (InputStream stream = this.getClass().getResourceAsStream("/template5.tmpl")) //$NON-NLS-1$
+     {
+      final TemplateEngine engine = TemplateEngine.newInstance(stream);
+      final String value = engine.getVar("template"); //$NON-NLS-1$
+      assertAll(
+        () -> assertNotNull(value, "No 'template' found"), //$NON-NLS-1$
+        () -> assertFalse(value.isEmpty(), "No 'template' found") //$NON-NLS-1$
+      );
+     }
+   }
+
+
+  /**
+   * Test newInstance from String with null.
+   */
+  @Test
+  public void newInstanceStringNull()
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final String template = null;
+      final TemplateEngine engine = TemplateEngine.newInstance(template);
+     }
+    );
+   }
+
+
+  /**
+   * Test newInstance from String with empty string.
+   */
+  @Test
+  public void newInstanceStringEmpty()
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final String template = ""; //$NON-NLS-1$
+      final TemplateEngine engine = TemplateEngine.newInstance(template);
+     }
+    );
+   }
+
+
+  /**
+   * Test newInstance from String.
+   */
+  @Test
+  public void newInstanceString()
+   {
+    final String template = "123\r\n{variable1}\r\n456\r\n"; //$NON-NLS-1$
+    final TemplateEngine engine = TemplateEngine.newInstance(template);
+    final String value = engine.getVar("template"); //$NON-NLS-1$
+    assertAll(
+      () -> assertNotNull(value, "No 'template' found"), //$NON-NLS-1$
+      () -> assertFalse(value.isEmpty(), "No 'template' found") //$NON-NLS-1$
     );
    }
 
