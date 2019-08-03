@@ -163,6 +163,21 @@ public final class TemplateEngineTests
 
 
   /**
+   * Test set template file.
+   */
+  @Test
+  public void setFileEmpty()
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final TemplateEngine engine = new TemplateEngine();
+      /* final boolean success = */ engine.setFile("", new File(TEMPLATE1_TMPL)); //$NON-NLS-1$
+     }
+    );
+   }
+
+
+  /**
    * Test read template file.
    *
    * @throws IOException IO exception
@@ -178,6 +193,24 @@ public final class TemplateEngineTests
       LOGGER.debug("file1 = " + variableValue); //$NON-NLS-1$
      }
     assertEquals("123\n{variable1}\n456\n", variableValue, "Variable value not as expected"); //$NON-NLS-1$ //$NON-NLS-2$
+   }
+
+
+  /**
+   * Test read empty template file.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void substEmpty() throws IOException
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final TemplateEngine engine = new TemplateEngine();
+      /* final boolean success = */ engine.setFile(FILE1, new File(TEMPLATE1_TMPL));
+      /* final String variableValue = */ engine.subst(""); //$NON-NLS-1$
+     }
+    );
    }
 
 
@@ -236,6 +269,23 @@ public final class TemplateEngineTests
     assertAll(
       () -> assertTrue(undefinedVars.isEmpty(), "Undefined variable(s) found!"), //$NON-NLS-1$
       () -> assertEquals(TEST, engine.getVar(VARIABLE1), "Variable value not as expected") //$NON-NLS-1$
+    );
+   }
+
+
+  /**
+   * Test set empty variable with value.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void setEmptyVar() throws IOException
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final TemplateEngine engine = new TemplateEngine();
+      engine.setVar("", TEST); //$NON-NLS-1$
+     }
     );
    }
 
@@ -314,6 +364,23 @@ public final class TemplateEngineTests
 
 
   /**
+   * Test set empty block name.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void setBlockEmpty() throws IOException
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
+      /* final boolean successBlock = */ engine.setBlock("", ""); //$NON-NLS-1$ //$NON-NLS-2$
+     }
+    );
+   }
+
+
+  /**
    * Test set existing block.
    *
    * @throws IOException IO exception
@@ -353,6 +420,29 @@ public final class TemplateEngineTests
     /* String parseResult = */ engine.parse(BLK1_BLK, BLK1, false);
     // end::NonAppendBlock[]
     assertEquals("\n789\nTEST2\nabc\n", engine.getVar(BLK1_BLK), "Block value not as expected"); //$NON-NLS-1$ //$NON-NLS-2$
+   }
+
+
+  /**
+   * Test empty parsing.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void parseEmpty() throws IOException
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
+      /* final boolean successFile = */ engine.setFile(FILE2, new File(TEMPLATE2_TMPL));
+      /* String substResult = */ engine.subst(FILE2);
+      engine.setVar(VARIABLE1, "TEST1"); //$NON-NLS-1$
+      engine.setVar("variable2", "TEST2"); //$NON-NLS-1$ //$NON-NLS-2$
+      engine.setVar("variable3", "TEST3"); //$NON-NLS-1$ //$NON-NLS-2$
+      /* final boolean successBlock = */ engine.setBlock(FILE2, BLK1, BLK1_BLK);
+      /* String parseResult = */ engine.parse("", "", false); //$NON-NLS-1$ //$NON-NLS-2$
+     }
+    );
    }
 
 
@@ -494,6 +584,25 @@ public final class TemplateEngineTests
 
 
   /**
+   * Get empty undefined variables.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void getUndefinedEmpty() throws IOException
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final TemplateEngine engine = new TemplateEngine();
+      /* final boolean success = */ engine.setFile(FILE4, new File("target/test-classes/templates/template4.tmpl")); //$NON-NLS-1$
+      // /* final String variableValue = */ engine.subst("file4"); //$NON-NLS-1$
+      /* final List<String> undefinedVars = */ engine.getUndefined(""); //$NON-NLS-1$
+     }
+    );
+   }
+
+
+  /**
    * Test get keep variable parsing.
    *
    * @throws IOException IO exception
@@ -569,6 +678,23 @@ public final class TemplateEngineTests
 
 
   /**
+   * Test unset empty variable.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void unsetVarEmpty() throws IOException
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final TemplateEngine engine = new TemplateEngine();
+      engine.unsetVar(""); //$NON-NLS-1$
+     }
+    );
+   }
+
+
+  /**
    * Test toString.
    */
   @Test
@@ -635,7 +761,7 @@ public final class TemplateEngineTests
   @Test
   public void newInstanceFileNull()
    {
-    assertThrows(IllegalArgumentException.class, () ->
+    assertThrows(NullPointerException.class, () ->
      {
       final File file = null;
       final TemplateEngine engine = TemplateEngine.newInstance(file);
@@ -650,7 +776,7 @@ public final class TemplateEngineTests
   @Test
   public void newInstanceInputStreamNull()
    {
-    assertThrows(IllegalArgumentException.class, () ->
+    assertThrows(NullPointerException.class, () ->
      {
       final InputStream stream = null;
       final TemplateEngine engine = TemplateEngine.newInstance(stream);
@@ -685,7 +811,7 @@ public final class TemplateEngineTests
   @Test
   public void newInstanceStringNull()
    {
-    assertThrows(IllegalArgumentException.class, () ->
+    assertThrows(NullPointerException.class, () ->
      {
       final String template = null;
       final TemplateEngine engine = TemplateEngine.newInstance(template);
@@ -727,17 +853,19 @@ public final class TemplateEngineTests
 
   /**
    * Test newInstance from TemplateEngine copy.
+   *
+   * @throws IOException IO exception
    */
   @Test
-  public void newInstanceCopy()
+  public void newInstanceCopy() throws IOException
    {
-    final String template = "123\r\n{variable1}\r\n456\r\n"; //$NON-NLS-1$
-    final TemplateEngine engine1 = TemplateEngine.newInstance(template);
+    final TemplateEngine engine1 = TemplateEngine.newInstance(new File(TEMPLATE1_TMPL));
+    /* String result = */ engine1.subst("template"); //$NON-NLS-1$
     final TemplateEngine engine2 = TemplateEngine.newInstance(engine1);
-    final String value = engine2.getVar("template"); //$NON-NLS-1$
+    final String value2 = engine2.getVar("template"); //$NON-NLS-1$
     assertAll(
-      () -> assertNotNull(value, "No 'template' found"), //$NON-NLS-1$
-      () -> assertFalse(value.isEmpty(), "No 'template' found") //$NON-NLS-1$
+      () -> assertNotNull(value2, "No 'template' found"), //$NON-NLS-1$
+      () -> assertFalse(value2.isEmpty(), "No 'template' found") //$NON-NLS-1$
     );
    }
 
@@ -751,6 +879,38 @@ public final class TemplateEngineTests
     final TemplateEngine engine1 = new TemplateEngine();
     final TemplateEngine engine2 = new TemplateEngine(engine1);
     assertNotNull(engine2, "Copy constructor failed!"); //$NON-NLS-1$
+   }
+
+
+  /**
+   * Test get empty variable with value.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void getVarEmpty() throws IOException
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final TemplateEngine engine = new TemplateEngine();
+      /* final String value = */ engine.getVar(""); //$NON-NLS-1$
+     }
+    );
+   }
+
+
+  /**
+   * Test empty finish.
+   */
+  @Test
+  public void finishEmpty()
+   {
+    assertThrows(IllegalArgumentException.class, () ->
+     {
+      final TemplateEngine engine = new TemplateEngine();
+      engine.finish(""); //$NON-NLS-1$
+     }
+    );
    }
 
  }

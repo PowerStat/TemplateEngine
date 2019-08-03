@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
@@ -104,9 +105,11 @@ public final class TemplateEngine
    * Copy constructor.
    *
    * @param engine Template engine
+   * @throws NullPointerException If engine is null
    */
   public TemplateEngine(final TemplateEngine engine)
    {
+    Objects.requireNonNull(engine, "engine"); //$NON-NLS-1$
     this.unknowns = engine.unknowns;
     for (final Map.Entry<String, String> entry : engine.tempVars.entrySet())
      {
@@ -145,6 +148,7 @@ public final class TemplateEngine
    *
    * @param engine TemplateEngine to copy
    * @return A new TemplateEngine instance that is a copy of engine.
+   * @throws NullPointerException If engine is null
    */
   public static TemplateEngine newInstance(final TemplateEngine engine)
    {
@@ -159,13 +163,11 @@ public final class TemplateEngine
    * @return A new TemplateEngine instance where the template variable name is 'template'
    * @throws FileNotFoundException When the given file does not exist
    * @throws IllegalArgumentException When the given file is null
+   * @throws NullPointerException If file is null
    */
   public static TemplateEngine newInstance(final File file) throws FileNotFoundException
    {
-    if (file == null)
-     {
-      throw new IllegalArgumentException();
-     }
+    Objects.requireNonNull(file, "file"); //$NON-NLS-1$
     if (!file.isFile())
      {
       if (!file.exists())
@@ -200,13 +202,11 @@ public final class TemplateEngine
    * @throws IOException If an I/O error occurs
    * @throws IllegalArgumentException When the given stream is null
    * @throws IllegalStateException If the stream is empty
+   * @throws NullPointerException If stream is null
    */
   public static TemplateEngine newInstance(final InputStream stream) throws IOException
    {
-    if (stream == null)
-     {
-      throw new IllegalArgumentException();
-     }
+    Objects.requireNonNull(stream, "stream"); //$NON-NLS-1$
     final StringBuilder fileBuffer = new StringBuilder();
     try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)))
      {
@@ -234,10 +234,12 @@ public final class TemplateEngine
    * @param template Template string
    * @return A new TemplateEngine instance where the template variable name is 'template'.
    * @throws IllegalArgumentException When the given string is null or empty
+   * @throws NullPointerException If template is null
    */
   public static TemplateEngine newInstance(final String template)
    {
-    if ((template == null) || template.isEmpty())
+    Objects.requireNonNull(template, "template"); //$NON-NLS-1$
+    if (template.isEmpty())
      {
       throw new IllegalArgumentException();
      }
@@ -265,9 +267,17 @@ public final class TemplateEngine
    * @param newVarname Variable that should hold the template
    * @param newFile Template file UTF-8 encoded
    * @return true when successful (file exists) otherwise false
+   * @throws NullPointerException If newVarname or newFile is null
+   * @throws IllegalArgumentException If newVarname is empty
    */
   public boolean setFile(final String newVarname, final File newFile)
    {
+    Objects.requireNonNull(newVarname, "newVarname"); //$NON-NLS-1$
+    Objects.requireNonNull(newFile, "newFile"); //$NON-NLS-1$
+    if (newVarname.isEmpty())
+     {
+      throw new IllegalArgumentException();
+     }
     boolean exists = newFile.exists();
     if (exists)
      {
@@ -345,9 +355,16 @@ public final class TemplateEngine
    *
    * @param varname Template variable name
    * @return Template variables value
+   * @throws NullPointerException If varname is null
+   * @throws IllegalArgumentException If varname is empty
    */
   public String getVar(final String varname)
    {
+    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    if (varname.isEmpty())
+     {
+      throw new IllegalArgumentException();
+     }
     return this.tempVars.containsKey(varname) ? this.tempVars.get(varname) : ""; //$NON-NLS-1$
    }
 
@@ -356,10 +373,17 @@ public final class TemplateEngine
    * Set template variables value.
    *
    * @param varname Template variable name
-   * @param value Template variable value
+   * @param value Template variable value, could  be null
+   * @throws NullPointerException If varname is null
+   * @throws IllegalArgumentException If varname is empty
    */
   public void setVar(final String varname, final String value)
    {
+    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    if (varname.isEmpty())
+     {
+      throw new IllegalArgumentException();
+     }
     this.tempVars.put(varname, (value == null) ? "" : value); //$NON-NLS-1$
    }
 
@@ -368,6 +392,8 @@ public final class TemplateEngine
    * Set template variable as empty.
    *
    * @param varname Template variable name
+   * @throws NullPointerException If varname is null
+   * @throws IllegalArgumentException If varname is empty
    */
   public void setVar(final String varname)
    {
@@ -379,9 +405,16 @@ public final class TemplateEngine
    * Unset template variable.
    *
    * @param varname Template variable name
+   * @throws NullPointerException If varname is null
+   * @throws IllegalArgumentException If varname is empty
    */
   public void unsetVar(final String varname)
    {
+    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    if (varname.isEmpty())
+     {
+      throw new IllegalArgumentException();
+     }
     /* String value = */ this.tempVars.remove(varname);
    }
 
@@ -397,9 +430,17 @@ public final class TemplateEngine
    * @return true on sucess otherwise false
    * @throws IOException IO exception
    * @throws IllegalStateException When no block with varname is found.
+   * @throws NullPointerException If parent or varname is null
+   * @throws IllegalArgumentException If parent or varname is empty
    */
   public boolean setBlock(final String parent, final String varname, final String name) throws IOException
    {
+    Objects.requireNonNull(parent, "parent"); //$NON-NLS-1$
+    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    if (parent.isEmpty() || varname.isEmpty())
+     {
+      throw new IllegalArgumentException();
+     }
     if (!loadfile(parent))
      {
       return false;
@@ -428,6 +469,8 @@ public final class TemplateEngine
    * @return true on sucess otherwise false
    * @throws IOException IO exception
    * @throws IllegalStateException When no block with varname is found.
+   * @throws NullPointerException If parent or varname is null
+   * @throws IllegalArgumentException If parent or varname is empty
    */
   public boolean setBlock(final String parent, final String varname) throws IOException
    {
@@ -444,6 +487,7 @@ public final class TemplateEngine
   /*
   private String replaceVarsOld(String varname)
    {
+    assert (varname != null) && !varname.isEmpty();
     // loop over all known variables an replace them
     if (!this.tempVars.isEmpty())
      {
@@ -499,9 +543,16 @@ public final class TemplateEngine
    * @param varname Variable name
    * @return Replaced variable content or null
    * @throws IOException File not found or IO exception
+   * @throws NullPointerException If varname is null
+   * @throws IllegalArgumentException If varname is empty
    */
   public String subst(final String varname) throws IOException
    {
+    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    if (varname.isEmpty())
+     {
+      throw new IllegalArgumentException();
+     }
     if (!loadfile(varname))
      {
       return null; // Use "" ?
@@ -519,9 +570,17 @@ public final class TemplateEngine
    * @param append true for appending blocks to target, otherwise false for replacing targets content
    * @return Variables content after parsing
    * @throws IOException File not found or IO exception
+   * @throws NullPointerException If target or varname is null
+   * @throws IllegalArgumentException If target or varname is empty
    */
   public String parse(final String target, final String varname, final boolean append) throws IOException
    {
+    Objects.requireNonNull(target, "target"); //$NON-NLS-1$
+    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    if (target.isEmpty() || varname.isEmpty())
+     {
+      throw new IllegalArgumentException();
+     }
     final String str = subst(varname);
     assert str != null;
     setVar(target, (append ? getVar(target) : "") + str); //$NON-NLS-1$
@@ -538,6 +597,8 @@ public final class TemplateEngine
    * @param varname Parse the content of this variable
    * @return Variables content after parsing
    * @throws IOException File not found or IO exception
+   * @throws NullPointerException If target or varname is null
+   * @throws IllegalArgumentException If target or varname is empty
    */
   public String parse(final String target, final String varname) throws IOException
    {
@@ -571,9 +632,16 @@ public final class TemplateEngine
    * @param varname Variable to parse for undefined variables
    * @return List with undefined template variables names
    * @throws IOException  File not found or IO exception
+   * @throws NullPointerException If varname is null
+   * @throws IllegalArgumentException If varname is empty
    */
   public List<String> getUndefined(final String varname) throws IOException
    {
+    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    if (varname.isEmpty())
+     {
+      throw new IllegalArgumentException();
+     }
     if (!loadfile(varname))
      {
       return new ArrayList<>();
@@ -598,12 +666,19 @@ public final class TemplateEngine
   /**
    * Handle undefined template variables after parsing has happened.
    *
-   * @param str Template variable to parse for unknown variables
+   * @param varname Template variable to parse for unknown variables
    * @return Modified str as specified by the "unknowns" setting
+   * @throws NullPointerException If varname is null
+   * @throws IllegalArgumentException If varname is empty
    */
-  public String finish(final String str)
+  public String finish(final String varname)
    {
-    String result = str;
+    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    if (varname.isEmpty())
+     {
+      throw new IllegalArgumentException();
+     }
+    String result = varname;
     final Pattern pattern = Pattern.compile("\\{([^ \\t\\r\\n}]+)\\}"); //$NON-NLS-1$
     final Matcher matcher = pattern.matcher(result);
     switch (this.unknowns)
@@ -628,6 +703,8 @@ public final class TemplateEngine
    *
    * @param varname Name of template variable
    * @return Value of template variable
+   * @throws NullPointerException If varname is null
+   * @throws IllegalArgumentException If varname is empty
    */
   public String get(final String varname)
    {
@@ -650,6 +727,5 @@ public final class TemplateEngine
    {
     return "TemplateEngine[unknowns=" + this.unknowns + ", files=" + this.files.values().stream().map(File::getName).reduce((s1, s2) -> s1 + ", " + s2) + ", vars=" + getVars() + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
    }
-
 
  }
