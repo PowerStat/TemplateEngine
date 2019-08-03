@@ -424,8 +424,8 @@ public final class TemplateEngineTests
   public void getVarsEmpty()
    {
     final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
-    final String[] variables = engine.getVars();
-    assertTrue(variables.length == 0, "Variables within empty template found!"); //$NON-NLS-1$
+    final List<String> variables = engine.getVars();
+    assertTrue(variables.size() == 0, "Variables within empty template found!"); //$NON-NLS-1$
    }
 
 
@@ -438,10 +438,10 @@ public final class TemplateEngineTests
     final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
     engine.setVar(VARIABLE1, TEST);
     engine.setVar("variable2", TEST); //$NON-NLS-1$
-    final String[] variables = engine.getVars();
+    final List<String> variables = engine.getVars();
     assertAll(
-      () -> assertTrue(variables.length > 0, "No variables within template found!"), //$NON-NLS-1$
-      () -> assertNotNull(variables[0], "No variable in list!") //$NON-NLS-1$
+      () -> assertTrue(variables.size() > 0, "No variables within template found!"), //$NON-NLS-1$
+      () -> assertNotNull(variables.get(0), "No variable in list!") //$NON-NLS-1$
     );
    }
 

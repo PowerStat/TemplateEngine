@@ -14,8 +14,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -68,19 +66,37 @@ public final class TemplateEngine
   public enum HandleUndefined
    {
     /**
+     * Remove variables.
+     */
+    REMOVE(0),
+
+    /**
      * Keep variables.
      */
-    keep,
+    KEEP(1),
 
     /**
      * Change to XML comments.
      */
-    comment,
+    COMMENT(2);
+
 
     /**
-     * Remove variables.
+     * Action number.
      */
-    remove
+    private final int action;
+
+
+    /**
+     * Ordinal constructor.
+     *
+     * @param action Action number
+     */
+    HandleUndefined(final int action)
+     {
+      this.action = action;
+     }
+
    }
 
 
@@ -534,20 +550,16 @@ public final class TemplateEngine
    *
    * @return Array with names of template variables
    */
-  public String[] getVars()
+  public List<String> getVars()
    {
     if (this.tempVars.isEmpty())
      {
-      return new String[0];
+      return new ArrayList<>();
      }
-    final String[] result = new String[this.tempVars.size()];
-    final Set<Entry<String, String>> tempVarsSet = this.tempVars.entrySet();
-    final Iterator<Entry<String, String>> iter = tempVarsSet.iterator();
-    int ctr = 0;
-    while (iter.hasNext())
+    final List<String> result = new ArrayList<>();
+    for (final Entry<String, String> entry : this.tempVars.entrySet())
      {
-      final Map.Entry<String, String> mapEntry = iter.next();
-      result[ctr++] = mapEntry.getKey(); // + " = " + mapEntry.getValue();
+      result.add(entry.getKey()); // entry.getValue();
      }
     return result;
    }
@@ -636,7 +648,7 @@ public final class TemplateEngine
   @Override
   public String toString()
    {
-    return "TemplateEngine[unknowns=" + this.unknowns + ", files=" + this.files.values().stream().map(file -> file.getName()).reduce((s1, s2) -> s1 + ", " + s2) + ", vars=" + Arrays.toString(getVars()) + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+    return "TemplateEngine[unknowns=" + this.unknowns + ", files=" + this.files.values().stream().map(File::getName).reduce((s1, s2) -> s1 + ", " + s2) + ", vars=" + getVars() + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
    }
 
 
