@@ -541,7 +541,7 @@ public final class TemplateEngine
    * Substitute variable with its content.
    *
    * @param varname Variable name
-   * @return Replaced variable content or null
+   * @return Replaced variable content or empty string
    * @throws IOException File not found or IO exception
    * @throws NullPointerException If varname is null
    * @throws IllegalArgumentException If varname is empty
@@ -555,7 +555,7 @@ public final class TemplateEngine
      }
     if (!loadfile(varname))
      {
-      return null; // Use "" ?
+      return ""; //$NON-NLS-1$
      }
     // return replaceVarsOld(getVar(varname));
     return replaceVarsNew(getVar(varname));
@@ -582,7 +582,6 @@ public final class TemplateEngine
       throw new IllegalArgumentException();
      }
     final String str = subst(varname);
-    assert str != null;
     setVar(target, (append ? getVar(target) : "") + str); //$NON-NLS-1$
     return str;
    }

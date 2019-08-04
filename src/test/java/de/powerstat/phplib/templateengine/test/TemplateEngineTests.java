@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -547,7 +546,7 @@ public final class TemplateEngineTests
     final TemplateEngine engine = new TemplateEngine(HandleUndefined.comment);
     /* final boolean successFile = */ engine.setFile(FILE4, new File("target/test-classes/templates/template4.tmpl")); //$NON-NLS-1$
     final String result = engine.subst(FILE4);
-    assertNull(result, "Template not empty!"); //$NON-NLS-1$
+    assertEquals("", result, "Template not empty!"); //$NON-NLS-1$ //$NON-NLS-2$
    }
 
 
@@ -651,7 +650,7 @@ public final class TemplateEngineTests
     final String variableValue = engine.subst("file0"); //$NON-NLS-1$
     assertAll(
       () -> assertFalse(success, "Template file template0.tmpl could be set!"), //$NON-NLS-1$
-      () -> assertNull(variableValue, "Template file template0.tmpl could be loaded from classpath") //$NON-NLS-1$
+      () -> assertEquals("", variableValue, "Template file template0.tmpl could be loaded from classpath") //$NON-NLS-1$ //$NON-NLS-2$
     );
    }
 
