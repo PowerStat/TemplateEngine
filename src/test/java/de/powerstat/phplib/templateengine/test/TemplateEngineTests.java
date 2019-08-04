@@ -806,6 +806,26 @@ public final class TemplateEngineTests
 
 
   /**
+   * Test newInstance from empty InputStream.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void newInstanceInputStreamEmpty() throws IOException
+   {
+    assertThrows(IllegalStateException.class, () ->
+     {
+      try (InputStream stream = this.getClass().getResourceAsStream("/template6.tmpl")) //$NON-NLS-1$
+       {
+        final TemplateEngine engine = TemplateEngine.newInstance(stream);
+        final String value = engine.getVar("template"); //$NON-NLS-1$
+       }
+     }
+    );
+   }
+
+
+  /**
    * Test newInstance from String with null.
    */
   @Test
