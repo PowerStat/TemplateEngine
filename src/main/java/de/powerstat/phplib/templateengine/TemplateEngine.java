@@ -43,6 +43,21 @@ public final class TemplateEngine
   private static final Logger LOGGER = LogManager.getLogger(TemplateEngine.class);
 
   /**
+   * Template name constant.
+   */
+  private static final String TEMPLATE = "template"; //$NON-NLS-1$
+
+  /**
+   * Varname name constant.
+   */
+  private static final String VARNAME = "varname"; //$NON-NLS-1$
+
+  /**
+   * Varname is empty error message constant.
+   */
+  private static final String VARNAME_IS_EMPTY = "varname is empty"; //$NON-NLS-1$
+
+  /**
    * File name map.
    */
   private final transient Map<String, File> files = new ConcurrentHashMap<>();
@@ -189,7 +204,7 @@ public final class TemplateEngine
     filename = filename.toLowerCase(Locale.getDefault());
     templ.setFile(filename, file);
     */
-    templ.setFile("template", file); //$NON-NLS-1$
+    templ.setFile(TEMPLATE, file);
     return templ;
    }
 
@@ -220,10 +235,10 @@ public final class TemplateEngine
      }
     if (fileBuffer.length() == 0)
      {
-      throw new IllegalStateException();
+      throw new IllegalStateException("Empty stream"); //$NON-NLS-1$
      }
     final TemplateEngine templ = new TemplateEngine();
-    templ.setVar("template", fileBuffer.toString()); //$NON-NLS-1$
+    templ.setVar(TEMPLATE, fileBuffer.toString());
     return templ;
    }
 
@@ -238,13 +253,13 @@ public final class TemplateEngine
    */
   public static TemplateEngine newInstance(final String template)
    {
-    Objects.requireNonNull(template, "template"); //$NON-NLS-1$
+    Objects.requireNonNull(template, TEMPLATE);
     if (template.isEmpty())
      {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("template is empty"); //$NON-NLS-1$
      }
     final TemplateEngine templ = new TemplateEngine();
-    templ.setVar("template", template); //$NON-NLS-1$
+    templ.setVar(TEMPLATE, template);
     return templ;
    }
 
@@ -276,7 +291,7 @@ public final class TemplateEngine
     Objects.requireNonNull(newFile, "newFile"); //$NON-NLS-1$
     if (newVarname.isEmpty())
      {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("newVarname is empty"); //$NON-NLS-1$
      }
     boolean exists = newFile.exists();
     if (exists)
@@ -360,10 +375,10 @@ public final class TemplateEngine
    */
   public String getVar(final String varname)
    {
-    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    Objects.requireNonNull(varname, VARNAME);
     if (varname.isEmpty())
      {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
     return this.tempVars.containsKey(varname) ? this.tempVars.get(varname) : ""; //$NON-NLS-1$
    }
@@ -379,10 +394,10 @@ public final class TemplateEngine
    */
   public void setVar(final String varname, final String value)
    {
-    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    Objects.requireNonNull(varname, VARNAME);
     if (varname.isEmpty())
      {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
     this.tempVars.put(varname, (value == null) ? "" : value); //$NON-NLS-1$
    }
@@ -410,10 +425,10 @@ public final class TemplateEngine
    */
   public void unsetVar(final String varname)
    {
-    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    Objects.requireNonNull(varname, VARNAME);
     if (varname.isEmpty())
      {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
     /* String value = */ this.tempVars.remove(varname);
    }
@@ -436,10 +451,10 @@ public final class TemplateEngine
   public boolean setBlock(final String parent, final String varname, final String name) throws IOException
    {
     Objects.requireNonNull(parent, "parent"); //$NON-NLS-1$
-    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    Objects.requireNonNull(varname, VARNAME);
     if (parent.isEmpty() || varname.isEmpty())
      {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("parent or varname is empty"); //$NON-NLS-1$
      }
     if (!loadfile(parent))
      {
@@ -548,10 +563,10 @@ public final class TemplateEngine
    */
   public String subst(final String varname) throws IOException
    {
-    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    Objects.requireNonNull(varname, VARNAME);
     if (varname.isEmpty())
      {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
     if (!loadfile(varname))
      {
@@ -576,10 +591,10 @@ public final class TemplateEngine
   public String parse(final String target, final String varname, final boolean append) throws IOException
    {
     Objects.requireNonNull(target, "target"); //$NON-NLS-1$
-    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    Objects.requireNonNull(varname, VARNAME);
     if (target.isEmpty() || varname.isEmpty())
      {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("target or varname is empty"); //$NON-NLS-1$
      }
     final String str = subst(varname);
     setVar(target, (append ? getVar(target) : "") + str); //$NON-NLS-1$
@@ -636,10 +651,10 @@ public final class TemplateEngine
    */
   public List<String> getUndefined(final String varname) throws IOException
    {
-    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    Objects.requireNonNull(varname, VARNAME);
     if (varname.isEmpty())
      {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
     if (!loadfile(varname))
      {
@@ -672,10 +687,10 @@ public final class TemplateEngine
    */
   public String finish(final String varname)
    {
-    Objects.requireNonNull(varname, "varname"); //$NON-NLS-1$
+    Objects.requireNonNull(varname, VARNAME);
     if (varname.isEmpty())
      {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
     String result = varname;
     final Pattern pattern = Pattern.compile("\\{([^ \\t\\r\\n}]+)\\}"); //$NON-NLS-1$
@@ -724,7 +739,7 @@ public final class TemplateEngine
   @Override
   public String toString()
    {
-    return "TemplateEngine[unknowns=" + this.unknowns + ", files=" + this.files.values().stream().map(File::getName).reduce((s1, s2) -> s1 + ", " + s2) + ", vars=" + getVars() + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+    return new StringBuilder().append("TemplateEngine[unknowns=").append(this.unknowns).append(", files=").append(this.files.values().stream().map(File::getName).reduce((s1, s2) -> s1 + ", " + s2)).append(", vars=").append(getVars()).append("]").toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
    }
 
  }
