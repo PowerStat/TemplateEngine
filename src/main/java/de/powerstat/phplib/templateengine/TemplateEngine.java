@@ -308,8 +308,9 @@ public final class TemplateEngine
           this.files.put(newVarname, newFile);
          }
        }
-      catch (final IOException e)
+      catch (final IOException ignored)
         {
+         // exists is already false
          if (LOGGER.isWarnEnabled())
           {
            LOGGER.warn("File does not exist: " + newFile.getAbsolutePath()); //$NON-NLS-1$
