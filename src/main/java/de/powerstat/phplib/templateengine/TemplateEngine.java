@@ -31,6 +31,9 @@ import org.apache.logging.log4j.Logger;
 /**
  * PHPLib compatible template engine.
  *
+ * Unconditionally thread safe.
+ * Not serializable, because serialization is dangerous, use Protocol Buffers or JSON instead!
+ *
  * @author Kai Hofmann
  * @see <a href="https://sourceforge.net/projects/phplib/">https://sourceforge.net/projects/phplib/</a>
  * @see <a href="https://pear.php.net/package/HTML_Template_PHPLIB">https://pear.php.net/package/HTML_Template_PHPLIB</a>
@@ -60,12 +63,12 @@ public final class TemplateEngine
   /**
    * File name map.
    */
-  private final transient Map<String, File> files = new ConcurrentHashMap<>();
+  private final Map<String, File> files = new ConcurrentHashMap<>();
 
   /**
    * Temporary variables map.
    */
-  private final transient Map<String, String> tempVars = new ConcurrentHashMap<>();
+  private final Map<String, String> tempVars = new ConcurrentHashMap<>();
 
   /**
    * Handling of undefined template variables.
@@ -74,7 +77,7 @@ public final class TemplateEngine
    * "comment" =&gt; replace undefined variables with comments
    * "keep"    =&gt; keep undefined variables
    */
-  private transient HandleUndefined unknowns = HandleUndefined.remove;
+  private HandleUndefined unknowns = HandleUndefined.REMOVE;
 
   /**
    * Enum for handling of undefined variables.
