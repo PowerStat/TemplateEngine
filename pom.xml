@@ -167,7 +167,7 @@
           <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.5.0</version>
+            <version>5.5.1</version>
           </dependency>
 
         </dependencies>
@@ -184,7 +184,7 @@
           <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.5.0</version>
+            <version>5.5.1</version>
           </dependency>
 
         </dependencies>
@@ -480,7 +480,7 @@
           <dependency>
             <groupId>org.asciidoctor</groupId>
             <artifactId>asciidoctorj-pdf</artifactId>
-            <version>1.5.0-alpha.18</version>
+            <version>1.5.0-beta.2</version>
           </dependency>
         </dependencies>
         
@@ -638,7 +638,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.5.0</version>
+      <version>5.5.1</version>
       <scope>test</scope>
     </dependency>
 
