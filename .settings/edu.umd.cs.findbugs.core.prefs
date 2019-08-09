@@ -1,5 +1,5 @@
 #SpotBugs User Preferences
-#Thu Oct 18 19:23:52 CEST 2018
+#Fri Aug 09 23:10:37 CEST 2019
 detectorAndroidSqlInjectionDetector=AndroidSqlInjectionDetector|true
 detectorAnonymousLdapDetector=AnonymousLdapDetector|true
 detectorAppendingToAnObjectOutputStream=AppendingToAnObjectOutputStream|true
@@ -237,7 +237,7 @@ detectorXssServletDetector=XssServletDetector|true
 detectorXssTwirlDetector=XssTwirlDetector|true
 detectorXxeDetector=XxeDetector|true
 detector_threshold=2
-effort=default
+effort=max
 filter_settings=Medium|BAD_PRACTICE,CORRECTNESS,I18N,MALICIOUS_CODE,MT_CORRECTNESS,PERFORMANCE,SECURITY,STYLE|false|15
 filter_settings_neg=EXPERIMENTAL,NOISE|
 plugin0=../../work/eclipse/java/findsecbugs-plugin-1.8.0.jar|true

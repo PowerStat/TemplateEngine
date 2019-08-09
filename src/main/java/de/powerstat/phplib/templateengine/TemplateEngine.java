@@ -384,7 +384,8 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
-    return this.tempVars.containsKey(varname) ? this.tempVars.get(varname) : ""; //$NON-NLS-1$
+    final String value = this.tempVars.get(varname);
+    return (value == null) ? "" : value; //$NON-NLS-1$
    }
 
 
