@@ -302,7 +302,7 @@ pipeline
            }
           else
            {
-            bat 'mvn --batch-mode deploy:deploy site:deploy'
+            bat 'mvn --batch-mode site:deploy'
            }
          }
        }
