@@ -260,7 +260,7 @@ pipeline
             sh 'mvn --batch-mode release:clean'
             sh 'mvn --batch-mode release:prepare'
             sh 'mvn --batch-mode release:perform'
-            git push–tags
+            git push -–tags
             git push origin master
            }
           else
@@ -268,7 +268,7 @@ pipeline
             bat 'mvn --batch-mode release:clean'
             bat 'mvn --batch-mode release:prepare'
             bat 'mvn --batch-mode release:perform'
-            git push–tags
+            git push -–tags
             git push origin master
            }
          }
