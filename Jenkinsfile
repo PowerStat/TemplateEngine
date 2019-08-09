@@ -6,7 +6,7 @@ pipeline
   tools
    {
     maven 'Maven3'
-    jdk 'JDK11'
+    jdk 'JDK12'
     git 'GIT'
    }
 
