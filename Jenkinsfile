@@ -240,9 +240,9 @@ pipeline
        }
      }
 
+    /*
     stage('Release')
      {
-      /*
       when
        {
         expression
@@ -251,7 +251,6 @@ pipeline
           return 'https://github.com/PowerStat/TemplateEngine.git' == remoteUrl
          }
        }
-      */
       steps
        {
         script
@@ -275,10 +274,11 @@ pipeline
          }
        }
      }
+    */
 
+    /*
     stage('Deploy')
      {
-      /*
       when
        {
         allOf
@@ -291,7 +291,6 @@ pipeline
            }
          }
        }
-      */
       steps
        {
         script
@@ -307,6 +306,7 @@ pipeline
          }
        }
      }
+    */
 
 
    }
