@@ -26,7 +26,7 @@ pipeline
    }
 
 
-  environment 
+  environment
    {
     expectedRemoteUrl = "https://github.com/PowerStat/TemplateEngine.git"
    }
@@ -40,7 +40,7 @@ pipeline
        {
         script
          {
-          if (isUnix()) 
+          if (isUnix())
            {
             sh 'mvn --batch-mode clean'
            }
@@ -58,8 +58,8 @@ pipeline
        {
         script
          {
-          if (isUnix()) 
-           {           
+          if (isUnix())
+           {
             sh 'mvn --batch-mode compile'
            }
           else
@@ -76,8 +76,8 @@ pipeline
        {
         script
          {
-          if (isUnix()) 
-           {           
+          if (isUnix())
+           {
             sh 'mvn --batch-mode resources:testResources compiler:testCompile surefire:test'
            }
           else
@@ -103,8 +103,8 @@ pipeline
        {
         script
          {
-          if (isUnix()) 
-           {           
+          if (isUnix())
+           {
             sht 'mvn --batch-mode org.pitest:pitest-maven:mutationCoverage'
            }
           else
@@ -122,8 +122,8 @@ pipeline
        {
         script
          {
-          if (isUnix()) 
-           {           
+          if (isUnix())
+           {
             sh 'mvn --batch-mode checkstyle:checkstyle pmd:pmd pmd:cpd com.github.spotbugs:spotbugs-maven-plugin:spotbugs'
            }
           else
@@ -137,8 +137,8 @@ pipeline
         // dependencyCheckAnalyzer
         // dependencyCheckPublisher
         // dependencyTrackPublisher
-        // Arachni Scanner Plugin 
-        // Black Duck Detect 
+        // Arachni Scanner Plugin
+        // Black Duck Detect
         /*
         codesonar
         withSonarQubeEnv('My SonarQube Server')
@@ -165,8 +165,8 @@ pipeline
        {
         script
          {
-          if (isUnix()) 
-           {           
+          if (isUnix())
+           {
             sh 'mvn --batch-mode jar:jar'
            }
           else
@@ -183,8 +183,8 @@ pipeline
        {
         script
          {
-          if (isUnix()) 
-           {           
+          if (isUnix())
+           {
             sh 'mvn --batch-mode jar:jar install:install'
            }
           else
@@ -201,8 +201,8 @@ pipeline
        {
         script
          {
-          if (isUnix()) 
-           {           
+          if (isUnix())
+           {
             sh 'mvn --batch-mode failsafe:integration-test failsafe:verify'
            }
           else
@@ -219,8 +219,8 @@ pipeline
        {
         script
          {
-          if (isUnix()) 
-           {           
+          if (isUnix())
+           {
             sh 'mvn --batch-mode -Dweb.server=www.powerstat.de site'
            }
           else
@@ -239,12 +239,12 @@ pipeline
          }
        }
      }
-     
+
     stage('Release')
      {
       when
        {
-        expression 
+        expression
          {
           // def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
           def remoteUrl = scm.userRemoteConfigs?.first()?.url
@@ -255,8 +255,8 @@ pipeline
        {
         script
          {
-          if (isUnix()) 
-           {           
+          if (isUnix())
+           {
             echo "doing release on unix"
            }
           else

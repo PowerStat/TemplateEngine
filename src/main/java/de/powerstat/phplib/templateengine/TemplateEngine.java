@@ -157,7 +157,7 @@ public final class TemplateEngine
    */
   public TemplateEngine()
    {
-    this(HandleUndefined.remove);
+    this(HandleUndefined.REMOVE);
    }
 
 
@@ -553,7 +553,7 @@ public final class TemplateEngine
       resVarname = resVarname.replaceAll("\\{" + varName + "\\}", getVar(varName)); //$NON-NLS-1$ //$NON-NLS-2$
      }
     return resVarname;
-       }
+   }
 
 
   /**
@@ -701,12 +701,12 @@ public final class TemplateEngine
     final Matcher matcher = pattern.matcher(result);
     switch (this.unknowns)
      {
-      case keep:
+      case KEEP:
         break;
-      case remove:
+      case REMOVE:
         result = matcher.replaceAll(""); //$NON-NLS-1$
         break;
-      case comment:
+      case COMMENT:
         result = matcher.replaceAll("<!-- Template variable '$1' undefined -->"); //$NON-NLS-1$
         break;
       default: // For the case that enum HandleUndefined will be extended!

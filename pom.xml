@@ -10,12 +10,12 @@
   <name>PowerStatsTemplateEngine</name>
   <description>Java port of phplib template engine. See https://sourceforge.net/projects/phplib/ or https://pear.php.net/package/HTML_Template_PHPLIB for more.</description>
   <url>https://www.powerstat.de/TemplateEngine.html</url>
-  
+
   <organization>
     <name>Dipl.-Inform Kai Hofmann</name>
     <url>http://www.powerstat.de/</url>
   </organization>
-  
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -53,7 +53,7 @@
         </plugins>
       </build>
     </profile>
-    
+
   </profiles>
 
   <licenses>
@@ -117,19 +117,19 @@
         <artifactId>maven-clean-plugin</artifactId>
         <version>3.1.0</version>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-install-plugin</artifactId>
         <version>2.5.2</version>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>3.1.0</version>
       </plugin>
-    
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -230,7 +230,7 @@
           <finalName>${project.artifactId}</finalName>
         </configuration>
       </plugin>
-<!--    
+<!--
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>buildnumber-maven-plugin</artifactId>
@@ -284,16 +284,16 @@
             <artifactId>maven-scm-provider-gitexe</artifactId>
             <version>1.11.2</version>
           </dependency>
-          
+
           <dependency>
             <groupId>org.apache.maven.scm</groupId>
             <artifactId>maven-scm-api</artifactId>
             <version>1.11.2</version>
           </dependency>
-          
+
         </dependencies>
       </plugin>
-      
+
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -344,7 +344,7 @@
           </execution>
         </executions>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
@@ -387,7 +387,7 @@
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
         <version>5.0.0</version>
-        <!- - 
+        <!- -
         <configuration>
           <skipProvidedScope>true</skipProvidedScope>
           <skipRuntimeScope>true</skipRuntimeScope>
@@ -414,7 +414,7 @@
         <version>3.1.1</version>
       </plugin>
       -->
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
@@ -425,10 +425,10 @@
             <artifactId>wagon-ssh</artifactId>
             <version>3.3.3</version>
           </dependency>
-          
+
         </dependencies>
       </plugin>
-      
+
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
@@ -439,7 +439,7 @@
             <artifactId>pitest-junit5-plugin</artifactId>
             <version>0.9</version>
           </dependency>
-          
+
         </dependencies>
       </plugin>
 
@@ -449,10 +449,10 @@
         <version>1.6.0</version>
         <executions>
           <execution>
-            <id>output-html</id>              
-            <phase>generate-resources</phase> 
+            <id>output-html</id>
+            <phase>generate-resources</phase>
             <goals>
-              <goal>process-asciidoc</goal> 
+              <goal>process-asciidoc</goal>
             </goals>
             <configuration>
               <backend>xhtml5</backend>
@@ -475,7 +475,7 @@
           </execution>
 -->
         </executions>
-        
+
         <dependencies>
           <dependency>
             <groupId>org.asciidoctor</groupId>
@@ -483,7 +483,7 @@
             <version>1.5.0-beta.2</version>
           </dependency>
         </dependencies>
-        
+
       </plugin>
 
     </plugins>
@@ -575,7 +575,7 @@
               <version>LATEST</version>
             </plugin>
 
-            <!-- 
+            <!--
             <dependency>
               <groupId>com.github.spotbugs</groupId>
               <artifactId>spotbugs</artifactId>
@@ -608,14 +608,14 @@
         <artifactId>jdepend-maven-plugin</artifactId>
         <version>2.0</version>
       </plugin>
- 
+
       <plugin>
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
         <version>5.0.0</version>
       </plugin>
-      
-      <!-- 
+
+      <!--
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
@@ -626,7 +626,7 @@
               <report>report</report>
             </reports>
           </reportSet>
-        </reportSets>      
+        </reportSets>
       </plugin>
       -->
 
@@ -653,7 +653,7 @@
       <artifactId>log4j-core</artifactId>
       <version>2.12.0</version>
     </dependency>
- 
+
    </dependencies>
 
 </project>
