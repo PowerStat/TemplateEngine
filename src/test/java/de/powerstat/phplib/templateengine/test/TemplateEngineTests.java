@@ -734,7 +734,7 @@ public final class TemplateEngineTests
    {
     assertThrows(FileNotFoundException.class, () ->
      {
-      final TemplateEngine engine = TemplateEngine.newInstance(new File("template0.tmpl")); //$NON-NLS-1$
+      /* final TemplateEngine engine = */ TemplateEngine.newInstance(new File("template0.tmpl")); //$NON-NLS-1$
      }
     );
    }
@@ -748,7 +748,7 @@ public final class TemplateEngineTests
    {
     assertThrows(AssertionError.class, () ->
      {
-      final TemplateEngine engine = TemplateEngine.newInstance(new File("target/test-classes/templates/")); //$NON-NLS-1$
+      /* final TemplateEngine engine = */ TemplateEngine.newInstance(new File("target/test-classes/templates/")); //$NON-NLS-1$
      }
     );
    }
@@ -763,7 +763,7 @@ public final class TemplateEngineTests
     assertThrows(NullPointerException.class, () ->
      {
       final File file = null;
-      final TemplateEngine engine = TemplateEngine.newInstance(file);
+      /* final TemplateEngine engine = */ TemplateEngine.newInstance(file);
      }
     );
    }
@@ -778,7 +778,7 @@ public final class TemplateEngineTests
     assertThrows(NullPointerException.class, () ->
      {
       final InputStream stream = null;
-      final TemplateEngine engine = TemplateEngine.newInstance(stream);
+      /* final TemplateEngine engine = */ TemplateEngine.newInstance(stream);
      }
     );
    }
@@ -817,7 +817,7 @@ public final class TemplateEngineTests
       try (InputStream stream = this.getClass().getResourceAsStream("/template6.tmpl")) //$NON-NLS-1$
        {
         final TemplateEngine engine = TemplateEngine.newInstance(stream);
-        final String value = engine.getVar("template"); //$NON-NLS-1$
+        /* final String value = */ engine.getVar("template"); //$NON-NLS-1$
        }
      }
     );
@@ -833,7 +833,7 @@ public final class TemplateEngineTests
     assertThrows(NullPointerException.class, () ->
      {
       final String template = null;
-      final TemplateEngine engine = TemplateEngine.newInstance(template);
+      /* final TemplateEngine engine = */ TemplateEngine.newInstance(template);
      }
     );
    }
@@ -848,7 +848,7 @@ public final class TemplateEngineTests
     assertThrows(IllegalArgumentException.class, () ->
      {
       final String template = ""; //$NON-NLS-1$
-      final TemplateEngine engine = TemplateEngine.newInstance(template);
+      /* final TemplateEngine engine = */ TemplateEngine.newInstance(template);
      }
     );
    }
