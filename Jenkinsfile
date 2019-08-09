@@ -298,11 +298,11 @@ pipeline
          {
           if (isUnix())
            {
-            sh 'mvn --batch-mode deploy:deploy deploy-site'
+            sh 'mvn --batch-mode deploy:deploy site:deploy'
            }
           else
            {
-            bat 'mvn --batch-mode deploy:deploy deploy-site'
+            bat 'mvn --batch-mode deploy:deploy site:deploy'
            }
          }
        }
