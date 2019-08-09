@@ -276,9 +276,9 @@ pipeline
      }
     */
 
-    /*
     stage('Deploy')
      {
+    /*
       when
        {
         allOf
@@ -291,6 +291,7 @@ pipeline
            }
          }
        }
+    */
       steps
        {
         script
@@ -306,7 +307,6 @@ pipeline
          }
        }
      }
-    */
 
 
    }
