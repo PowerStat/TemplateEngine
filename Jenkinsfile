@@ -240,15 +240,15 @@ pipeline
        }
      }
 
+    /*
     stage('Release')
      {
       when
        {
         expression
          {
-          // def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
-          def remoteUrl = scm.userRemoteConfigs?.first()?.url
-          return expectedRemoteUrl == remoteUrl
+          def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
+          return 'https://github.com/PowerStat/TemplateEngine.git' == remoteUrl
          }
        }
       steps
@@ -257,15 +257,56 @@ pipeline
          {
           if (isUnix())
            {
-            echo "doing release on unix"
+            sh 'mvn --batch-mode release:clean'
+            sh 'mvn --batch-mode release:prepare'
+            sh 'mvn --batch-mode release:perform'
+            git push–tags
+            git push origin master
            }
           else
            {
-            echo "doing release on windows"
+            bat 'mvn --batch-mode release:clean'
+            bat 'mvn --batch-mode release:prepare'
+            bat 'mvn --batch-mode release:perform'
+            git push–tags
+            git push origin master
            }
          }
        }
      }
+    */
+
+    /*
+    stage('Deploy')
+     {
+      when
+       {
+        allOf
+         {
+          branch 'master'
+          expression
+           {
+            def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
+            return 'https://github.com/PowerStat/TemplateEngine.git' == remoteUrl
+           }
+         }
+       }
+      steps
+       {
+        script
+         {
+          if (isUnix())
+           {
+            sh 'mvn --batch-mode deploy:deploy deploy-site'
+           }
+          else
+           {
+            bat 'mvn --batch-mode deploy:deploy deploy-site'
+           }
+         }
+       }
+     }
+    */
 
 
    }
