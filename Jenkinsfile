@@ -241,7 +241,7 @@ pipeline
      }
 
     /*
-    stage('Release')
+    stage('Release and deploy')
      {
       when
        {
@@ -270,34 +270,6 @@ pipeline
             bat 'mvn --batch-mode release:perform'
             git push -–tags
             git push origin master
-           }
-         }
-       }
-     }
-    */
-
-    /*
-    stage('Deploy')
-     {
-      when
-       {
-        expression
-         {
-          def remoteUrl = isUnix() ? sh(script: "git config remote.origin.url", returnStdout: true)?.trim() : bat(script: "git config remote.origin.url", returnStdout: true)?.trim()
-          return 'https://github.com/PowerStat/TemplateEngine.git' == remoteUrl
-         }
-       }
-      steps
-       {
-        script
-         {
-          if (isUnix())
-           {
-            sh 'mvn --batch-mode deploy:deploy site:deploy'
-           }
-          else
-           {
-            bat 'mvn --batch-mode site:deploy'
            }
          }
        }
