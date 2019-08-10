@@ -140,7 +140,7 @@
           <showWarnings>true</showWarnings>
           <optimize>false</optimize>
           <debug>true</debug>
-          <release>11</release>
+          <release>12</release>
         </configuration>
       </plugin>
 
