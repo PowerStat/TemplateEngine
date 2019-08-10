@@ -108,7 +108,7 @@ public final class TemplateEngineTests
   /**
    * Template 4 path.
    */
-  private static final String TARGET_TEST_CLASSES_TEMPLATES_TEMPLATE4_TMPL = "target/test-classes/templates/template4.tmpl"; //$NON-NLS-1$
+  private static final String TARGET_TEMPLATE4_TMPL = "target/test-classes/templates/template4.tmpl"; //$NON-NLS-1$
 
 
   /**
@@ -554,7 +554,7 @@ public final class TemplateEngineTests
   public void substEmptyFile() throws IOException
    {
     final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
-    /* final boolean successFile = */ engine.setFile(FILE4, new File(TARGET_TEST_CLASSES_TEMPLATES_TEMPLATE4_TMPL));
+    /* final boolean successFile = */ engine.setFile(FILE4, new File(TARGET_TEMPLATE4_TMPL));
     final String result = engine.subst(FILE4);
     assertEquals("", result, "Template not empty!"); //$NON-NLS-1$ //$NON-NLS-2$
    }
@@ -569,7 +569,7 @@ public final class TemplateEngineTests
   public void setBlockEmptyFile() throws IOException
    {
     final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
-    /* final boolean successFile = */ engine.setFile(FILE4, new File(TARGET_TEST_CLASSES_TEMPLATES_TEMPLATE4_TMPL));
+    /* final boolean successFile = */ engine.setFile(FILE4, new File(TARGET_TEMPLATE4_TMPL));
     // /* final String result = */ engine.subst("file4"); //$NON-NLS-1$
     final boolean successBlock = engine.setBlock(FILE4, BLK1, BLK1_BLK);
     assertFalse(successBlock, "Block could be cut out successfully from empty template!"); //$NON-NLS-1$
@@ -585,7 +585,7 @@ public final class TemplateEngineTests
   public void getUndefinedFromEmptyFile() throws IOException
    {
     final TemplateEngine engine = new TemplateEngine();
-    /* final boolean success = */ engine.setFile(FILE4, new File(TARGET_TEST_CLASSES_TEMPLATES_TEMPLATE4_TMPL));
+    /* final boolean success = */ engine.setFile(FILE4, new File(TARGET_TEMPLATE4_TMPL));
     // /* final String variableValue = */ engine.subst("file4"); //$NON-NLS-1$
     final List<String> undefinedVars = engine.getUndefined(FILE4);
     assertEquals(0, undefinedVars.size(), "Found undefined variables"); //$NON-NLS-1$
@@ -601,7 +601,7 @@ public final class TemplateEngineTests
     assertThrows(IllegalArgumentException.class, () ->
      {
       final TemplateEngine engine = new TemplateEngine();
-      /* final boolean success = */ engine.setFile(FILE4, new File(TARGET_TEST_CLASSES_TEMPLATES_TEMPLATE4_TMPL));
+      /* final boolean success = */ engine.setFile(FILE4, new File(TARGET_TEMPLATE4_TMPL));
       // /* final String variableValue = */ engine.subst("file4"); //$NON-NLS-1$
       /* final List<String> undefinedVars = */ engine.getUndefined(""); //$NON-NLS-1$
      }
@@ -768,8 +768,7 @@ public final class TemplateEngineTests
    {
     assertThrows(NullPointerException.class, () ->
      {
-      final File file = null;
-      /* final TemplateEngine engine = */ TemplateEngine.newInstance(file);
+      /* final TemplateEngine engine = */ TemplateEngine.newInstance((File)null);
      }
     );
    }
@@ -783,8 +782,7 @@ public final class TemplateEngineTests
    {
     assertThrows(NullPointerException.class, () ->
      {
-      final InputStream stream = null;
-      /* final TemplateEngine engine = */ TemplateEngine.newInstance(stream);
+      /* final TemplateEngine engine = */ TemplateEngine.newInstance((InputStream)null);
      }
     );
    }
@@ -836,8 +834,7 @@ public final class TemplateEngineTests
    {
     assertThrows(NullPointerException.class, () ->
      {
-      final String template = null;
-      /* final TemplateEngine engine = */ TemplateEngine.newInstance(template);
+      /* final TemplateEngine engine = */ TemplateEngine.newInstance((String)null);
      }
     );
    }
@@ -851,8 +848,7 @@ public final class TemplateEngineTests
    {
     assertThrows(IllegalArgumentException.class, () ->
      {
-      final String template = ""; //$NON-NLS-1$
-      /* final TemplateEngine engine = */ TemplateEngine.newInstance(template);
+      /* final TemplateEngine engine = */ TemplateEngine.newInstance(""); //$NON-NLS-1$
      }
     );
    }
@@ -864,8 +860,7 @@ public final class TemplateEngineTests
   @Test
   public void newInstanceString()
    {
-    final String template = "123\r\n{variable1}\r\n456\r\n"; //$NON-NLS-1$
-    final TemplateEngine engine = TemplateEngine.newInstance(template);
+    final TemplateEngine engine = TemplateEngine.newInstance("123\r\n{variable1}\r\n456\r\n"); //$NON-NLS-1$
     final String value = engine.getVar(TEMPLATE);
     assertAll(
       () -> assertNotNull(value, NO_TEMPLATE_FOUND),
