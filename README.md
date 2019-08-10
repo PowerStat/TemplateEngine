@@ -16,7 +16,7 @@ For example when using Apache Maven you could add the following dependency to yo
     <dependency>
       <groupId>de.powerstat.phplib</groupId>
       <artifactId>templateengine</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>1.2</version>
     </dependency>
 
 Other build tools like gradle will work analogous.
