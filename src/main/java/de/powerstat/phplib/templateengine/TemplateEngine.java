@@ -73,9 +73,9 @@ public final class TemplateEngine
   /**
    * Handling of undefined template variables.
    *
-   * "remove"  =&gt; remove undefined variables
-   * "comment" =&gt; replace undefined variables with comments
-   * "keep"    =&gt; keep undefined variables
+   * "remove"/0  =&gt; remove undefined variables
+   * "keep"/1    =&gt; keep undefined variables
+   * "comment"/2 =&gt; replace undefined variables with comments
    */
   private HandleUndefined unknowns = HandleUndefined.REMOVE;
 
@@ -114,6 +114,17 @@ public final class TemplateEngine
     HandleUndefined(final int action)
      {
       this.action = action;
+     }
+
+
+    /**
+     * Get action number.
+     *
+     * @return Action number
+     */
+    public int getAction()
+     {
+      return this.action;
      }
 
    }
