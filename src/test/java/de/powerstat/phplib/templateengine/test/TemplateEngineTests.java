@@ -929,4 +929,20 @@ public final class TemplateEngineTests
     );
    }
 
+
+  /**
+   * Test two { after each other within template.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void doubleOpenCurlyBrace() throws IOException
+   {
+    final TemplateEngine engine = new TemplateEngine();
+    /* final boolean success = */ engine.setFile(FILE1, new File("target/test-classes/templates/template7.tmpl"));
+    engine.setVar(VARIABLE1, ""); //$NON-NLS-1$
+    final String variableValue = engine.subst(FILE1);
+    assertEquals("123\n{\n456\n", variableValue, "Variable value not as expected"); //$NON-NLS-1$ //$NON-NLS-2$
+   }
+
  }

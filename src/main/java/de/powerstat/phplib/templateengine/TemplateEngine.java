@@ -512,13 +512,13 @@ public final class TemplateEngine
   /**
    * Replace variables old version.
    *
-   * @param varname Template/Block name
+   * @param block Template block
    * @return Template/Block with replaced variables
    */
   /*
-  private String replaceVarsOld(String varname)
+  private String replaceVarsOld(String block)
    {
-    assert (varname != null) && !varname.isEmpty();
+    assert (block != null) && !block.isEmpty();
     // loop over all known variables an replace them
     if (!this.tempVars.isEmpty())
      {
@@ -528,12 +528,10 @@ public final class TemplateEngine
        {
         final Map.Entry<String, String> mapEntry = iter.next();
         // convert into regexp (special char filter)
-        final Pattern pattern = Pattern.compile("\\{" + mapEntry.getKey() + "\\}"); //$NON-NLS-1$ //$NON-NLS-2$
-        final Matcher matcher = pattern.matcher(varname);
-        varname = matcher.replaceAll(mapEntry.getValue());
+        block = Pattern.compile("\\{" + mapEntry.getKey() + "\\}").matcher(block).replaceAll(mapEntry.getValue()); //$NON-NLS-1$ //$NON-NLS-2$
        }
      }
-    return varname;
+    return block;
    }
   */
 
@@ -541,30 +539,29 @@ public final class TemplateEngine
   /**
    * Replace variables new version.
    *
-   * @param varname Template/Block name
+   * @param block Template block
    * @return Template/Block with replaced variables
    */
-  private String replaceVarsNew(final String varname)
+  private String replaceVarsNew(final String block)
    {
-    assert (varname != null) && !varname.isEmpty();
+    assert (block != null) && !block.isEmpty();
     // Get variable names to replace from varname
-    final Pattern patternTemplate = Pattern.compile("\\{([^}\n\r\t :]+)\\}"); //$NON-NLS-1$
-    final Matcher matcherTemplate = patternTemplate.matcher(varname);
+    final Matcher matcherTemplate = Pattern.compile("\\{([^{^}\n\r\t :]+)\\}").matcher(block); //$NON-NLS-1$
     final Set<String> varsSetTemplate = new TreeSet<>();
     while (matcherTemplate.find())
      {
-      final String varnameTemplate = varname.substring(matcherTemplate.start() + 1, matcherTemplate.end() - 1);
+      final String varnameTemplate = block.substring(matcherTemplate.start() + 1, matcherTemplate.end() - 1);
       if (this.tempVars.containsKey(varnameTemplate))
        {
         varsSetTemplate.add(varnameTemplate);
        }
      }
-    String resVarname = varname;
+    String resBlock = block;
     for (final String varName : varsSetTemplate)
      {
-      resVarname = resVarname.replaceAll("\\{" + varName + "\\}", getVar(varName)); //$NON-NLS-1$ //$NON-NLS-2$
+      resBlock = resBlock.replaceAll("\\{" + varName + "\\}", getVar(varName)); //$NON-NLS-1$ //$NON-NLS-2$
      }
-    return resVarname;
+    return resBlock;
    }
 
 
