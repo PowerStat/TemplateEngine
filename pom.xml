@@ -173,6 +173,7 @@
         </dependencies>
         <configuration>
           <forkCount>0</forkCount>
+          <trimStackTrace>false</trimStackTrace>
         </configuration>
       </plugin>
 
@@ -433,6 +434,9 @@
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
         <version>1.4.9</version>
+        <configuration>
+          <timestampedReports>false</timestampedReports>
+        </configuration>
         <dependencies>
           <dependency>
             <groupId>org.pitest</groupId>
