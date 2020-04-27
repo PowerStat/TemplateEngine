@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003,2017-2019 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Copyright (C) 2002-2003,2017-2020 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
 package de.powerstat.phplib.templateengine;
 
@@ -61,6 +61,31 @@ public final class TemplateEngine
   private static final String VARNAME_IS_EMPTY = "varname is empty"; //$NON-NLS-1$
 
   /**
+   * Varname is to long error message constant.
+   */
+  private static final String VARNAME_IS_TO_LONG = "varname is to long"; //$NON-NLS-1$
+
+  /**
+   * Varname does not match name pattern error message constant.
+   */
+  private static final String VARNAME_DOES_NOT_MATCH_NAME_PATTERN = "varname does not match name pattern"; //$NON-NLS-1$
+
+  /**
+   * Varname regexp pattern.
+   */
+  private static final String VARNAME_PATTERN = "^[a-zA-Z0-9_]{1,64}$"; //$NON-NLS-1$
+
+  /**
+   * Maximum template size.
+   */
+  private static final int MAX_TEMPLATE_SIZE = 1048576;
+
+  /**
+   * Maximum varname size.
+   */
+  private static final int MAX_VARNAME_SIZE = 64;
+
+  /**
    * File name map.
    */
   private final Map<String, File> files = new ConcurrentHashMap<>();
@@ -77,7 +102,7 @@ public final class TemplateEngine
    * "keep"/1    =&gt; keep undefined variables
    * "comment"/2 =&gt; replace undefined variables with comments
    */
-  private HandleUndefined unknowns = HandleUndefined.REMOVE;
+  private HandleUndefined unknowns = HandleUndefined.REMOVE; // final
 
   /**
    * Enum for handling of undefined variables.
@@ -191,10 +216,11 @@ public final class TemplateEngine
    * @param file Text file (UTF-8 encoded) to load as template
    * @return A new TemplateEngine instance where the template variable name is 'template'
    * @throws FileNotFoundException When the given file does not exist
+   * @throws IOException When the given file is to large
    * @throws IllegalArgumentException When the given file is null
    * @throws NullPointerException If file is null
    */
-  public static TemplateEngine newInstance(final File file) throws FileNotFoundException
+  public static TemplateEngine newInstance(final File file) throws IOException
    {
     Objects.requireNonNull(file, "file"); //$NON-NLS-1$
     if (!file.isFile())
@@ -206,7 +232,10 @@ public final class TemplateEngine
       // Load all files from directory?
       throw new AssertionError(file.getAbsolutePath() + " is a directory and not a file!"); //$NON-NLS-1$
      }
-    assert file.length() < 1048576 : "Template file >= 1MB!"; //$NON-NLS-1$
+    if (file.length() > MAX_TEMPLATE_SIZE)
+     {
+      throw new IOException("file to large: " + file.length()); //$NON-NLS-1$
+     }
     final TemplateEngine templ = new TemplateEngine();
     /*
     String filename = file.getName();
@@ -272,6 +301,11 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("template is empty"); //$NON-NLS-1$
      }
+    if (template.length() > MAX_TEMPLATE_SIZE)
+     {
+      throw new IllegalArgumentException("template to large"); //$NON-NLS-1$
+     }
+    // if (!template.matches("^$"))
     final TemplateEngine templ = new TemplateEngine();
     templ.setVar(TEMPLATE, template);
     return templ;
@@ -283,7 +317,9 @@ public final class TemplateEngine
    *
    * @param newUnknowns How to handle unknown variables.
    * @see HandleUndefined
+   * @deprecated Use TemplateEngine(final HandleUndefined unknowns) instead
    */
+  @Deprecated
   public void setUnknowns(final HandleUndefined newUnknowns)
    {
     this.unknowns = newUnknowns;
@@ -307,9 +343,21 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("newVarname is empty"); //$NON-NLS-1$
      }
+    if (newVarname.length() > MAX_VARNAME_SIZE)
+     {
+      throw new IllegalArgumentException("newVarname is to long"); //$NON-NLS-1$
+     }
+    if (!newVarname.matches(VARNAME_PATTERN))
+     {
+      throw new IllegalArgumentException("newVarname does not match name pattern"); //$NON-NLS-1$
+     }
     boolean exists = newFile.exists();
     if (exists)
      {
+      if (newFile.length() > MAX_TEMPLATE_SIZE)
+       {
+        throw new IllegalArgumentException("newFile to large"); //$NON-NLS-1$
+       }
       this.files.put(newVarname, newFile);
      }
     else
@@ -327,7 +375,7 @@ public final class TemplateEngine
          // exists is already false
          if (LOGGER.isWarnEnabled())
           {
-           LOGGER.warn("File does not exist: " + newFile.getAbsolutePath()); //$NON-NLS-1$
+           LOGGER.warn("File does not exist: " + newFile.getAbsolutePath(), ignored); //$NON-NLS-1$
           }
         }
      }
@@ -345,7 +393,7 @@ public final class TemplateEngine
    */
   private boolean loadfile(final String varname) throws IOException
    {
-    assert (varname != null) && !varname.isEmpty();
+    assert (varname != null) && !varname.isEmpty() && (varname.length() <= MAX_VARNAME_SIZE);
     if (this.tempVars.containsKey(varname)) // Already loaded?
      {
       return true;
@@ -395,6 +443,14 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
+    if (varname.length() > MAX_VARNAME_SIZE)
+     {
+      throw new IllegalArgumentException(VARNAME_IS_TO_LONG);
+     }
+    if (!varname.matches(VARNAME_PATTERN))
+     {
+      throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
+     }
     final String value = this.tempVars.get(varname);
     return (value == null) ? "" : value; //$NON-NLS-1$
    }
@@ -415,6 +471,19 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
+    if (varname.length() > MAX_VARNAME_SIZE)
+     {
+      throw new IllegalArgumentException(VARNAME_IS_TO_LONG);
+     }
+    if ((value != null) && (value.length() > MAX_TEMPLATE_SIZE))
+     {
+      throw new IllegalArgumentException("value is to large"); //$NON-NLS-1$
+     }
+    if (!varname.matches(VARNAME_PATTERN))
+     {
+      throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
+     }
+    // if (!value.matches("^$"))
     this.tempVars.put(varname, (value == null) ? "" : value); //$NON-NLS-1$
    }
 
@@ -446,6 +515,14 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
+    if (varname.length() > MAX_VARNAME_SIZE)
+     {
+      throw new IllegalArgumentException(VARNAME_IS_TO_LONG);
+     }
+    if (!varname.matches(VARNAME_PATTERN))
+     {
+      throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
+     }
     /* String value = */ this.tempVars.remove(varname);
    }
 
@@ -468,9 +545,18 @@ public final class TemplateEngine
    {
     Objects.requireNonNull(parent, "parent"); //$NON-NLS-1$
     Objects.requireNonNull(varname, VARNAME);
+    Objects.requireNonNull(name, "name"); //$NON-NLS-1$
     if (parent.isEmpty() || varname.isEmpty())
      {
       throw new IllegalArgumentException("parent or varname is empty"); //$NON-NLS-1$
+     }
+    if ((parent.length() > MAX_VARNAME_SIZE) || (varname.length() > MAX_VARNAME_SIZE) || (name.length() > MAX_VARNAME_SIZE))
+     {
+      throw new IllegalArgumentException("parent, varname or name is to long"); //$NON-NLS-1$
+     }
+    if (!parent.matches(VARNAME_PATTERN) || !varname.matches(VARNAME_PATTERN) || (!name.isEmpty() && (!name.matches(VARNAME_PATTERN))))
+     {
+      throw new IllegalArgumentException("parent, varname or name does not match name pattern"); //$NON-NLS-1$
      }
     if (!loadfile(parent))
      {
@@ -544,7 +630,8 @@ public final class TemplateEngine
    */
   private String replaceVarsNew(final String block)
    {
-    assert (block != null) && !block.isEmpty();
+    assert (block != null) && !block.isEmpty() && (block.length() < MAX_TEMPLATE_SIZE);
+    // assert block.matches("^$")
     // Get variable names to replace from varname
     final Matcher matcherTemplate = Pattern.compile("\\{([^{^}\n\r\t :]+)\\}").matcher(block); //$NON-NLS-1$
     final Set<String> varsSetTemplate = new TreeSet<>();
@@ -581,6 +668,14 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
+    if (varname.length() > MAX_VARNAME_SIZE)
+     {
+      throw new IllegalArgumentException(VARNAME_IS_TO_LONG);
+     }
+    if (!varname.matches(VARNAME_PATTERN))
+     {
+      throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
+     }
     if (!loadfile(varname))
      {
       return ""; //$NON-NLS-1$
@@ -608,6 +703,14 @@ public final class TemplateEngine
     if (target.isEmpty() || varname.isEmpty())
      {
       throw new IllegalArgumentException("target or varname is empty"); //$NON-NLS-1$
+     }
+    if ((target.length() > MAX_VARNAME_SIZE) || (varname.length() > MAX_VARNAME_SIZE))
+     {
+      throw new IllegalArgumentException("target or varname is to long"); //$NON-NLS-1$
+     }
+    if (!target.matches(VARNAME_PATTERN) || !varname.matches(VARNAME_PATTERN))
+     {
+      throw new IllegalArgumentException("target or varname does not match name pattern"); //$NON-NLS-1$
      }
     final String str = subst(varname);
     setVar(target, (append ? getVar(target) : "") + str); //$NON-NLS-1$
@@ -669,6 +772,14 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
+    if (varname.length() > MAX_VARNAME_SIZE)
+     {
+      throw new IllegalArgumentException(VARNAME_IS_TO_LONG);
+     }
+    if (!varname.matches(VARNAME_PATTERN))
+     {
+      throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
+     }
     if (!loadfile(varname))
      {
       return new ArrayList<>();
@@ -693,19 +804,24 @@ public final class TemplateEngine
   /**
    * Handle undefined template variables after parsing has happened.
    *
-   * @param varname Template variable to parse for unknown variables
-   * @return Modified str as specified by the "unknowns" setting
+   * @param template Template to parse for unknown variables
+   * @return Modified template as specified by the "unknowns" setting
    * @throws NullPointerException If varname is null
    * @throws IllegalArgumentException If varname is empty
    */
-  public String finish(final String varname)
+  public String finish(final String template)
    {
-    Objects.requireNonNull(varname, VARNAME);
-    if (varname.isEmpty())
+    Objects.requireNonNull(template, TEMPLATE);
+    if (template.isEmpty())
      {
-      throw new IllegalArgumentException(VARNAME_IS_EMPTY);
+      throw new IllegalArgumentException("template is empty"); //$NON-NLS-1$
      }
-    String result = varname;
+    if (template.length() > MAX_TEMPLATE_SIZE)
+     {
+      throw new IllegalArgumentException("template is to large"); //$NON-NLS-1$
+     }
+    // if (!template.matches("^$"))
+    String result = template;
     final Pattern pattern = Pattern.compile("\\{([^ \\t\\r\\n}]+)\\}"); //$NON-NLS-1$
     final Matcher matcher = pattern.matcher(result);
     switch (this.unknowns)
@@ -753,6 +869,42 @@ public final class TemplateEngine
   public String toString()
    {
     return new StringBuilder().append("TemplateEngine[unknowns=").append(this.unknowns).append(", files=").append(this.files.values().stream().map(File::getName).reduce((s1, s2) -> s1 + ", " + s2)).append(", vars=").append(getVars()).append("]").toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+   }
+
+
+  /**
+   * Calculate hash code.
+   *
+   * @return Hash
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode()
+   {
+    return Objects.hash(this.unknowns, this.files, this.tempVars);
+   }
+
+
+  /**
+   * Is equal with another object.
+   *
+   * @param obj Object
+   * @return true when equal, false otherwise
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(final Object obj)
+   {
+    if (this == obj)
+     {
+      return true;
+     }
+    if (!(obj instanceof TemplateEngine))
+     {
+      return false;
+     }
+    final TemplateEngine other = (TemplateEngine)obj;
+    return (this.unknowns == other.unknowns) && this.files.equals(other.files) && this.tempVars.equals(other.tempVars);
    }
 
  }
