@@ -28,6 +28,14 @@ To compile this project yourself you could use:
 or simply:
 
      mvn clean install
+     
+To find newer dependencies:
+
+    mvn versions:display-dependency-updates
+    
+To find newer plugins:
+
+    mvn versions:display-plugin-updates
 
 ## Usage
 

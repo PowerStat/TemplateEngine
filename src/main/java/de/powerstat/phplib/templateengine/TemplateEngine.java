@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -229,7 +230,7 @@ public final class TemplateEngine
        {
         throw new FileNotFoundException(file.getAbsolutePath());
        }
-      // Load all files from directory?
+      // Load all files (*.tmpl) from directory?
       throw new AssertionError(file.getAbsolutePath() + " is a directory and not a file!"); //$NON-NLS-1$
      }
     if (file.length() > MAX_TEMPLATE_SIZE)
@@ -305,7 +306,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("template to large"); //$NON-NLS-1$
      }
-    // if (!template.matches("^$"))
+    // if (!template.matches("^.+$"))
     final TemplateEngine templ = new TemplateEngine();
     templ.setVar(TEMPLATE, template);
     return templ;
@@ -483,7 +484,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
-    // if (!value.matches("^$"))
+    // if (!value.matches("^.+$"))
     this.tempVars.put(varname, (value == null) ? "" : value); //$NON-NLS-1$
    }
 
@@ -631,7 +632,7 @@ public final class TemplateEngine
   private String replaceVarsNew(final String block)
    {
     assert (block != null) && !block.isEmpty() && (block.length() < MAX_TEMPLATE_SIZE);
-    // assert block.matches("^$")
+    // assert block.matches("^.+$")
     // Get variable names to replace from varname
     final Matcher matcherTemplate = Pattern.compile("\\{([^{^}\n\r\t :]+)\\}").matcher(block); //$NON-NLS-1$
     final Set<String> varsSetTemplate = new TreeSet<>();
@@ -745,14 +746,14 @@ public final class TemplateEngine
    {
     if (this.tempVars.isEmpty())
      {
-      return new ArrayList<>();
+      return Collections.emptyList();
      }
     final List<String> result = new ArrayList<>();
     for (final Entry<String, String> entry : this.tempVars.entrySet())
      {
       result.add(entry.getKey()); // entry.getValue();
      }
-    return result;
+    return Collections.unmodifiableList(result);
    }
 
 
@@ -782,7 +783,7 @@ public final class TemplateEngine
      }
     if (!loadfile(varname))
      {
-      return new ArrayList<>();
+      return Collections.emptyList();
      }
     final Pattern pattern = Pattern.compile("\\{([^ \\t\\r\\n}]+)\\}"); //$NON-NLS-1$
     final Matcher matcher = pattern.matcher(getVar(varname));
@@ -797,7 +798,7 @@ public final class TemplateEngine
        }
       result = matcher.find();
      }
-    return undefvars;
+    return Collections.unmodifiableList(undefvars);
    }
 
 
@@ -820,7 +821,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("template is to large"); //$NON-NLS-1$
      }
-    // if (!template.matches("^$"))
+    // if (!template.matches("^.+$"))
     String result = template;
     final Pattern pattern = Pattern.compile("\\{([^ \\t\\r\\n}]+)\\}"); //$NON-NLS-1$
     final Matcher matcher = pattern.matcher(result);

@@ -833,6 +833,20 @@ public final class TemplateEngineTests
 
 
   /**
+   * Test set block with to max length parent name.
+   *
+   * @throws IOException IO exception
+   */
+  @Test
+  public void setBlockParentMaxLength2() throws IOException
+   {
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
+    final boolean successBlock = engine.setBlock(MAX_VARNAME, VARIABLE1);
+    assertFalse(successBlock, "SetBlock not as expected"); //$NON-NLS-1$
+   }
+
+
+  /**
    * Test set block with max length varname.
    * @throws IOException IO exception
    */
@@ -950,7 +964,7 @@ public final class TemplateEngineTests
     engine.setVar("test3", "333"); //$NON-NLS-1$ //$NON-NLS-2$
     final boolean successBlock = engine.setBlock(FILE3, "test2"); //$NON-NLS-1$
     // engine.parse("test2", "test2", false); // Parse block before template to have no problems! //$NON-NLS-1$ //$NON-NLS-2$
-    final String output = engine.parse(OUTPUT, FILE3, false);
+    final String output = engine.parse(OUTPUT, FILE3);
     assertAll(
       () -> assertTrue(successBlock, "Could not cut out block!"), //$NON-NLS-1$
       () -> assertEquals("000 \n111 \n \nabc {test1} def 333 ghi \n \n333 \n000 \n", output, "Output value not as expected") // Buggy result, because of order problem //$NON-NLS-1$ //$NON-NLS-2$
