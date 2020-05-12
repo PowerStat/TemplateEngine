@@ -320,7 +320,7 @@ public final class TemplateEngine
    * @see HandleUndefined
    * @deprecated Use TemplateEngine(final HandleUndefined unknowns) instead
    */
-  @Deprecated
+  @Deprecated(since = "1.4", forRemoval = false)
   public void setUnknowns(final HandleUndefined newUnknowns)
    {
     this.unknowns = newUnknowns;

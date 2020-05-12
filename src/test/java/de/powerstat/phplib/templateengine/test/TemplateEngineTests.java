@@ -62,7 +62,7 @@ public final class TemplateEngineTests
   /**
    * Template 9 path (maximum file size).
    */
-  private static final String TEMPLATE9_TMPL = "target/test-classes/templates/template9.tmpl";
+  private static final String TEMPLATE9_TMPL = "target/test-classes/templates/template9.tmpl"; //$NON-NLS-1$
 
   /**
    * Template 10 path (file to large).
@@ -167,7 +167,7 @@ public final class TemplateEngineTests
   /**
    * Variable value not as expected message.
    */
-  private static final String VARIABLE_VALUE_NOT_AS_EXPECTED = "Variable value not as expected";
+  private static final String VARIABLE_VALUE_NOT_AS_EXPECTED = "Variable value not as expected"; //$NON-NLS-1$
 
 
   /**
