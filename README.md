@@ -36,6 +36,12 @@ To find newer dependencies:
 To find newer plugins:
 
     mvn versions:display-plugin-updates
+    
+To make a new release:
+
+    mvn --batch-mode release:clean release:prepare release:perform
+    git push -–tags
+    git push origin master
 
 ## Usage
 
