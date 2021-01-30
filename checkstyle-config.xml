@@ -328,6 +328,7 @@
     <module name="TypecastParenPad"/>
     <module name="WhitespaceAfter">
       <property name="severity" value="warning"/>
+      <property name="tokens" value="COMMA, SEMI, LITERAL_IF, LITERAL_ELSE, LITERAL_WHILE, LITERAL_DO, LITERAL_FOR, DO_WHILE"/>
     </module>
     <module name="WhitespaceAround">
       <property name="severity" value="warning"/>

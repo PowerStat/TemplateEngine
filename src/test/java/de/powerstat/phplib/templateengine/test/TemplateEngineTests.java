@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 
 import de.powerstat.phplib.templateengine.TemplateEngine;
 import de.powerstat.phplib.templateengine.TemplateEngine.HandleUndefined;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 
 /**
@@ -1707,6 +1708,7 @@ public final class TemplateEngineTests
    * Test equals.
    */
   @Test
+  @SuppressFBWarnings("EC_NULL_ARG")
   public void testEquals()
    {
     final TemplateEngine tmpl1 = new TemplateEngine(HandleUndefined.REMOVE);
