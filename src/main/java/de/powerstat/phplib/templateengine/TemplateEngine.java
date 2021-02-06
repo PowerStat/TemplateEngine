@@ -233,9 +233,10 @@ public final class TemplateEngine
       // Load all files (*.tmpl) from directory?
       throw new AssertionError(file.getAbsolutePath() + " is a directory and not a file!"); //$NON-NLS-1$
      }
-    if (file.length() > MAX_TEMPLATE_SIZE)
+    final long fileLen = file.length();
+    if (fileLen > MAX_TEMPLATE_SIZE)
      {
-      throw new IOException("file to large: " + file.length()); //$NON-NLS-1$
+      throw new IOException("file to large: " + fileLen); //$NON-NLS-1$
      }
     final TemplateEngine templ = new TemplateEngine();
     /*
@@ -748,7 +749,7 @@ public final class TemplateEngine
      {
       return Collections.emptyList();
      }
-    final List<String> result = new ArrayList<>();
+    final List<String> result = new ArrayList<>(this.tempVars.size());
     for (final Entry<String, String> entry : this.tempVars.entrySet())
      {
       result.add(entry.getKey()); // entry.getValue();
@@ -869,7 +870,7 @@ public final class TemplateEngine
   @Override
   public String toString()
    {
-    return new StringBuilder().append("TemplateEngine[unknowns=").append(this.unknowns).append(", files=").append(this.files.values().stream().map(File::getName).reduce((s1, s2) -> s1 + ", " + s2)).append(", vars=").append(getVars()).append("]").toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+    return new StringBuilder().append("TemplateEngine[unknowns=").append(this.unknowns).append(", files=").append(this.files.values().stream().map(File::getName).reduce((s1, s2) -> s1 + ", " + s2)).append(", vars=").append(getVars()).append(']').toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
    }
 
 

@@ -33,6 +33,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 /**
  * TemplateEngine tests.
  */
+@SuppressFBWarnings({"CE_CLASS_ENVY", "EC_NULL_ARG"})
 public final class TemplateEngineTests
  {
   /**
@@ -169,6 +170,11 @@ public final class TemplateEngineTests
    * Variable value not as expected message.
    */
   private static final String VARIABLE_VALUE_NOT_AS_EXPECTED = "Variable value not as expected"; //$NON-NLS-1$
+
+  /**
+   * Set block not as expected message.
+   */
+  private static final String SET_BLOCK_NOT_AS_EXPECTED = "SetBlock not as expected";
 
 
   /**
@@ -829,7 +835,7 @@ public final class TemplateEngineTests
    {
     final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
     final boolean successBlock = engine.setBlock(MAX_VARNAME, VARIABLE1, ""); //$NON-NLS-1$
-    assertFalse(successBlock, "SetBlock not as expected"); //$NON-NLS-1$
+    assertFalse(successBlock, SET_BLOCK_NOT_AS_EXPECTED);
    }
 
 
@@ -843,7 +849,7 @@ public final class TemplateEngineTests
    {
     final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
     final boolean successBlock = engine.setBlock(MAX_VARNAME, VARIABLE1);
-    assertFalse(successBlock, "SetBlock not as expected"); //$NON-NLS-1$
+    assertFalse(successBlock, SET_BLOCK_NOT_AS_EXPECTED);
    }
 
 
@@ -856,7 +862,7 @@ public final class TemplateEngineTests
    {
     final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
     final boolean successBlock = engine.setBlock(VARIABLE1, MAX_VARNAME, ""); //$NON-NLS-1$
-    assertFalse(successBlock, "SetBlock not as expected"); //$NON-NLS-1$
+    assertFalse(successBlock, SET_BLOCK_NOT_AS_EXPECTED);
    }
 
 
@@ -869,7 +875,7 @@ public final class TemplateEngineTests
    {
     final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
     final boolean successBlock = engine.setBlock(VARIABLE1, "1234", MAX_VARNAME); //$NON-NLS-1$
-    assertFalse(successBlock, "SetBlock not as expected"); //$NON-NLS-1$
+    assertFalse(successBlock, SET_BLOCK_NOT_AS_EXPECTED);
    }
 
 
