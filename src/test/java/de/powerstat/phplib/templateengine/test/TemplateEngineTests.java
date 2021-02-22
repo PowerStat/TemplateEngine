@@ -332,7 +332,7 @@ public final class TemplateEngineTests
     final String variableValue = engine.subst(FILE1);
     if (LOGGER.isDebugEnabled())
      {
-      LOGGER.debug("file1 = " + variableValue); //$NON-NLS-1$
+      LOGGER.debug("file1 = {}", variableValue); //$NON-NLS-1$
      }
     assertEquals("123\n{variable1}\n456\n", variableValue, VARIABLE_VALUE_NOT_AS_EXPECTED); //$NON-NLS-1$
    }
