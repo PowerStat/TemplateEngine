@@ -1,2 +1,5 @@
 target/
 infer-out/
+coverity.bat
+cov-int.zip
+cov-int/
