@@ -473,9 +473,9 @@
   <!-- Size Violations -->
   <module name="LineLength">
     <!-- <property name="fileExtensions" value="*"/> -->
-    <!-- <property name="ignorePattern" value=""^$""/>
-    <property name="max" value="3100"/>
-    <property name="severity" value="warning"/> -->
+    <!-- <property name="ignorePattern" value=""^$""/> -->
+    <property name="max" value="320"/>
+    <!-- <property name="severity" value="warning"/> -->
   </module>
 
   <!-- Headers -->

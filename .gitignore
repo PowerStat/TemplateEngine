@@ -3,3 +3,4 @@ infer-out/
 coverity.bat
 cov-int.zip
 cov-int/
+TemplateEngine.XanitizerConfig

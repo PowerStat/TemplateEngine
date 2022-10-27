@@ -1214,8 +1214,10 @@ public final class TemplateEngineTests
    * Test get keep variable parsing.
    *
    * @throws IOException IO exception
+   * @deprecated Test for deprecated code
    */
   @Test
+  @Deprecated
   public void setUnknowns() throws IOException
    {
     final TemplateEngine engine = new TemplateEngine();

@@ -6,6 +6,7 @@ See:
 
 * [PHPLib](https://sourceforge.net/projects/phplib/)
 * [PEAR - PHP Extension and Application Repository](https://pear.php.net/package/HTML_Template_PHPLIB)
+* [Synopsis Coverity Scan TemplateEngine](https://scan.coverity.com/projects/templateengine?tab=overview)
 
 ## Installation
 
@@ -16,7 +17,7 @@ For example when using Apache Maven you could add the following dependency to yo
     <dependency>
       <groupId>de.powerstat.phplib</groupId>
       <artifactId>templateengine</artifactId>
-      <version>1.2</version>
+      <version>1.6</version>
     </dependency>
 
 Other build tools like gradle will work analogous.
