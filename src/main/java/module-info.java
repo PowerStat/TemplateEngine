@@ -1,6 +1,11 @@
 /*
  * Copyright (C) 2019 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
+
+
+/**
+ * Module for PowerStat's PHPLib like TemplateEngine.
+ */
 module de.powerstat.phplib.templateengine
  {
   exports de.powerstat.phplib.templateengine;

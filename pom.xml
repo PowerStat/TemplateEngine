@@ -454,8 +454,8 @@
               <goal>process-asciidoc</goal>
             </goals>
             <configuration>
-              <sourceDirectory>src/doc/asciidoc</sourceDirectory>
-              <sourceDocumentName>index.adoc</sourceDocumentName>
+              <sourceDirectory>src/site/asciidoc</sourceDirectory>
+              <!-- <sourceDocumentName>index.adoc</sourceDocumentName> -->
               <backend>xhtml5</backend>
               <sourceHighlighter>coderay</sourceHighlighter>
               <attributes>

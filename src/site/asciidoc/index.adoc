@@ -4,9 +4,9 @@
 // ====================================
 
 // configure EN settings for asciidoc
-include::config.adoc[]
+include::architecture/config.adoc[]
 
-= image:arc42-logo.png[arc42] Template
+= image:architecture/arc42-logo.png[arc42] Template
 :revnumber: 8.1 EN
 :revdate: May 2022
 :revremark: (based upon AsciiDoc version)
@@ -29,7 +29,7 @@ ifdef::backend-html5[]
 endif::backend-html5[]
 
 
-include::about-arc42.adoc[]
+include::architecture/about-arc42.adoc[]
 
 // horizontal line
 ***
@@ -42,50 +42,48 @@ include::about-arc42.adoc[]
 
 <<<<
 // 1. Introduction and Goals
-include::01_introduction_and_goals.adoc[]
+include::architecture/01_introduction_and_goals.adoc[]
 
 <<<<
 // 2. Architecture Constraints
-include::02_architecture_constraints.adoc[]
+include::architecture/02_architecture_constraints.adoc[]
 
 <<<<
 // 3. System Scope and Context
-include::03_system_scope_and_context.adoc[]
+include::architecture/03_system_scope_and_context.adoc[]
 
 <<<<
 // 4. Solution Strategy
-include::04_solution_strategy.adoc[]
+include::architecture/04_solution_strategy.adoc[]
 
 <<<<
 // 5. Building Block View
-include::05_building_block_view.adoc[]
+include::architecture/05_building_block_view.adoc[]
 
 <<<<
 // 6. Runtime View
-include::06_runtime_view.adoc[]
+include::architecture/06_runtime_view.adoc[]
 
 <<<<
 // 7. Deployment View
-include::07_deployment_view.adoc[]
+include::architecture/07_deployment_view.adoc[]
 
 <<<<
 // 8. Concepts
-include::08_concepts.adoc[]
+include::architecture/08_concepts.adoc[]
 
 <<<<
 // 9. Architecture Decisions
-include::09_architecture_decisions.adoc[]
+include::architecture/09_architecture_decisions.adoc[]
 
 <<<<
 // 10. Quality Requirements
-include::10_quality_requirements.adoc[]
+include::architecture/10_quality_requirements.adoc[]
 
 <<<<
 // 11. Technical Risks
-include::11_technical_risks.adoc[]
+include::architecture/11_technical_risks.adoc[]
 
 <<<<
 // 12. Glossary
-include::12_glossary.adoc[]
-
-
+include::architecture/12_glossary.adoc[]

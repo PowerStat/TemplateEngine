@@ -1,5 +1,5 @@
 = PHPLib template engine =
-Kai Hofmann <hofmann@hofmann-int.de>
+Kai Hofmann <powersta@web.de>
 05.11.2022
 
 == Background ==
@@ -10,7 +10,7 @@ See:
 
 https://sourceforge.net/projects/phplib/[PHPLIB]
 
-https://pear.php.net/package/HTML_Template_PHPLIB[Pear::HTML_Template_PHPLIB]
+https://pear.php.net/package/HTML_Template_PHPLIB[Pear\:\:HTML_Template_PHPLIB]
 
 == Improvements ==
 
