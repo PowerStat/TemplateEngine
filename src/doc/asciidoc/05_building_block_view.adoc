@@ -1,0 +1,92 @@
+[[section-building-block-view]]
+
+
+== Building Block View
+
+[plantuml, target=building-block, format=png]   
+....
+package de.powerstat.phplib.templateengine
+{
+  class TemplateEngine
+}
+
+package java.io
+{
+}
+
+package java.nio
+{
+}
+
+package java.util
+{
+}
+
+package org.apache.logging.log4j
+{
+}
+
+java.io <-- de.powerstat.phplib.templateengine
+java.nio <-- de.powerstat.phplib.templateengine
+java.util <-- de.powerstat.phplib.templateengine
+org.apache.logging.log4j <-- de.powerstat.phplib.templateengine
+....
+
+
+=== Whitebox Overall System
+
+[plantuml, target=whitebox-diagram, format=png]   
+....
+package de.powerstat.phplib.templateengine
+{
+  class TemplateEngine 
+   {
+    +enum HandleUndefined
+    +{static} newInstance(engine : TemplateEngine) : TemplateEngine
+    +{static} newInstance(file : File) : TemplateEngine
+    +{static} newInstance(stream : InputStream) : TemplateEngine
+    +{static} newInstance(template : String) : TemplateEngine
+    +TemplateEngine(engine : TemplateEngine)
+    +TemplateEngine(unknowns : HandleUndefined)
+    +TemplateEngine()
+    +setFile(newVarname : String, newFile : File) : boolean
+    +getVar(varname : String) : String
+    +setVar(varname : String, value : String)
+    +setVar(varname : String)
+    +unsetVar(varname : String)
+    +setBlock(parent : String, varname : String, name : String) : boolean
+    +setBlock(parent : String, varname : String) : boolean
+    +subst(varname : String) : String
+    +parse(target : String, varname : String, append : boolean) : String
+    +parse(target : String, varname : String) :String
+    +getVars() : List<String>
+    +getUndefined(varname : String) : List<String>
+    +finish(template : String) : String
+    +get(varname : String) : String
+    +toString() : String
+    +hashCode() : int
+    +equals(obj : Object) : boolean
+   }
+}
+
+package java.io
+{
+}
+
+package java.nio
+{
+}
+
+package java.util
+{
+}
+
+package org.apache.logging.log4j
+{
+}
+
+java.io <-- de.powerstat.phplib.templateengine
+java.nio <-- de.powerstat.phplib.templateengine
+java.util <-- de.powerstat.phplib.templateengine
+org.apache.logging.log4j <-- de.powerstat.phplib.templateengine
+....

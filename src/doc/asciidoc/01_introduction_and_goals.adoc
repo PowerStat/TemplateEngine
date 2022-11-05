@@ -1,0 +1,46 @@
+[[section-introduction-and-goals]]
+== Introduction and Goals
+
+Far in the past there was the phplib template engine which was simple and easy to use. During working with this engine over some years I have optimized it and ported it to the java programming language.
+During the time the template engine has been made more safe and secure by using static analysis tools.
+Usage of this template engine is for webpages as well as for code generators and everything else you could imagine.
+
+=== Requirements Overview
+
+Functional requirements are:
+
+* Has templates
+* Can read templates from files
+* Can replace variables within content
+* Can append content to variables
+* Can cut out blocks from templates/blocks and replace them with a variable
+* Can have blocks within blocks
+
+It is a small and fast template engine that divides cleanly between the designer and the software engineer.
+
+.Further Information
+
+* https://sourceforge.net/projects/phplib/[PHPLib]
+* https://pear.php.net/package/HTML_Template_PHPLIB[PEAR - PHP Extension and Application Repository]
+
+=== Quality Goals
+
+The top quality goals are:
+
+* Compatibility with phplib template engine
+* Performace efficience
+* Low memory usage
+* Security/Safety
+* Usability
+* Transferability
+
+=== Stakeholders
+
+The first stakeholder is the developer itself for his other projects. Second stakeholders are all other java or jvm language developers around the world, because it's an open source project.
+
+[options="header",cols="1,2,2"]
+|===
+|Role/Name|Contact|Expectations
+|Kai Hofmann|powerstat@web.de|Stable api, secure, fast, simple
+|Every developer|unknown|Stable api, secure, fast, simple
+|===

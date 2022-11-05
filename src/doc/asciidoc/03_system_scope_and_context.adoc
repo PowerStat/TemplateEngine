@@ -1,0 +1,19 @@
+[[section-system-scope-and-context]]
+== System Scope and Context
+
+The System context is related to every Java programm or other languages thet run on the jvm/graalvm.
+Communication could happen vis Strings, Files or Streams.
+
+
+=== Business Context
+
+The template engine is a library that could be used by other developers within the java / jvm context.
+
+
+=== Technical Context
+
+Technical interfaces in Java are:
+
+* String (in/out)
+* File (in)
+* InputStream (in)

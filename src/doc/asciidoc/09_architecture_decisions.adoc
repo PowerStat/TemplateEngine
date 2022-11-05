@@ -1,0 +1,7 @@
+[[section-design-decisions]]
+== Architecture Decisions
+
+* PHPLib template engine - because of it' simplenest
+* Java - because its a better language than C++ and white spread
+* Block loop logic is still within the code and not in the template
+* Template syntax is XML compatible but could alos be used for code templates

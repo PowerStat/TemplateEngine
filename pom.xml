@@ -454,11 +454,16 @@
               <goal>process-asciidoc</goal>
             </goals>
             <configuration>
+              <sourceDirectory>src/doc/asciidoc</sourceDirectory>
+              <sourceDocumentName>index.adoc</sourceDocumentName>
               <backend>xhtml5</backend>
               <sourceHighlighter>coderay</sourceHighlighter>
               <attributes>
                 <toc>left</toc>
               </attributes>
+              <requires>
+                <require>asciidoctor-diagram</require>
+              </requires>
             </configuration>
           </execution>
 <!--
@@ -481,6 +486,13 @@
             <artifactId>asciidoctorj-pdf</artifactId>
             <version>2.3.3</version>
           </dependency>
+          
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj-diagram</artifactId>
+            <version>2.2.3</version>
+          </dependency>
+                    
         </dependencies>
 
       </plugin>

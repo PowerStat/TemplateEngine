@@ -1,0 +1,24 @@
+[[section-concepts]]
+== Cross-cutting Concepts
+
+=== Domain concepts
+
+To be done
+
+=== Safety and security concepts
+
+See development concepts
+
+=== Architecture and design patterns
+
+To be done.
+
+=== Development concepts
+
+* Java
+* Maven
+* CheckStyle with own rules
+* PMD with own rules
+* SpotBugs with plugins
+* SonarQube
+* Unit-Tests with pitest and jacoco

@@ -1,0 +1,30 @@
+[[section-quality-scenarios]]
+== Quality Requirements
+
+=== Quality Tree
+
+[plantuml, target=quality-tree, format=png]   
+....
+@startmindmap
+* Quality tree
+** Compatibility with phplib template engine
+** Performace efficience
+** Low memory usage
+** Security/Safety
+*** DDD Value/Entity objects
+*** Static code analysis
+*** Unit tests
+** Usability
+*** Simple api
+*** Developer documentation
+** Transferability
+*** Java virtual machine
+@endmindmap
+....
+
+=== Quality Scenarios
+
+[plantuml, target=use-case, format=png]   
+....
+:Developer: --> (Generate output with variable content)
+....

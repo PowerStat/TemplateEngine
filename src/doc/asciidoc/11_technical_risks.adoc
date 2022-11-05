@@ -1,0 +1,8 @@
+[[section-technical-risks]]
+== Risks and Technical Debts
+
+The following risks exists at the moment:
+
+* Unknown memory consumption
+* Unknown performance issues
+* Unknown security problems

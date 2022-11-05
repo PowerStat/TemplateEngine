@@ -1,0 +1,9 @@
+[[section-solution-strategy]]
+== Solution Strategy
+
+Java has been choosen as programming language, because it is widely used.
+
+The template engine has been ported 1:1 in a first step and then improved over time.
+
+To archive key quality goals free available static analysis tools have been introduced and the ruleset (if possible) have been self made for high quality. Also unit tests have been applied with using mutation testing (pitest) and high code coverage (jacoco).
+Also Eclipse configurations to reach high quality have been made.

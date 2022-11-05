@@ -1,0 +1,28 @@
+[[section-glossary]]
+== Glossary
+
+[cols="e,2e" options="header"]
+|===
+|Term |Definition
+
+|Block
+|Area that can be cut out from a template to replace it one or multiple times with new content
+
+|GraalVM
+|Graal virtual machine, successor of JVM
+
+|Java
+|The java programming language
+
+|JVM
+|Java virtual machine
+
+|Template
+|UTF-8 string with replaceable elements
+
+|TemplateEngine
+|A program that allows to replace variables and blocks within a template
+
+|Variable
+|A replaceable variable within a template
+|===

@@ -1,0 +1,49 @@
+[[section-runtime-view]]
+== Runtime View
+
+=== <Runtime Scenario 1>
+
+[plantuml, target=activity-diagram1, format=png]   
+....
+(*) --> "newInstance(File)"
+--> "setVar(varname, value)"
+--> "finish(template)"
+"finish(template)" --> (*)
+....
+
+=== <Runtime Scenario 2>
+
+[plantuml, target=activity-diagram2, format=png]   
+....
+(*) --> "newInstance(InputStream)"
+--> "setBlock(parent, varname, name)"
+--> "setVar(varname, value)"
+--> "parse(target, varname, append=false)"
+--> "finish(template)"
+"finish(template)" --> (*)
+....
+
+=== <Runtime Scenario 3>
+
+[plantuml, target=activity-diagram3, format=png]   
+....
+(*) --> "newInstance(String)"
+--> "setBlock(parent, varname, name)"
+--> "setVar(varname, value1)"
+--> "parse(target, varname, append=true)"
+--> "setVar(varname, value2)"
+--> "parse(target, varname, append=false)"
+--> "finish(template)"
+"finish(template)" --> (*)
+....
+
+=== <Runtime Scenario 4>
+
+[plantuml, target=activity-diagram4, format=png]   
+....
+(*) --> "TemplateEngine(HandleUndefined)"
+--> "setFile(newVarname, newFile)"
+--> "setVar(varname, value)"
+--> "finish(template)"
+"finish(template)" --> (*)
+....

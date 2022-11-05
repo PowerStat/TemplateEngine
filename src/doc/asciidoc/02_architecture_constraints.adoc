@@ -1,0 +1,9 @@
+[[section-architecture-constraints]]
+== Architecture Constraints
+
+Architecture constraints are as follows:
+
+* Open source
+* Compatible in api and template format with the original phplib template engine
+* Given configurations for CheckStyle, PMD, SpotBugs, SonarQube have to be used
+* For documentation uml, javadoc and asciidoc have to be used
