@@ -211,7 +211,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.2.2</version>
+        <version>3.3.0</version>
         <configuration>
           <archive>
             <manifestEntries>
@@ -390,7 +390,7 @@
       <plugin>
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
-        <version>7.1.2</version>
+        <version>7.3.0</version>
         <!- -
         <configuration>
           <skipProvidedScope>true</skipProvidedScope>
@@ -428,7 +428,7 @@
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
-        <version>1.9.5</version>
+        <version>1.9.9</version>
         <configuration>
           <timestampedReports>false</timestampedReports>
         </configuration>
@@ -488,7 +488,7 @@
       <plugin>
         <groupId>com.societegenerale.commons</groupId>
         <artifactId>arch-unit-maven-plugin</artifactId>
-        <version>2.9.3</version>
+        <version>3.0.0</version>
         <configuration>
           <projectPath>${project.basedir}/target</projectPath>
           <rules>
@@ -563,7 +563,7 @@
         <configuration>
           <verbose>true</verbose>
           <includeTests>true</includeTests>
-          <targetJdk>1.8</targetJdk>
+          <targetJdk>11</targetJdk>
           <excludes>**/module-info.java,**/package-info.java</excludes>
           <rulesets>
             <ruleset>PMD.xml</ruleset>
@@ -575,7 +575,7 @@
       <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>4.7.2.0</version>
+        <version>4.7.2.1</version>
         <configuration>
           <effort>max</effort>
           <threshold>low</threshold>
@@ -772,14 +772,14 @@
       <plugin>
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
-        <version>7.1.2</version>
+        <version>7.3.0</version>
       </plugin>
 
       <!--
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
-        <version>1.9.5</version>
+        <version>1.9.9</version>
         <reportSets>
           <reportSet>
             <reports>
