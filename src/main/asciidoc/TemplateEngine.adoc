@@ -1,6 +1,6 @@
 = PHPLib template engine =
 Kai Hofmann <hofmann@hofmann-int.de>
-18.06.2019
+05.11.2022
 
 == Background ==
 
@@ -75,3 +75,8 @@ for more.
 
 The maven generated site could be found here
 https://www.powerstat.de/TemplateEngine/[TemplateEngine]
+
+== AsciiDoc arc42 site ==
+
+The maven generated documentation could be found here
+https://www.powerstat.de/TemplateEngine/generated-docs/[arc42 architecture documentation]
