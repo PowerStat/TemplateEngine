@@ -47,3 +47,5 @@
 --> "finish(template)"
 "finish(template)" --> (*)
 ....
+
+include::../../../test/java/de/powerstat/phplib/templateengine/test/TemplateEngineTest.java[tag=NonAppendBlock]

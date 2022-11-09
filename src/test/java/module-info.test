@@ -17,5 +17,6 @@ module de.powerstat.phplib.templateengine
   requires org.apache.logging.log4j;
   requires org.junit.jupiter.api;
   requires com.github.spotbugs.annotations;
+  requires io.cucumber.java;
 
  }

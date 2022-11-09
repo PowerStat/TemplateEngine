@@ -569,13 +569,6 @@
       <property name="legalComment" value=""/>
     </module>
     -->
-    <!-- 
-    <module name="Translation">
-      <property name="fileExtensions" value=".properties"/>
-      <property name="baseName" value="^messages.*$"/>
-      <property name="requiredTranslations" value=""/>
-    </module>
-    -->
     <module name="UncommentedMain">
       <property name="excludedClasses" value="^$"/>
     </module>
@@ -890,14 +883,6 @@
   </module>
   -->
 
-  <!-- Size Violations -->
-  <module name="LineLength">
-    <!-- <property name="severity" value="warning"/> -->
-    <!-- <property name="fileExtensions" value="*"/> -->
-    <!-- <property name="ignorePattern" value="^(package|import) .*"/> -->
-    <property name="max" value="320"/>
-  </module>
-
   <!-- Headers -->
   <!-- 
   <module name="Header">
@@ -969,6 +954,12 @@
   -->
 
   <!-- Size violations -->
+  <module name="LineLength">
+    <property name="severity" value="warning"/>
+    <!-- <property name="fileExtensions" value="*"/> -->
+    <!-- <property name="ignorePattern" value="^(package|import) .*"/> -->
+    <property name="max" value="320"/>
+  </module>
   <module name="FileLength">
     <property name="severity" value="warning"/>
     <property name="max" value="20000"/>
