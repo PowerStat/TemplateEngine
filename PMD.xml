@@ -2,6 +2,10 @@
 <ruleset name="PowerStat Rules" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
   <description>This ruleset checks the code for discouraged programming constructs.</description>
 
+  <!-- Apex Rules -->
+  <!-- not used -->
+
+  <!-- Ecmascript Rules -->
   <!-- Ecmascript best practices -->
   <rule ref="category/ecmascript/bestpractices.xml/AvoidWithStatement" />
   <rule ref="category/ecmascript/bestpractices.xml/ConsistentReturn">
@@ -45,11 +49,13 @@
   <rule ref="category/ecmascript/errorprone.xml/EqualComparison" />
   <rule ref="category/ecmascript/errorprone.xml/InnaccurateNumericLiteral" />
 
+  <!-- HTML Rules -->
   <!-- HTML best practices -->
-  <!-- <rule ref="category/html/bestpractices.xml/AvoidInlineStyles" /> requires 6.45 -->
-  <!-- <rule ref="category/html/bestpractices.xml/UnnecessaryTypeAttribute" /> requires 6.45 -->
-  <!-- <rule ref="category/html/bestpractices.xml/UseAltAttributeForImages" /> requires 6.45 -->
+  <rule ref="category/html/bestpractices.xml/AvoidInlineStyles" />
+  <rule ref="category/html/bestpractices.xml/UnnecessaryTypeAttribute" />
+  <rule ref="category/html/bestpractices.xml/UseAltAttributeForImages" />
 
+  <!-- Java rules -->
   <!-- Java best practices -->
   <rule ref="category/java/bestpractices.xml/AbstractClassWithoutAbstractMethod" />
   <rule ref="category/java/bestpractices.xml/AccessorClassGeneration" />
@@ -119,7 +125,8 @@
   <rule ref="category/java/bestpractices.xml/OneDeclarationPerLine">
     <properties>
       <property name="strictMode" value="false" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/bestpractices.xml/PreserveStackTrace" />
   <rule ref="category/java/bestpractices.xml/PrimitiveWrapperInstantiation" />
   <rule ref="category/java/bestpractices.xml/ReplaceEnumerationWithIterator" />
@@ -146,7 +153,8 @@
   <rule ref="category/java/bestpractices.xml/UnusedPrivateMethod">
     <properties>
       <property name="ignoredAnnotations" value="java.lang.Deprecated" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/bestpractices.xml/UseCollectionIsEmpty" />
   <rule ref="category/java/bestpractices.xml/UseStandardCharsets" />
   <rule ref="category/java/bestpractices.xml/UseTryWithResources">
@@ -170,7 +178,8 @@
   <rule ref="category/java/codestyle.xml/BooleanGetMethodName">
     <properties>
       <property name="checkParameterizedMethods" value="false" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/CallSuperInConstructor" />
   <rule ref="category/java/codestyle.xml/ClassNamingConventions">
     <properties>
@@ -192,7 +201,8 @@
   <rule ref="category/java/codestyle.xml/ConfusingTernary">
     <properties>
       <property name="ignoreElseIf" value="false" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/ControlStatementBraces">
     <properties>
       <property name="checkIfElseStmt" value="true" />
@@ -233,7 +243,8 @@
       <property name="finalMethodParameterPattern" value="[a-z][a-zA-Z0-9]*" />
       <property name="lambdaParameterPattern" value="[a-z][a-zA-Z0-9]*" />
       <property name="explicitLambdaParameterPattern" value="[a-z][a-zA-Z0-9]*" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/GenericsNaming" />
   <rule ref="category/java/codestyle.xml/IdenticalCatchBranches" />
   <rule ref="category/java/codestyle.xml/LinguisticNaming">
@@ -256,13 +267,15 @@
   <rule ref="category/java/codestyle.xml/LocalVariableCouldBeFinal">
     <properties>
       <property name="ignoreForEachDecl" value="false" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/LocalVariableNamingConventions">
     <properties>
       <property name="localVarPattern" value="[a-z][a-zA-Z0-9]*" />
       <property name="finalVarPattern" value="[a-z][a-zA-Z0-9]*" />
       <property name="catchParameterPattern" value="[a-z][a-zA-Z0-9]*" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/LongVariable">
     <properties>
       <property name="minimum">
@@ -280,7 +293,8 @@
       <property name="junit3TestPattern" value="test[A-Z0-9][a-zA-Z0-9]*" />
       <property name="junit4TestPattern" value="[a-z][a-zA-Z0-9]*" />
       <property name="junit5TestPattern" value="[a-z][a-zA-Z0-9]*" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/NoPackage" />
   <!-- <rule ref="category/java/codestyle.xml/OnlyOneReturn" /> -->
   <rule ref="category/java/codestyle.xml/PackageCase" />
@@ -290,15 +304,18 @@
   <rule ref="category/java/codestyle.xml/ShortClassName">
     <properties>
       <property name="minimum" value="5" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/ShortMethodName">
     <properties>
       <property name="minimum" value="3" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/ShortVariable">
     <properties>
       <property name="minimum" value="3" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/TooManyStaticImports">
     <properties>
       <property name="maximumStaticImports" value="8" />
@@ -364,7 +381,8 @@
   <rule ref="category/java/design.xml/CouplingBetweenObjects">
     <properties>
       <property name="threshold" value="20" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/design.xml/CyclomaticComplexity">
     <properties>
       <property name="classReportLevel" value="139" />
@@ -388,7 +406,8 @@
   <rule ref="category/java/design.xml/ExcessiveMethodLength">
     <properties>
       <property name="minimum" value="100.0" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/design.xml/ExcessiveParameterList">
     <properties>
       <property name="minimum" value="10.0" />
@@ -404,7 +423,8 @@
   <rule ref="category/java/design.xml/ImmutableField">
     <properties>
       <property name="ignoredAnnotations" value="lombok.Setter|lombok.Getter|lombok.Builder|lombok.Data|lombok.RequiredArgsConstructor|lombok.AllArgsConstructor|lombok.Value|lombok.NoArgsConstructor" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/design.xml/LawOfDemeter">
     <properties>
       <property name="violationSuppressRegex" value=".*Potential violation of Law of Demeter .*"/>
@@ -446,7 +466,8 @@
       <property name="ignoredAnnotations" value="lombok.Setter|lombok.Getter|lombok.Builder|lombok.Data|lombok.RequiredArgsConstructor|lombok.AllArgsConstructor|lombok.Value|lombok.NoArgsConstructor|lombok.experimental.Delegate|lombok.EqualsAndHashCode" />
       <property name="checkInnerClasses" value="false" />
       <property name="disallowNotAssignment" value="false" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/design.xml/SwitchDensity">
     <properties>
       <property name="minimum" value="10.0" />
@@ -465,7 +486,8 @@
   <rule ref="category/java/design.xml/UselessOverridingMethod">
     <properties>
       <property name="ignoreAnnotations" value="false" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/design.xml/UseObjectForClearerAPI" />
   <rule ref="category/java/design.xml/UseUtilityClass">
     <properties>
@@ -502,7 +524,8 @@
   <rule ref="category/java/documentation.xml/UncommentedEmptyConstructor">
     <properties>
       <property name="ignoreExplicitConstructorInvocation" value="false" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/documentation.xml/UncommentedEmptyMethodBody" />
 
   <!-- Java error prone -->
@@ -552,7 +575,8 @@
   <rule ref="category/java/errorprone.xml/AvoidUsingOctalValues">
     <properties>
       <property name="strict" value="false" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <!-- 
   <rule ref="category/java/errorprone.xml/BeanMembersShouldSerialize">
     <properties>
@@ -722,6 +746,7 @@
   <rule ref="category/java/security.xml/InsecureCryptoIv" />
 
 
+  <!-- Java Server Pages Rules -->
   <!-- JSP best practices -->
   <rule ref="category/jsp/bestpractices.xml/DontNestJsfInJstlIteration" />
   <rule ref="category/jsp/bestpractices.xml/NoClassAttribute" />
@@ -744,35 +769,33 @@
   <rule ref="category/jsp/security.xml/IframeMissingSrcAttribute" />
   <rule ref="category/jsp/security.xml/NoUnsanitizedJSPExpression" />
 
+  <!-- Maven POM Rules -->
   <!-- Maven error prone -->
-  <!--
   <rule ref="category/pom/errorprone.xml/InvalidDependencyTypes">
     <properties>
       <property name="validTypes" value="pom, jar, maven-plugin, ejb, war, ear, rar, par" />
     </properties>
   </rule>
-  requires ? -->
-  <!-- 
   <rule ref="category/pom/errorprone.xml/ProjectVersionAsDependencyVersion" />
-  requires ? -->
   
+  <!-- Modelica Rules -->
+  <!-- PLSQL Rules -->
+  <!-- Salesforce VisualForce Rules -->
+  <!-- VM Rules -->
+
+  <!-- XML Rules -->
   <!-- XML error prone -->
-  <!-- 
   <rule ref="category/xml/errorprone.xml/MistypedCDATASection" />
-  requires ? -->
   
+  <!-- XSL Rules -->
   <!-- XSL code style-->
-  <!-- 
   <rule ref="category/xsl/codestyle.xml/UseConcatOnce" />
-  requires ? -->
   
   <!-- XSL performance-->
-  <!-- 
   <rule ref="category/xsl/performance.xml/AvoidAxisNavigation">
     <properties>
       <property name="checkSelfDescendantAbreviation" value="false" />
     </properties>
 </rule>
-requires ? -->
 
 </ruleset>
