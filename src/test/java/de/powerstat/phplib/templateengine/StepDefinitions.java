@@ -95,13 +95,14 @@ public class StepDefinitions
   @When("The template is processed")
   public void the_template_is_processed()
    {
+    // Nothing to do.
    }
 
 
   /**
    * Then.
    *
-   * @throws IOException
+   * @throws IOException IO exception
    */
   @Then("The variable is replaced with the value hello world")
   public void the_variable_is_replaced_with_the_value_hello_world() throws IOException

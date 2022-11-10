@@ -51,9 +51,9 @@
 
   <!-- HTML Rules -->
   <!-- HTML best practices -->
-  <rule ref="category/html/bestpractices.xml/AvoidInlineStyles" />
-  <rule ref="category/html/bestpractices.xml/UnnecessaryTypeAttribute" />
-  <rule ref="category/html/bestpractices.xml/UseAltAttributeForImages" />
+  <!-- <rule ref="category/html/bestpractices.xml/AvoidInlineStyles" /> requires 6.45 -->
+  <!-- <rule ref="category/html/bestpractices.xml/UnnecessaryTypeAttribute" /> requires 6.45 -->
+  <!-- <rule ref="category/html/bestpractices.xml/UseAltAttributeForImages" /> requires 6.45 -->
 
   <!-- Java rules -->
   <!-- Java best practices -->
@@ -771,12 +771,14 @@
 
   <!-- Maven POM Rules -->
   <!-- Maven error prone -->
+  <!-- 
   <rule ref="category/pom/errorprone.xml/InvalidDependencyTypes">
     <properties>
       <property name="validTypes" value="pom, jar, maven-plugin, ejb, war, ear, rar, par" />
     </properties>
   </rule>
-  <rule ref="category/pom/errorprone.xml/ProjectVersionAsDependencyVersion" />
+  require 5.4 -->
+  <!-- <rule ref="category/pom/errorprone.xml/ProjectVersionAsDependencyVersion" /> require 5.4 -->
   
   <!-- Modelica Rules -->
   <!-- PLSQL Rules -->
@@ -785,17 +787,19 @@
 
   <!-- XML Rules -->
   <!-- XML error prone -->
-  <rule ref="category/xml/errorprone.xml/MistypedCDATASection" />
+  <!-- <rule ref="category/xml/errorprone.xml/MistypedCDATASection" /> require 5.0 -->
   
   <!-- XSL Rules -->
   <!-- XSL code style-->
-  <rule ref="category/xsl/codestyle.xml/UseConcatOnce" />
+  <!-- <rule ref="category/xsl/codestyle.xml/UseConcatOnce" /> require 5.0 -->
   
   <!-- XSL performance-->
+  <!-- 
   <rule ref="category/xsl/performance.xml/AvoidAxisNavigation">
     <properties>
       <property name="checkSelfDescendantAbreviation" value="false" />
     </properties>
 </rule>
+  require 5.0 -->
 
 </ruleset>

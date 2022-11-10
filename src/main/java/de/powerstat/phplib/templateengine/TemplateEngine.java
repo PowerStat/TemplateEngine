@@ -358,7 +358,7 @@ public final class TemplateEngine
    * @throws NullPointerException If newVarname or newFile is null
    * @throws IllegalArgumentException If newVarname is empty
    */
-  @SuppressWarnings("PMD.LinguisticNaming")
+  @SuppressWarnings({"PMD.LinguisticNaming", "java:S3457"})
   public boolean setFile(final String newVarname, final File newFile)
    {
     Objects.requireNonNull(newVarname, "newVarname"); //$NON-NLS-1$
@@ -723,6 +723,7 @@ public final class TemplateEngine
    * @throws NullPointerException If target or varname is null
    * @throws IllegalArgumentException If target or varname is empty
    */
+  @SuppressWarnings("java:S2301")
   public String parse(final String target, final String varname, final boolean append) throws IOException
    {
     Objects.requireNonNull(target, "target"); //$NON-NLS-1$
