@@ -109,7 +109,9 @@
       <property name="testClassPattern" value="Test" />
     </properties>
   </rule>
-  <!-- <rule ref="category/java/bestpractices.xml/JUnit5TestShouldBePackagePrivate" /> -->
+  <!-- 
+  <rule ref="category/java/bestpractices.xml/JUnit5TestShouldBePackagePrivate" />
+  -->
   <rule ref="category/java/bestpractices.xml/JUnitAssertionsShouldIncludeMessage" />
   <rule ref="category/java/bestpractices.xml/JUnitTestContainsTooManyAsserts">
     <properties>
@@ -144,12 +146,14 @@
   <rule ref="category/java/bestpractices.xml/UnusedFormalParameter">
     <properties>
       <property name="checkAll" value="false" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/bestpractices.xml/UnusedLocalVariable" />
   <rule ref="category/java/bestpractices.xml/UnusedPrivateField">
     <properties>
       <property name="ignoredFieldNames" value="serialVersionUID|serialPersistentFields" />
-    </properties>  </rule>
+    </properties>
+  </rule>
   <rule ref="category/java/bestpractices.xml/UnusedPrivateMethod">
     <properties>
       <property name="ignoredAnnotations" value="java.lang.Deprecated" />
@@ -249,7 +253,7 @@
   <rule ref="category/java/codestyle.xml/IdenticalCatchBranches" />
   <rule ref="category/java/codestyle.xml/LinguisticNaming">
     <properties>
-      <property name="ignoredAnnotations" value="java.lang.Override" />
+      <property name="ignoredAnnotations" value="java.lang.Override|org.junit.jupiter.api.Test|org.junit.jupiter.params.ParameterizedTest" />
       <property name="checkBooleanMethod" value="true" />
       <property name="checkGetters" value="true" />
       <property name="checkSetters" value="true" />
@@ -296,7 +300,9 @@
     </properties>
   </rule>
   <rule ref="category/java/codestyle.xml/NoPackage" />
-  <!-- <rule ref="category/java/codestyle.xml/OnlyOneReturn" /> -->
+  <!-- 
+  <rule ref="category/java/codestyle.xml/OnlyOneReturn" /> 
+  -->
   <rule ref="category/java/codestyle.xml/PackageCase" />
   <rule ref="category/java/codestyle.xml/PrematureDeclaration" />
   <rule ref="category/java/codestyle.xml/RemoteInterfaceNamingConvention" />
@@ -345,7 +351,9 @@
       <property name="java7Compatibility" value="false" />
     </properties>
   </rule>
-  <!-- <rule ref="category/java/codestyle.xml/UselessParentheses" /> -->
+  <!-- 
+  <rule ref="category/java/codestyle.xml/UselessParentheses" /> 
+  -->
   <rule ref="category/java/codestyle.xml/UselessQualifiedThis" />
   <rule ref="category/java/codestyle.xml/UseShortArrayInitializer" />
   <!--
@@ -419,7 +427,9 @@
     </properties>
   </rule>
   <rule ref="category/java/design.xml/FinalFieldCouldBeStatic" />
-  <!-- <rule ref="category/java/design.xml/GodClass" /> -->
+  <!-- 
+  <rule ref="category/java/design.xml/GodClass" /> 
+  -->
   <rule ref="category/java/design.xml/ImmutableField">
     <properties>
       <property name="ignoredAnnotations" value="lombok.Setter|lombok.Getter|lombok.Builder|lombok.Data|lombok.RequiredArgsConstructor|lombok.AllArgsConstructor|lombok.Value|lombok.NoArgsConstructor" />
@@ -427,7 +437,7 @@
   </rule>
   <rule ref="category/java/design.xml/LawOfDemeter">
     <properties>
-      <property name="violationSuppressRegex" value=".*Potential violation of Law of Demeter .*"/>
+      <property name="violationSuppressRegex" value="Potential violation of Law of Demeter \((method chain calls|object not created locally|static property access)\)"/>
     </properties>
   </rule>
   <rule ref="category/java/design.xml/LogicInversion" />
@@ -778,7 +788,9 @@
     </properties>
   </rule>
   require 5.4 -->
-  <!-- <rule ref="category/pom/errorprone.xml/ProjectVersionAsDependencyVersion" /> require 5.4 -->
+  <!-- 
+  <rule ref="category/pom/errorprone.xml/ProjectVersionAsDependencyVersion" />
+  require 5.4 -->
   
   <!-- Modelica Rules -->
   <!-- PLSQL Rules -->
@@ -787,11 +799,15 @@
 
   <!-- XML Rules -->
   <!-- XML error prone -->
-  <!-- <rule ref="category/xml/errorprone.xml/MistypedCDATASection" /> require 5.0 -->
+  <!-- 
+  <rule ref="category/xml/errorprone.xml/MistypedCDATASection" />
+  require 5.0 -->
   
   <!-- XSL Rules -->
   <!-- XSL code style-->
-  <!-- <rule ref="category/xsl/codestyle.xml/UseConcatOnce" /> require 5.0 -->
+  <!-- 
+  <rule ref="category/xsl/codestyle.xml/UseConcatOnce" />
+  require 5.0 -->
   
   <!-- XSL performance-->
   <!-- 

@@ -17,7 +17,7 @@
     </module> 
     -->
     <module name="AnnotationUseStyle">
-      <property name="elementStyle" value="compact_no_array"/>
+      <property name="elementStyle" value="compact"/>
       <property name="closingParens" value="never"/>
       <property name="trailingArrayComma" value="never"/>
     </module>
@@ -585,13 +585,13 @@
     </module>
     -->
     <module name="InterfaceMemberImpliedModifier">
-      <property name="violateImpliedPublicField" value="true"/>
-      <property name="violateImpliedStaticField" value="true"/>
-      <property name="violateImpliedFinalField" value="true"/>
-      <property name="violateImpliedPublicMethod" value="true"/>
-      <property name="violateImpliedAbstractMethod" value="true"/>
-      <property name="violateImpliedPublicNested" value="true"/>
-      <property name="violateImpliedStaticNested" value="true"/>
+      <property name="violateImpliedPublicField" value="false"/>
+      <property name="violateImpliedStaticField" value="false"/>
+      <property name="violateImpliedFinalField" value="false"/>
+      <property name="violateImpliedPublicMethod" value="false"/>
+      <property name="violateImpliedAbstractMethod" value="false"/>
+      <property name="violateImpliedPublicNested" value="false"/>
+      <property name="violateImpliedStaticNested" value="false"/>
     </module>
     <module name="ModifierOrder">
       <property name="severity" value="warning"/>
@@ -772,7 +772,7 @@
     </module> 
     -->
     <module name="LambdaBodyLength">
-      <property name="max" value="10"/>
+      <property name="max" value="16"/>
     </module>
     <module name="MethodCount">
       <property name="maxTotal" value="110"/>
@@ -840,7 +840,7 @@
     </module>
     <module name="OperatorWrap">
       <property name="severity" value="warning"/>
-      <property name="option" value="nl"/>
+      <property name="option" value="eol"/>
       <property name="tokens" value=""/>
     </module>
     <module name="ParenPad">
