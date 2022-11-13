@@ -4,7 +4,7 @@
 
   <groupId>de.powerstat.phplib</groupId>
   <artifactId>templateengine</artifactId>
-  <version>1.6-SNAPSHOT</version>
+  <version>1.6</version>
   <packaging>jar</packaging>
 
   <name>PowerStatsTemplateEngine</name>
@@ -104,7 +104,7 @@
     <connection>scm:git:https://github.com/PowerStat/TemplateEngine.git</connection>
     <developerConnection>scm:git:https://github.com/PowerStat/TemplateEngine.git</developerConnection>
     <url>https://github.com/PowerStat/TemplateEngine</url>
-    <tag>HEAD</tag>
+    <tag>V1.6</tag>
   </scm>
 
   <repositories>
@@ -350,15 +350,15 @@
             <configuration>
               <rules>
                 <dependencyConvergence />
-                <banDuplicatePomDependencyVersions/>
+                <banDuplicatePomDependencyVersions />
                 <requirePluginVersions>
                    <banLatest>true</banLatest>
                    <banRelease>true</banRelease>
                    <banSnapshots>true</banSnapshots>
                    <phases>clean,deploy,site</phases>
                 </requirePluginVersions>
-                <requireReleaseDeps/>
-                <requireUpperBoundDeps/>
+                <requireReleaseDeps />
+                <requireUpperBoundDeps />
               </rules>
             </configuration>
             <goals>
