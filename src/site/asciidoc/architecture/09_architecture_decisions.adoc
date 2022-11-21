@@ -2,6 +2,6 @@
 == Architecture Decisions
 
 * PHPLib template engine - because of it' simplenest
-* Java - because its a better language than C++ and white spread
+* Java - because its a better language than C++ and wide spread
 * Block loop logic is still within the code and not in the template
-* Template syntax is XML compatible but could alos be used for code templates
+* Template syntax is XML compatible but could also be used for code templates
