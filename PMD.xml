@@ -401,19 +401,9 @@
   <rule ref="category/java/design.xml/DataClass" />
   <rule ref="category/java/design.xml/DoNotExtendJavaLangError" />
   <rule ref="category/java/design.xml/ExceptionAsFlowControl" />
-  <rule ref="category/java/design.xml/ExcessiveClassLength">
-    <properties>
-      <property name="minimum" value="1750.0" />
-    </properties>
-  </rule>
   <rule ref="category/java/design.xml/ExcessiveImports">
     <properties>
       <property name="minimum" value="50"/>
-    </properties>
-  </rule>
-  <rule ref="category/java/design.xml/ExcessiveMethodLength">
-    <properties>
-      <property name="minimum" value="100.0" />
     </properties>
   </rule>
   <rule ref="category/java/design.xml/ExcessiveParameterList">
@@ -634,7 +624,6 @@
     </properties>
   </rule>
   <rule ref="category/java/errorprone.xml/EmptyFinalizer" />
-  <rule ref="category/java/errorprone.xml/EmptyStatementNotInLoop" />
   <rule ref="category/java/errorprone.xml/EqualsNull" />
   <rule ref="category/java/errorprone.xml/FinalizeDoesNotCallSuperFinalize" />
   <rule ref="category/java/errorprone.xml/FinalizeOnlyCallsSuperFinalize" />

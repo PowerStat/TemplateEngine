@@ -48,4 +48,4 @@
 "finish(template)" --> (*)
 ....
 
-include::../../../test/java/de/powerstat/phplib/templateengine/test/TemplateEngineTest.java[tag=NonAppendBlock]
+include::../../../test/java/de/powerstat/phplib/templateengine/test/TemplateEngineTests.java[tag=NonAppendBlock]
