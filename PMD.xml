@@ -115,7 +115,7 @@
   <rule ref="category/java/bestpractices.xml/JUnitAssertionsShouldIncludeMessage" />
   <rule ref="category/java/bestpractices.xml/JUnitTestContainsTooManyAsserts">
     <properties>
-      <property name="maximumAsserts" value="11" />
+      <property name="maximumAsserts" value="12" />
     </properties>
   </rule>
   <rule ref="category/java/bestpractices.xml/JUnitTestsShouldIncludeAssert" />
@@ -668,11 +668,9 @@
   <rule ref="category/java/errorprone.xml/SuspiciousHashcodeMethodName" />
   <rule ref="category/java/errorprone.xml/SuspiciousOctalEscape" />
   <rule ref="category/java/errorprone.xml/TestClassWithoutTestCases">
-  <!-- 
     <properties>
       <property name="testClassPattern" value="^(?:.*\.)?Test[^\.]*$|^(?:.*\.)?.*Tests?$|^(?:.*\.)?.*TestCase$" />
     </properties>
-  requires 6.51 -->
   </rule>
   <rule ref="category/java/errorprone.xml/UnconditionalIfStatement" />
   <rule ref="category/java/errorprone.xml/UnnecessaryBooleanAssertion" />
@@ -770,16 +768,6 @@
 
   <!-- Maven POM Rules -->
   <!-- Maven error prone -->
-  <!-- 
-  <rule ref="category/pom/errorprone.xml/InvalidDependencyTypes">
-    <properties>
-      <property name="validTypes" value="pom, jar, maven-plugin, ejb, war, ear, rar, par" />
-    </properties>
-  </rule>
-  require 5.4 -->
-  <!-- 
-  <rule ref="category/pom/errorprone.xml/ProjectVersionAsDependencyVersion" />
-  require 5.4 -->
   
   <!-- Modelica Rules -->
   <!-- PLSQL Rules -->
@@ -788,23 +776,10 @@
 
   <!-- XML Rules -->
   <!-- XML error prone -->
-  <!-- 
-  <rule ref="category/xml/errorprone.xml/MistypedCDATASection" />
-  require 5.0 -->
   
   <!-- XSL Rules -->
   <!-- XSL code style-->
-  <!-- 
-  <rule ref="category/xsl/codestyle.xml/UseConcatOnce" />
-  require 5.0 -->
   
   <!-- XSL performance-->
-  <!-- 
-  <rule ref="category/xsl/performance.xml/AvoidAxisNavigation">
-    <properties>
-      <property name="checkSelfDescendantAbreviation" value="false" />
-    </properties>
-</rule>
-  require 5.0 -->
 
 </ruleset>

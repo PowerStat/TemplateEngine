@@ -8,6 +8,7 @@
 package de.powerstat.phplib.templateengine
 {
   class TemplateEngine
+  enum HandleUndefined
 }
 
 package java.io
@@ -39,9 +40,12 @@ org.apache.logging.log4j <-- de.powerstat.phplib.templateengine
 ....
 package de.powerstat.phplib.templateengine
 {
+  enum HandleUndefined
+   {
+   }
+  
   class TemplateEngine 
    {
-    +enum HandleUndefined
     +{static} newInstance(engine : TemplateEngine) : TemplateEngine
     +{static} newInstance(file : File) : TemplateEngine
     +{static} newInstance(stream : InputStream) : TemplateEngine
@@ -67,7 +71,50 @@ package de.powerstat.phplib.templateengine
     +hashCode() : int
     +equals(obj : Object) : boolean
    }
+   
+  package de.powerstat.phplib.templateengine.intern
+   {
+    class BlockManager 
+     {
+      +BlockManager(vManager : VariableManager, bManager : BlockManager)
+      +BlockManager(vManager : VariableManager)
+      +setBlock(parent : String, varname : String, name : String) : boolean
+      +toString() : String
+      +hashCode() : int
+      +equals(obj : Object) : boolean
+     }
+   
+    class FileManager 
+     {
+      +FileManager(vManager : VariableManager, fManager : FileManager)
+      +FileManager(vManager : VariableManager)
+      +addFile(newVarname : String, newFile : File) : boolean
+      +existsFile(varname : String) : boolean
+      +loadFile(varname : String) : boolean
+      +toString() : String
+      +hashCode() : int
+      +equals(obj : Object) : boolean
 }
+
+    class VariableManager 
+     {
+      +VariableManager(vManager : VariableManager)
+      +VariableManager()
+      +existsVar(varname : String) : boolean
+      +getVar(varname : String) : String
+      +setVar(varname : String, value : String)
+      +unsetVar(varname : String)
+      +getUndefined(varname : String) : List<String>
+      +subst(varname : String) : String
+      +parse(target : String, varname : String, append : boolean) : String
+      +getVars() : List<String>
+      +toString() : String
+      +hashCode() : int
+      +equals(obj : Object) : boolean
+     }
+  }
+}
+
 
 package java.io
 {
@@ -89,4 +136,5 @@ java.io <-- de.powerstat.phplib.templateengine
 java.nio <-- de.powerstat.phplib.templateengine
 java.util <-- de.powerstat.phplib.templateengine
 org.apache.logging.log4j <-- de.powerstat.phplib.templateengine
+de.powerstat.phplib.templateengine.intern <-- de.powerstat.phplib.templateengine
 ....

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Copyright (C) 2019-2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
 package de.powerstat.phplib.templateengine.test;
 
@@ -26,8 +26,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
+import de.powerstat.phplib.templateengine.HandleUndefined;
 import de.powerstat.phplib.templateengine.TemplateEngine;
-import de.powerstat.phplib.templateengine.TemplateEngine.HandleUndefined;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 
@@ -287,6 +287,11 @@ public final class TemplateEngineTests
    * newInstance result not as expected message.
    */
   private static final String NEW_INSTANCE_RESULT_NOT_AS_EXPECTED = "newInstance result not as expected"; //$NON-NLS-1$
+
+  /**
+   * Parent constant.
+   */
+  private static final String PARENT = "parent";
 
 
   /**
@@ -1435,26 +1440,6 @@ public final class TemplateEngineTests
 
 
   /**
-   * Test get keep variable parsing.
-   *
-   * @throws IOException IO exception
-   * @deprecated Test for deprecated code
-   */
-  @Test
-  @Deprecated
-  public void setUnknowns() throws IOException
-   {
-    final TemplateEngine engine = new TemplateEngine();
-    engine.setUnknowns(HandleUndefined.KEEP);
-    /* final boolean success = */ engine.setFile(TemplateEngineTests.FILE1, new File(TemplateEngineTests.TEMPLATE1_TMPL));
-    /* String substResult = */ engine.subst(TemplateEngineTests.FILE1);
-    /* String parseResult = */ engine.parse(TemplateEngineTests.OUTPUT, TemplateEngineTests.FILE1);
-    final String output = engine.get(TemplateEngineTests.OUTPUT);
-    assertEquals(TemplateEngineTests.EQUALS_123_VARIABLE1_456, output, TemplateEngineTests.OUTPUT_VALUE_NOT_AS_EXPECTED);
-   }
-
-
-  /**
    * Test read template file from classpath.
    *
    * @throws IOException IO exception
@@ -1588,7 +1573,7 @@ public final class TemplateEngineTests
     /* final boolean success = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
     engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.TEST);
     final String string = engine.toString();
-    assertEquals("TemplateEngine[unknowns=REMOVE, files=Optional[template2.tmpl, template1.tmpl], vars=[variable1]]", string, "toString() result not as expected"); //$NON-NLS-1$ //$NON-NLS-2$
+    assertEquals("TemplateEngine[unknowns=REMOVE, vManager=VariableManager[vars=[variable1]], fManager=FileManager[files=Optional[template2.tmpl, template1.tmpl]], bManager=BlockManager[vars=[variable1]]]", string, "toString() result not as expected"); //$NON-NLS-1$ //$NON-NLS-2$
    }
 
 
@@ -1938,11 +1923,13 @@ public final class TemplateEngineTests
 
   /**
    * Test equals.
+   *
+   * @throws IOException IO exception
    */
   @Test
   @SuppressFBWarnings("EC_NULL_ARG")
   @SuppressWarnings("PMD.EqualsNull")
-  public void testEquals()
+  public void testEquals() throws IOException
    {
     final TemplateEngine tmpl1 = new TemplateEngine(HandleUndefined.REMOVE);
     final TemplateEngine tmpl2 = new TemplateEngine(HandleUndefined.REMOVE);
@@ -1950,8 +1937,11 @@ public final class TemplateEngineTests
     final TemplateEngine tmpl4 = new TemplateEngine(HandleUndefined.REMOVE);
     final TemplateEngine tmpl5 = new TemplateEngine(HandleUndefined.REMOVE);
     final TemplateEngine tmpl6 = new TemplateEngine(HandleUndefined.REMOVE);
+    final TemplateEngine tmpl7 = new TemplateEngine(HandleUndefined.REMOVE);
     tmpl5.setVar("key", "value"); //$NON-NLS-1$ //$NON-NLS-2$
     /* boolean success = */ tmpl6.setFile("file", new File(TemplateEngineTests.TEMPLATE1_TMPL)); //$NON-NLS-1$
+    tmpl7.setVar(PARENT, "before<!-- BEGIN blktest -->content<!-- END blktest -->after");
+    /* final boolean result = */ tmpl7.setBlock(PARENT, "blktest");
     assertAll("testEquals", //$NON-NLS-1$
       () -> assertTrue(tmpl1.equals(tmpl1), "TemplateEngine11 is not equal"), //$NON-NLS-1$
       () -> assertTrue(tmpl1.equals(tmpl2), "TemplateEngine12 are not equal"), //$NON-NLS-1$
@@ -1962,7 +1952,8 @@ public final class TemplateEngineTests
       () -> assertFalse(tmpl3.equals(tmpl1), "TemplateEngine31 are equal"), //$NON-NLS-1$
       () -> assertFalse(tmpl1.equals(null), "TemplateEngine10 is equal"), //$NON-NLS-1$
       () -> assertFalse(tmpl1.equals(tmpl5), "TemplateEngine15 is equal"), //$NON-NLS-1$
-      () -> assertFalse(tmpl1.equals(tmpl6), "TemplateEngine16 is equal") //$NON-NLS-1$
+      () -> assertFalse(tmpl1.equals(tmpl6), "TemplateEngine16 is equal"), //$NON-NLS-1$
+      () -> assertFalse(tmpl1.equals(tmpl7), "TemplateEngine17 is equal") //$NON-NLS-1$
     );
    }
 

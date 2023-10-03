@@ -15,7 +15,7 @@ import io.cucumber.junit.platform.engine.Constants;
 /**
  * Run cucumber test.
  */
-@SuppressWarnings("java:S2187")
+@SuppressWarnings({"java:S2187", "PMD.TestClassWithoutTestCases"})
 @Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("de/powerstat/phplib/templateengine")

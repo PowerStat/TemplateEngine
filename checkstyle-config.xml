@@ -958,7 +958,7 @@
     <property name="severity" value="warning"/>
     <!-- <property name="fileExtensions" value="*"/> -->
     <!-- <property name="ignorePattern" value="^(package|import) .*"/> -->
-    <property name="max" value="320"/>
+    <property name="max" value="332"/>
   </module>
   <module name="FileLength">
     <property name="severity" value="warning"/>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003,2017-2020 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Copyright (C) 2002-2003,2017-2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
 package de.powerstat.phplib.templateengine;
 
@@ -11,22 +11,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import de.powerstat.phplib.templateengine.intern.BlockManager;
+import de.powerstat.phplib.templateengine.intern.FileManager;
+import de.powerstat.phplib.templateengine.intern.VariableManager;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 
 /**
@@ -41,15 +35,25 @@ import org.apache.logging.log4j.Logger;
  */
 public final class TemplateEngine
  {
-  /**
+  /* *
    * Logger.
    */
-  private static final Logger LOGGER = LogManager.getLogger(TemplateEngine.class);
+  // private static final Logger LOGGER = LogManager.getLogger(TemplateEngine.class);
 
   /**
    * Template name constant.
    */
   private static final String TEMPLATE = "template"; //$NON-NLS-1$
+
+  /**
+   * Template is empty message.
+   */
+  private static final String TEMPLATE_IS_EMPTY = "template is empty"; //$NON-NLS-1$
+
+  /**
+   * Maximum varname size.
+   */
+  private static final int MAX_VARNAME_SIZE = 64;
 
   /**
    * Varname name constant.
@@ -72,24 +76,9 @@ public final class TemplateEngine
   private static final String VARNAME_DOES_NOT_MATCH_NAME_PATTERN = "varname does not match name pattern"; //$NON-NLS-1$
 
   /**
-   * Template is empty message.
-   */
-  private static final String TEMPLATE_IS_EMPTY = "template is empty"; //$NON-NLS-1$
-
-  /**
-   * File path separator.
-   */
-  private static final String FILEPATH_SEPARATOR = "/"; //$NON-NLS-1$
-
-  /**
    * Varname regexp pattern.
    */
   private static final Pattern VARNAME_REGEXP = Pattern.compile("^[a-zA-Z0-9_]{1,64}$"); //$NON-NLS-1$
-
-  /**
-   * Template matcher regexp pattern.
-   */
-  private static final Pattern TEMPLATE_MATCHER_REGEXP = Pattern.compile("\\{([^{^}\n\r\t :]+)\\}"); //$NON-NLS-1$
 
   /**
    * Block matcher regexp.
@@ -102,78 +91,28 @@ public final class TemplateEngine
   private static final int MAX_TEMPLATE_SIZE = 1048576;
 
   /**
-   * Maximum varname size.
-   */
-  private static final int MAX_VARNAME_SIZE = 64;
-
-  /**
-   * File name map.
-   */
-  private final Map<String, File> files = new ConcurrentHashMap<>();
-
-  /**
-   * Temporary variables map.
-   */
-  private final Map<String, String> tempVars = new ConcurrentHashMap<>();
-
-  /**
    * Handling of undefined template variables.
    *
    * "remove"/0  =&gt; remove undefined variables
    * "keep"/1    =&gt; keep undefined variables
    * "comment"/2 =&gt; replace undefined variables with comments
    */
-  private HandleUndefined unknowns = HandleUndefined.REMOVE; // final
+  private final HandleUndefined unknowns;
 
   /**
-   * Enum for handling of undefined variables.
+   * Variable manager.
    */
-  public enum HandleUndefined
-   {
-    /**
-     * Remove variables.
-     */
-    REMOVE(0),
+  private final VariableManager variableManager;
 
     /**
-     * Keep variables.
+   * File manager.
      */
-    KEEP(1),
+  private final FileManager fileManager;
 
     /**
-     * Change to XML comments.
+   * Block manager.
      */
-    COMMENT(2);
-
-
-    /**
-     * Action number.
-     */
-    private final int action;
-
-
-    /**
-     * Ordinal constructor.
-     *
-     * @param action Action number
-     */
-    HandleUndefined(final int action)
-     {
-      this.action = action;
-     }
-
-
-    /**
-     * Get action number.
-     *
-     * @return Action number
-     */
-    public int getAction()
-     {
-      return this.action;
-     }
-
-   }
+  private final BlockManager blockManager;
 
 
   /**
@@ -186,14 +125,9 @@ public final class TemplateEngine
    {
     Objects.requireNonNull(engine, "engine"); //$NON-NLS-1$
     this.unknowns = engine.unknowns;
-    for (final Map.Entry<String, String> entry : engine.tempVars.entrySet())
-     {
-      this.tempVars.put(entry.getKey(), entry.getValue());
-     }
-    for (final Map.Entry<String, File> entry : engine.files.entrySet())
-     {
-      this.files.put(entry.getKey(), entry.getValue());
-     }
+    this.variableManager = new VariableManager(engine.variableManager);
+    this.fileManager = new FileManager(this.variableManager, engine.fileManager);
+    this.blockManager = new BlockManager(this.variableManager, engine.blockManager);
    }
 
 
@@ -206,6 +140,9 @@ public final class TemplateEngine
   public TemplateEngine(final HandleUndefined unknowns)
    {
     this.unknowns = unknowns;
+    this.variableManager = new VariableManager();
+    this.fileManager = new FileManager(this.variableManager);
+    this.blockManager = new BlockManager(this.variableManager);
    }
 
 
@@ -284,7 +221,7 @@ public final class TemplateEngine
    * @throws IllegalStateException If the stream is empty
    * @throws NullPointerException If stream is null
    */
-  // @SuppressFBWarnings("EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS")
+  @SuppressFBWarnings("EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS")
   public static TemplateEngine newInstance(final InputStream stream) throws IOException
    {
     Objects.requireNonNull(stream, "stream"); //$NON-NLS-1$
@@ -336,20 +273,6 @@ public final class TemplateEngine
 
 
   /**
-   * Handling of unknown template variables during parsing.
-   *
-   * @param newUnknowns How to handle unknown variables.
-   * @see HandleUndefined
-   * @deprecated Use TemplateEngine(final HandleUndefined unknowns) instead
-   */
-  @Deprecated(since = "1.4", forRemoval = false)
-  public void setUnknowns(final HandleUndefined newUnknowns)
-   {
-    this.unknowns = newUnknowns;
-   }
-
-
-  /**
    * Set template file for variable.
    *
    * @param newVarname Variable that should hold the template
@@ -375,81 +298,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("newVarname does not match name pattern"); //$NON-NLS-1$
      }
-    boolean exists = newFile.exists();
-    if (exists)
-     {
-      if (newFile.length() > TemplateEngine.MAX_TEMPLATE_SIZE)
-       {
-        throw new IllegalArgumentException("newFile to large"); //$NON-NLS-1$
-       }
-      this.files.put(newVarname, newFile);
-     }
-    else
-     {
-      try (InputStream stream = this.getClass().getResourceAsStream(TemplateEngine.FILEPATH_SEPARATOR + newFile.getName()))
-       {
-        if (stream != null)
-         {
-          exists = true;
-          this.files.put(newVarname, newFile);
-         }
-       }
-      catch (final IOException ignored)
-       {
-        // exists is already false
-        if (TemplateEngine.LOGGER.isWarnEnabled())
-         {
-          TemplateEngine.LOGGER.warn("File does not exist: " + newFile.getAbsolutePath(), ignored); //$NON-NLS-1$
-         }
-       }
-     }
-    return exists;
-   }
-
-
-  /**
-   * Load template file (UTF-8 encoded) if required.
-   *
-   * @param varname Variable to read from file
-   * @return true if successful otherwise false
-   * @throws FileNotFoundException File not found
-   * @throws IOException IO exception
-   */
-  @SuppressWarnings("PMD.CloseResource")
-  private boolean loadfile(final String varname) throws IOException
-   {
-    // assert (varname != null) && !varname.isEmpty() && (varname.length() <= TemplateEngine.MAX_VARNAME_SIZE);
-    if (this.tempVars.containsKey(varname)) // Already loaded?
-     {
-      return true;
-     }
-    final File file = this.files.get(varname);
-    if (file == null)
-     {
-      return false;
-     }
-    InputStream istream = this.getClass().getResourceAsStream(TemplateEngine.FILEPATH_SEPARATOR + file.getName()); // Read from classpath/jar
-    if (istream == null)
-     {
-      istream = Files.newInputStream(this.files.get(varname).toPath(), StandardOpenOption.READ); // Read from filesystem
-     }
-    final StringBuilder fileBuffer = new StringBuilder();
-    try (BufferedReader reader = new BufferedReader(new InputStreamReader(istream, StandardCharsets.UTF_8)))
-     {
-      String line = reader.readLine();
-      while (line != null)
-       {
-        fileBuffer.append(line);
-        fileBuffer.append('\n');
-        line = reader.readLine();
-       }
-     }
-    if (fileBuffer.length() == 0)
-     {
-      return false;
-     }
-    setVar(varname, fileBuffer.toString());
-    return true;
+    return this.fileManager.addFile(newVarname, newFile);
    }
 
 
@@ -476,8 +325,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(TemplateEngine.VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
-    final String value = this.tempVars.get(varname);
-    return (value == null) ? "" : value; //$NON-NLS-1$
+    return this.variableManager.getVar(varname);
    }
 
 
@@ -508,8 +356,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(TemplateEngine.VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
-    // if (!value.matches("^.+$"))
-    this.tempVars.put(varname, (value == null) ? "" : value); //$NON-NLS-1$
+    this.variableManager.setVar(varname, value);
    }
 
 
@@ -522,7 +369,7 @@ public final class TemplateEngine
    */
   public void setVar(final String varname)
    {
-    setVar(varname, ""); //$NON-NLS-1$
+    setVar(varname, "");
    }
 
 
@@ -548,7 +395,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(TemplateEngine.VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
-    /* String value = */ this.tempVars.remove(varname);
+    this.variableManager.unsetVar(varname);
    }
 
 
@@ -584,21 +431,11 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("parent, varname or name does not match name pattern"); //$NON-NLS-1$
      }
-    if (!loadfile(parent))
+    if (!this.fileManager.loadFile(parent))
      {
       return false;
      }
-    String internName = name;
-    if ("".equals(internName)) //$NON-NLS-1$
-     {
-      internName = varname;
-     }
-    final Pattern pattern = Pattern.compile("<!--\\s+BEGIN " + varname + "\\s+-->(.*)<!--\\s+END " + varname + "\\s+-->", Pattern.DOTALL | Pattern.MULTILINE); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-    final Matcher matcher = pattern.matcher(getVar(parent));
-    final String str = matcher.replaceFirst("{" + internName + "}"); //$NON-NLS-1$ //$NON-NLS-2$
-    setVar(varname, matcher.group(1));
-    setVar(parent, str);
-    return true;
+    return this.blockManager.setBlock(parent, varname, name);
    }
 
 
@@ -618,68 +455,11 @@ public final class TemplateEngine
   @SuppressWarnings("PMD.LinguisticNaming")
   public boolean setBlock(final String parent, final String varname) throws IOException
    {
-    return setBlock(parent, varname, ""); //$NON-NLS-1$
+    return setBlock(parent, varname, "");
    }
 
 
   /* *
-   * Replace variables old version.
-   *
-   * @param block Template block
-   * @return Template/Block with replaced variables
-   */
-  /*
-  private String replaceVarsOld(String block)
-   {
-    assert (block != null) && !block.isEmpty();
-    // loop over all known variables an replace them
-    if (!this.tempVars.isEmpty())
-     {
-      final Set<Entry<String, String>> tempVarsSet = this.tempVars.entrySet();
-      final Iterator<Entry<String, String>> iter = tempVarsSet.iterator();
-      while (iter.hasNext())
-       {
-        final Map.Entry<String, String> mapEntry = iter.next();
-        // convert into regexp (special char filter)
-        block = Pattern.compile("\\{" + mapEntry.getKey() + "\\}").matcher(block).replaceAll(mapEntry.getValue()); //$NON-NLS-1$ //$NON-NLS-2$
-       }
-     }
-    return block;
-   }
-  */
-
-
-  /**
-   * Replace variables new version.
-   *
-   * @param block Template block
-   * @return Template/Block with replaced variables
-   */
-  private String replaceVarsNew(final String block)
-   {
-    // assert (block != null) && !block.isEmpty();
-    // assert block.matches("^.+$")
-    // Get variable names to replace from varname
-    final Matcher matcherTemplate = TemplateEngine.TEMPLATE_MATCHER_REGEXP.matcher(block);
-    final Set<String> varsSetTemplate = new TreeSet<>();
-    while (matcherTemplate.find())
-     {
-      final String varnameTemplate = block.substring(matcherTemplate.start() + 1, matcherTemplate.end() - 1);
-      if (this.tempVars.containsKey(varnameTemplate))
-       {
-        varsSetTemplate.add(varnameTemplate);
-       }
-     }
-    String resBlock = block;
-    for (final String varName : varsSetTemplate)
-     {
-      resBlock = resBlock.replaceAll("\\{" + varName + "\\}", getVar(varName)); //$NON-NLS-1$ //$NON-NLS-2$
-     }
-    return resBlock;
-   }
-
-
-  /**
    * Substitute variable with its content.
    *
    * @param varname Variable name
@@ -703,12 +483,11 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(TemplateEngine.VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
-    if (!loadfile(varname))
+    if (!this.fileManager.loadFile(varname))
      {
       return ""; //$NON-NLS-1$
      }
-    // return replaceVarsOld(getVar(varname));
-    return replaceVarsNew(getVar(varname));
+    return this.variableManager.subst(varname);
    }
 
 
@@ -740,9 +519,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("target or varname does not match name pattern"); //$NON-NLS-1$
      }
-    final String str = subst(varname);
-    setVar(target, (append ? getVar(target) : "") + str); //$NON-NLS-1$
-    return str;
+    return this.variableManager.parse(target, varname, append);
    }
 
 
@@ -771,16 +548,7 @@ public final class TemplateEngine
    */
   public List<String> getVars()
    {
-    if (this.tempVars.isEmpty())
-     {
-      return Collections.emptyList();
-     }
-    final List<String> result = new ArrayList<>(this.tempVars.size());
-    for (final Entry<String, String> entry : this.tempVars.entrySet())
-     {
-      result.add(entry.getKey()); // entry.getValue();
-     }
-    return Collections.unmodifiableList(result);
+    return this.variableManager.getVars();
    }
 
 
@@ -808,23 +576,11 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(TemplateEngine.VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
-    if (!loadfile(varname))
+    if (!this.fileManager.loadFile(varname))
      {
       return Collections.emptyList();
      }
-    final Matcher matcher = TemplateEngine.BLOCK_MATCHER_REGEXP.matcher(getVar(varname));
-    boolean result = matcher.find();
-    final List<String> undefvars = new ArrayList<>();
-    while (result)
-     {
-      final String vname = matcher.group(1);
-      if (!this.tempVars.containsKey(vname) && !undefvars.contains(vname))
-       {
-        undefvars.add(vname);
-       }
-      result = matcher.find();
-     }
-    return Collections.unmodifiableList(undefvars);
+    return this.variableManager.getUndefined(varname);
    }
 
 
@@ -886,7 +642,7 @@ public final class TemplateEngine
    *
    * The exact details of this representation are unspecified and subject to change, but the following may be regarded as typical:
    *
-   * "TemplateEngine[unknowns=REMOVE, vars=[name, ...]]"
+   * "TemplateEngine[unknowns=REMOVE, vManager=[name, ...]]"
    *
    * @return String representation of this TemplatEngine.
    * @see java.lang.Object#toString()
@@ -894,7 +650,7 @@ public final class TemplateEngine
   @Override
   public String toString()
    {
-    return new StringBuilder().append("TemplateEngine[unknowns=").append(this.unknowns).append(", files=").append(this.files.values().stream().map(File::getName).reduce((s1, s2) -> s1 + ", " + s2)).append(", vars=").append(getVars()).append(']').toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+    return new StringBuilder().append("TemplateEngine[unknowns=").append(this.unknowns).append(", vManager=").append(this.variableManager).append(", fManager=").append(this.fileManager).append(", bManager=").append(this.blockManager).append(']').toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
    }
 
 
@@ -907,7 +663,7 @@ public final class TemplateEngine
   @Override
   public int hashCode()
    {
-    return Objects.hash(this.unknowns, this.files, this.tempVars);
+    return Objects.hash(this.unknowns, this.variableManager, this.fileManager, this.blockManager);
    }
 
 
@@ -930,7 +686,7 @@ public final class TemplateEngine
       return false;
      }
     final TemplateEngine other = (TemplateEngine)obj;
-    return (this.unknowns == other.unknowns) && this.files.equals(other.files) && this.tempVars.equals(other.tempVars);
+    return (this.unknowns == other.unknowns) && this.variableManager.equals(other.variableManager) && this.fileManager.equals(other.fileManager) && this.blockManager.equals(other.blockManager);
    }
 
  }
