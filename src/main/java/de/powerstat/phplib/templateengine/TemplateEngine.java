@@ -519,6 +519,10 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("target or varname does not match name pattern"); //$NON-NLS-1$
      }
+    if (!this.fileManager.loadFile(varname))
+     {
+      return ""; //$NON-NLS-1$
+     }
     return this.variableManager.parse(target, varname, append);
    }
 

@@ -17,6 +17,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 /**
  * Template variable manager.
@@ -26,7 +29,7 @@ public class VariableManager
   /* *
    * Logger.
    */
-  // private static final Logger LOGGER = LogManager.getLogger(VariableManager.class);
+  private static final Logger LOGGER = LogManager.getLogger(VariableManager.class);
 
   /**
    * Template matcher regexp pattern.
@@ -238,7 +241,15 @@ public class VariableManager
   @SuppressWarnings("java:S2301")
   public String parse(final String target, final String varname, final boolean append) throws IOException
    {
+    if (LOGGER.isDebugEnabled())
+     {
+      LOGGER.debug("varname: " + varname);
+     }
     final String str = subst(varname);
+    if (LOGGER.isDebugEnabled())
+     {
+      LOGGER.debug("str: " + str);
+     }
     setVar(target, (append ? getVar(target) : "") + str); //$NON-NLS-1$
     return str;
    }

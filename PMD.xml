@@ -5,6 +5,12 @@
   <!-- Apex Rules -->
   <!-- not used -->
 
+  <!-- HTML Rules -->
+  <!-- HTML best practices -->
+  <!-- <rule ref="category/html/bestpractices.xml/AvoidInlineStyles" /> requires 6.45 -->
+  <!-- <rule ref="category/html/bestpractices.xml/UnnecessaryTypeAttribute" /> requires 6.45 -->
+  <!-- <rule ref="category/html/bestpractices.xml/UseAltAttributeForImages" /> requires 6.45 -->
+
   <!-- Ecmascript Rules -->
   <!-- Ecmascript best practices -->
   <rule ref="category/ecmascript/bestpractices.xml/AvoidWithStatement" />
@@ -49,11 +55,6 @@
   <rule ref="category/ecmascript/errorprone.xml/EqualComparison" />
   <rule ref="category/ecmascript/errorprone.xml/InnaccurateNumericLiteral" />
 
-  <!-- HTML Rules -->
-  <!-- HTML best practices -->
-  <!-- <rule ref="category/html/bestpractices.xml/AvoidInlineStyles" /> requires 6.45 -->
-  <!-- <rule ref="category/html/bestpractices.xml/UnnecessaryTypeAttribute" /> requires 6.45 -->
-  <!-- <rule ref="category/html/bestpractices.xml/UseAltAttributeForImages" /> requires 6.45 -->
 
   <!-- Java rules -->
   <!-- Java best practices -->

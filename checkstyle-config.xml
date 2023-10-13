@@ -17,8 +17,8 @@
     </module> 
     -->
     <module name="AnnotationUseStyle">
-      <property name="elementStyle" value="compact"/>
       <property name="closingParens" value="never"/>
+      <property name="elementStyle" value="compact"/>
       <property name="trailingArrayComma" value="never"/>
     </module>
     <module name="MissingDeprecated">
@@ -48,19 +48,19 @@
       <property name="tokens" value="LITERAL_WHILE, LITERAL_TRY, LITERAL_FINALLY, LITERAL_DO, LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, INSTANCE_INIT, STATIC_INIT, LITERAL_SWITCH, LITERAL_SYNCHRONIZED"/>
     </module>
     <module name="EmptyCatchBlock">
-      <property name="exceptionVariableName" value="^$"/>
       <property name="commentFormat" value=".*"/>
+      <property name="exceptionVariableName" value="^$"/>
     </module>
     <module name="LeftCurly">
       <property name="severity" value="warning"/>
-      <property name="option" value="nl"/>
       <property name="ignoreEnums" value="true"/>
+      <property name="option" value="nl"/>
       <property name="tokens" value="CLASS_DEF, CTOR_DEF, INTERFACE_DEF, LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF, LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE, METHOD_DEF"/>
     </module>
     <module name="NeedBraces">
       <property name="severity" value="warning"/>
-      <property name="allowSingleLineStatement" value="false"/>
       <property name="allowEmptyLoopBody" value="false"/>
+      <property name="allowSingleLineStatement" value="false"/>
       <property name="tokens" value="LITERAL_DO, LITERAL_ELSE, LITERAL_FOR, LITERAL_IF, LITERAL_WHILE"/>
     </module>
     <module name="RightCurly">
@@ -87,24 +87,24 @@
       <property name="allowMarkerInterfaces" value="true"/>
     </module>
     <module name="MutableException">
-      <property name="format" value="^.*Exception$|^.*Error$|^.*Throwable$"/>
       <property name="extendedClassNameFormat" value="^.*Exception$|^.*Error$|^.*Throwable$"/>
+      <property name="format" value="^.*Exception$|^.*Error$|^.*Throwable$"/>
     </module>
     <module name="OneTopLevelClass">
     </module>
     <module name="ThrowsCount">
-      <property name="max" value="6"/>
       <property name="ignorePrivateMethods" value="true"/>
+      <property name="max" value="6"/>
     </module>
     <module name="VisibilityModifier">
       <property name="severity" value="warning"/>
+      <property name="allowPublicFinalFields" value="false"/>
+      <property name="allowPublicImmutableFields" value="false"/>
+      <property name="ignoreAnnotationCanonicalNames" value="com.google.common.annotations.VisibleForTesting, org.junit.ClassRule, org.junit.Rule"/>
+      <property name="immutableClassCanonicalNames" value="java.io.File, java.lang.Boolean, java.lang.Byte, java.lang.Character, java.lang.Double, java.lang.Float, java.lang.Integer, java.lang.Long, java.lang.Short, java.lang.StackTraceElement, java.lang.String, java.math.BigDecimal, java.math.BigInteger, java.net.Inet4Address, java.net.Inet6Address, java.net.InetSocketAddress, java.net.URI, java.net.URL, java.util.Locale, java.util.UUID"/>
       <property name="packageAllowed" value="false"/>
       <property name="protectedAllowed" value="false"/>
       <property name="publicMemberPattern" value="^serialVersionUID$"/>
-      <property name="allowPublicFinalFields" value="false"/>
-      <property name="allowPublicImmutableFields" value="false"/>
-      <property name="immutableClassCanonicalNames" value="java.io.File, java.lang.Boolean, java.lang.Byte, java.lang.Character, java.lang.Double, java.lang.Float, java.lang.Integer, java.lang.Long, java.lang.Short, java.lang.StackTraceElement, java.lang.String, java.math.BigDecimal, java.math.BigInteger, java.net.Inet4Address, java.net.Inet6Address, java.net.InetSocketAddress, java.net.URI, java.net.URL, java.util.Locale, java.util.UUID"/>
-      <property name="ignoreAnnotationCanonicalNames" value="com.google.common.annotations.VisibleForTesting, org.junit.ClassRule, org.junit.Rule"/>
     </module>
 
     <!-- Coding -->
@@ -154,11 +154,11 @@
     </module>
     <module name="HiddenField">
       <property name="severity" value="warning"/>
-      <property name="ignoreFormat" value=""/>
+      <property name="ignoreAbstractMethods" value="false"/>
       <property name="ignoreConstructorParameter" value="true"/>
+      <property name="ignoreFormat" value=""/>
       <property name="ignoreSetter" value="true"/>
       <property name="setterCanReturnItsClass" value="true"/>
-      <property name="ignoreAbstractMethods" value="false"/>
       <property name="tokens" value="VARIABLE_DEF, PARAMETER_DEF, PATTERN_VARIABLE_DEF, LAMBDA, RECORD_COMPONENT_DEF"/>
     </module>
     <module name="IllegalCatch">
@@ -168,9 +168,9 @@
       <property name="classes" value="java.lang.Boolean"/>
     </module>
     <module name="IllegalThrows">
-      <property name="illegalClassNames" value="Error, RuntimeException, Throwable, java.lang.Error, java.lang.RuntimeException, java.lang.Throwable"/>
-      <property name="ignoredMethodNames" value="finalize"/>
       <property name="ignoreOverriddenMethods" value="true"/>
+      <property name="ignoredMethodNames" value="finalize"/>
+      <property name="illegalClassNames" value="Error, RuntimeException, Throwable, java.lang.Error, java.lang.RuntimeException, java.lang.Throwable"/>
     </module>
     <module name="IllegalToken">
       <property name="tokens" value="LABELED_STAT"/>
@@ -182,12 +182,12 @@
       <property name="tokens" value=""/>
     </module>
     <module name="IllegalType">
-      <property name="validateAbstractClassNames" value="false"/>
-      <property name="illegalClassNames" value="HashMap, HashSet, LinkedHashMap, LinkedHashSet, TreeMap, TreeSet, java.util.HashMap, java.util.HashSet, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeMap, java.util.TreeSet"/>
-      <property name="legalAbstractClassNames" value=""/>
       <property name="ignoredMethodNames" value="getEnvironment, getInitialContext"/>
       <property name="illegalAbstractClassNameFormat" value="^(.*[.])?Abstract.*$"/>
+      <property name="illegalClassNames" value="HashMap, HashSet, LinkedHashMap, LinkedHashSet, TreeMap, TreeSet, java.util.HashMap, java.util.HashSet, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeMap, java.util.TreeSet"/>
+      <property name="legalAbstractClassNames" value=""/>
       <property name="memberModifiers" value=""/>
+      <property name="validateAbstractClassNames" value="false"/>
       <property name="tokens" value="ANNOTATION_FIELD_DEF, CLASS_DEF, INTERFACE_DEF, METHOD_CALL, METHOD_DEF, METHOD_REF, PARAMETER_DEF, VARIABLE_DEF, PATTERN_VARIABLE_DEF, RECORD_DEF, RECORD_COMPONENT_DEF"/>
     </module>
     <module name="InnerAssignment">
@@ -195,12 +195,12 @@
     </module>
     <module name="MagicNumber">
       <property name="severity" value="warning"/>
-      <property name="ignoreNumbers" value="-1, 0, 1, 2"/>
-      <property name="ignoreHashCodeMethod" value="false"/>
-      <property name="ignoreAnnotation" value="false"/>
-      <property name="ignoreFieldDeclaration" value="false"/>
-      <property name="ignoreAnnotationElementDefaults" value="true"/>
       <property name="constantWaiverParentToken" value="ARRAY_INIT, ASSIGN, DIV, ELIST, EXPR, LITERAL_NEW, METHOD_CALL, MINUS, PLUS, STAR, TYPECAST, UNARY_MINUS, UNARY_PLUS"/>
+      <property name="ignoreAnnotation" value="false"/>
+      <property name="ignoreAnnotationElementDefaults" value="true"/>
+      <property name="ignoreFieldDeclaration" value="false"/>
+      <property name="ignoreHashCodeMethod" value="false"/>
+      <property name="ignoreNumbers" value="-1, 0, 1, 2"/>
       <property name="tokens" value="NUM_DOUBLE, NUM_FLOAT, NUM_INT, NUM_LONG"/>
     </module>
     <!-- 
@@ -209,10 +209,8 @@
       <message key="matchxpath.match" value="Private methods must appear after public methods"/>
     </module>
     -->
-    <!-- 
     <module name="MissingCtor">
     </module> 
-    -->
     <module name="MissingSwitchDefault">
       <property name="severity" value="warning"/>
     </module>
@@ -221,8 +219,8 @@
     </module>
     <module name="MultipleStringLiterals">
       <property name="allowedDuplicates" value="1"/>
+      <property name="ignoreOccurrenceContext" value="ANNOTATION  "/>
       <property name="ignoreStringsRegexp" value="^&quot;&quot;$"/>
-      <property name="ignoreOccurrenceContext" value="ANNOTATION 	"/>
     </module>
     <module name="MultipleVariableDeclarations">
     </module>
@@ -259,9 +257,9 @@
       <property name="validateOnlyOverlapping" value="true"/>
     </module> 
     <module name="ReturnCount">
+      <property name="format" value="^equals$"/>
       <property name="max" value="7"/>
       <property name="maxForVoid" value="1"/>
-      <property name="format" value="^equals$"/>
       <property name="tokens" value="CTOR_DEF, METHOD_DEF, LAMBDA"/>
     </module>
     <module name="SimplifyBooleanExpression">
@@ -290,22 +288,23 @@
     <module name="UnnecessarySemicolonInEnumeration">
     </module>
     <module name="UnnecessarySemicolonInTryWithResources">
+      <property name="allowWhenNoBraceAfterSemicolon" value="true"/>
     </module>
     <module name="UnusedLocalVariable">
     </module>
     <module name="VariableDeclarationUsageDistance">
       <property name="allowedDistance" value="3"/>
+      <property name="ignoreFinal" value="true"/>
       <property name="ignoreVariablePattern" value=""/>
       <property name="validateBetweenScopes" value="false"/>
-      <property name="ignoreFinal" value="true"/>
     </module>
 
     <!-- Imports -->
     <module name="AvoidStarImport">
       <property name="severity" value="warning"/>
-      <property name="excludes" value=""/>
       <property name="allowClassImports" value="false"/>
       <property name="allowStaticMemberImports" value="false"/>
+      <property name="excludes" value=""/>
     </module>
     <module name="AvoidStaticImport">
       <property name="excludes" value="org.junit.jupiter.api.Assertions.*"/>
@@ -313,17 +312,17 @@
     <!-- 
     <module name="CustomImportOrder">
       <property name="customImportOrderRules" value=""/>
-      <property name="standardPackageRegExp" value="^(java|javax)\."/>
-      <property name="thirdPartyPackageRegExp" value=".*"/>
-      <property name="specialImportsRegExp" value="^$"/>
       <property name="separateLineBetweenGroups" value="true"/>
       <property name="sortImportsInGroupAlphabetically" value="false"/>
+      <property name="specialImportsRegExp" value="^$"/>
+      <property name="standardPackageRegExp" value="^(java|javax)\."/>
+      <property name="thirdPartyPackageRegExp" value=".*"/>
     </module> 
     -->
     <module name="IllegalImport">
       <property name="severity" value="warning"/>
-      <property name="illegalPkgs" value="sun"/>
       <property name="illegalClasses" value=""/>
+      <property name="illegalPkgs" value="sun"/>
       <property name="regexp" value="false"/>
     </module>
     <!-- 
@@ -334,14 +333,14 @@
     -->
     <!-- 
     <module name="ImportOrder">
-      <property name="option" value="under"/>
+      <property name="caseSensitive" value="true"/>
       <property name="groups" value=""/>
+      <property name="option" value="under"/>
       <property name="ordered" value="true"/>
       <property name="separated" value="false"/>
       <property name="separatedStaticGroups" value="false"/>
-      <property name="caseSensitive" value="true"/>
-      <property name="staticGroups" value=""/>
       <property name="sortStaticImportsAlphabetically" value="false"/>
+      <property name="staticGroups" value=""/>
       <property name="useContainerOrderingForStatic" value="false"/>
     </module> 
     -->
@@ -355,9 +354,9 @@
 
     <!-- Javadoc Comments -->
     <module name="AtclauseOrder">
-      <property name="violateExecutionOnNonTightHtml" value="false"/>
-      <property name="target" value="CLASS_DEF, COMPACT_CTOR_DEF, CTOR_DEF, ENUM_DEF, INTERFACE_DEF, METHOD_DEF, RECORD_DEF, VARIABLE_DEF"/>
       <property name="tagOrder" value="@author, @exception, @param, @return, @throws, @see, @serial, @serialData, @serialField, @since, @version, @deprecated"/>
+      <property name="target" value="CLASS_DEF, COMPACT_CTOR_DEF, CTOR_DEF, ENUM_DEF, INTERFACE_DEF, METHOD_DEF, RECORD_DEF, VARIABLE_DEF"/>
+      <property name="violateExecutionOnNonTightHtml" value="false"/>
     </module>
     <module name="InvalidJavadocPosition">
     </module>
@@ -370,11 +369,11 @@
     </module>
     <module name="JavadocMethod">
       <property name="severity" value="warning"/>
-      <property name="allowedAnnotations" value="Override"/>
-      <property name="validateThrows" value="false"/>
       <property name="accessModifiers" value="public, protected, package, private"/>
       <property name="allowMissingParamTags" value="false"/>
       <property name="allowMissingReturnTag" value="false"/>
+      <property name="allowedAnnotations" value="Override"/>
+      <property name="validateThrows" value="false"/>
       <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF"/>
     </module>
     <module name="JavadocMissingLeadingAsterisk">
@@ -385,59 +384,59 @@
     </module>
     <!-- 
     <module name="JavadocParagraph">
-      <property name="violateExecutionOnNonTightHtml" value="false"/>
       <property name="allowNewlineParagraph" value="true"/>
+      <property name="violateExecutionOnNonTightHtml" value="false"/>
     </module> 
     -->
     <!-- 
     <module name="JavadocStyle">
-      <property name="scope" value="private"/>
-      <property name="excludeScope" value=""/>
-      <property name="checkFirstSentence" value="true"/>
-      <property name="endOfSentenceFormat" value="([.?!][ \t\n\r\f<])|([.?!]$)"/>
       <property name="checkEmptyJavadoc" value="false"/>
+      <property name="checkFirstSentence" value="true"/>
       <property name="checkHtml" value="true"/>
+      <property name="endOfSentenceFormat" value="([.?!][ \t\n\r\f<])|([.?!]$)"/>
+      <property name="excludeScope" value=""/>
+      <property name="scope" value="private"/>
       <property name="tokens" value="ANNOTATION_DEF, ANNOTATION_FIELD_DEF, CLASS_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, INTERFACE_DEF, METHOD_DEF, PACKAGE_DEF, VARIABLE_DEF, RECORD_DEF, COMPACT_CTOR_DEF"/>
     </module> 
     -->
     <!-- 
     <module name="JavadocTagContinuationIndentation">
-      <property name="violateExecutionOnNonTightHtml" value="false"/>
       <property name="offset" value="2"/>
+      <property name="violateExecutionOnNonTightHtml" value="false"/>
     </module> 
     -->
     <module name="JavadocType">
       <property name="severity" value="warning"/>
-      <property name="scope" value="private"/>
-      <!-- <property name="excludeScope" value=""/> -->
-      <!-- <property name="authorFormat" value=""/> -->
-      <!-- <property name="versionFormat" value=""/> -->
       <property name="allowMissingParamTags" value="false"/>
       <property name="allowUnknownTags" value="false"/>
       <property name="allowedAnnotations" value="Generated"/>
+      <!-- <property name="authorFormat" value=""/> -->
+      <!-- <property name="excludeScope" value=""/> -->
+      <property name="scope" value="private"/>
+      <!-- <property name="versionFormat" value=""/> -->
       <property name="tokens" value="INTERFACE_DEF, CLASS_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF"/>
     </module>
     <module name="JavadocVariable">
       <property name="severity" value="warning"/>
-      <property name="scope" value="private"/>
       <!-- <property name="excludeScope" value=""/> -->
       <!-- <property name="ignoreNamePattern" value=""/> -->
+      <property name="scope" value="private"/>
       <property name="tokens" value="ENUM_CONSTANT_DEF"/>
     </module>
     <module name="MissingJavadocMethod">
-      <property name="minLineCount" value="-1"/>
-      <property name="allowedAnnotations" value="Override"/>
-      <property name="scope" value="public"/>
-      <!-- <property name="excludeScope" value=""/> -->
       <property name="allowMissingPropertyJavadoc" value="false"/>
+      <property name="allowedAnnotations" value="Override"/>
+      <!-- <property name="excludeScope" value=""/> -->
       <property name="ignoreMethodNamesRegex" value=""/>
+      <property name="minLineCount" value="-1"/>
+      <property name="scope" value="public"/>
       <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF"/>
     </module>
     <module name="MissingJavadocPackage">
     </module>
     <module name="MissingJavadocType">
-      <property name="scope" value="public"/>
       <!-- <property name="excludeScope" value=""/> -->
+      <property name="scope" value="public"/>
       <property name="skipAnnotations" value="Generated"/>
       <property name="tokens" value="INTERFACE_DEF, CLASS_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF"/>
     </module>
@@ -449,14 +448,14 @@
       <property name="violateExecutionOnNonTightHtml" value="false"/>
     </module>
     <module name="SingleLineJavadoc">
-      <property name="violateExecutionOnNonTightHtml" value="false"/>
-      <property name="ignoredTags" value=""/>
       <property name="ignoreInlineTags" value="true"/>
+      <property name="ignoredTags" value=""/>
+      <property name="violateExecutionOnNonTightHtml" value="false"/>
     </module>
     <module name="SummaryJavadocCheck">
-      <property name="violateExecutionOnNonTightHtml" value="false"/>
       <property name="forbiddenSummaryFragments" value="^$"/>
       <property name="period" value="."/>
+      <property name="violateExecutionOnNonTightHtml" value="false"/>
     </module>
     <!-- 
     <module name="WriteTag">
@@ -476,18 +475,18 @@
     -->
     <!-- 
     <module name="ClassDataAbstractionCoupling">
-      <property name="max" value="7"/>
-      <property name="excludedClasses" value="ArrayIndexOutOfBoundsException, ArrayList, Boolean, Byte, Character, Class, Collection, Deprecated, Deque, Double, DoubleStream, EnumSet, Exception, Float, FunctionalInterface, HashMap, HashSet, IllegalArgumentException, IllegalStateException, IndexOutOfBoundsException, IntStream, Integer, LinkedHashMap, LinkedHashSet, LinkedList, List, Long, LongStream, Map, NullPointerException, Object, Optional, OptionalDouble, OptionalInt, OptionalLong, Override, Queue, RuntimeException, SafeVarargs, SecurityException, Set, Short, SortedMap, SortedSet, Stream, String, StringBuffer, StringBuilder, SuppressWarnings, Throwable, TreeMap, TreeSet, UnsupportedOperationException, Void, boolean, byte, char, double, float, int, long, short, var, void"/>
       <property name="excludeClassesRegexps" value="^$"/>
+      <property name="excludedClasses" value="ArrayIndexOutOfBoundsException, ArrayList, Boolean, Byte, Character, Class, Collection, Deprecated, Deque, Double, DoubleStream, EnumSet, Exception, Float, FunctionalInterface, HashMap, HashSet, IllegalArgumentException, IllegalStateException, IndexOutOfBoundsException, IntStream, Integer, LinkedHashMap, LinkedHashSet, LinkedList, List, Long, LongStream, Map, NullPointerException, Object, Optional, OptionalDouble, OptionalInt, OptionalLong, Override, Queue, RuntimeException, SafeVarargs, SecurityException, Set, Short, SortedMap, SortedSet, Stream, String, StringBuffer, StringBuilder, SuppressWarnings, Throwable, TreeMap, TreeSet, UnsupportedOperationException, Void, boolean, byte, char, double, float, int, long, short, var, void"/>
       <property name="excludedPackages" value=""/>
+      <property name="max" value="7"/>
     </module> 
     -->
     <!-- 
     <module name="ClassFanOutComplexity">
-      <property name="max" value="20"/>
-      <property name="excludedClasses" value="ArrayIndexOutOfBoundsException, ArrayList, Boolean, Byte, Character, Class, Collection, Deprecated, Deque, Double, DoubleStream, EnumSet, Exception, Float, FunctionalInterface, HashMap, HashSet, IllegalArgumentException, IllegalStateException, IndexOutOfBoundsException, IntStream, Integer, LinkedHashMap, LinkedHashSet, LinkedList, List, Long, LongStream, Map, NullPointerException, Object, Optional, OptionalDouble, OptionalInt, OptionalLong, Override, Queue, RuntimeException, SafeVarargs, SecurityException, Set, Short, SortedMap, SortedSet, Stream, String, StringBuffer, StringBuilder, SuppressWarnings, Throwable, TreeMap, TreeSet, UnsupportedOperationException, Void, boolean, byte, char, double, float, int, long, short, var, void"/>
       <property name="excludeClassesRegexps" value="^$"/>
+      <property name="excludedClasses" value="ArrayIndexOutOfBoundsException, ArrayList, Boolean, Byte, Character, Class, Collection, Deprecated, Deque, Double, DoubleStream, EnumSet, Exception, Float, FunctionalInterface, HashMap, HashSet, IllegalArgumentException, IllegalStateException, IndexOutOfBoundsException, IntStream, Integer, LinkedHashMap, LinkedHashSet, LinkedList, List, Long, LongStream, Map, NullPointerException, Object, Optional, OptionalDouble, OptionalInt, OptionalLong, Override, Queue, RuntimeException, SafeVarargs, SecurityException, Set, Short, SortedMap, SortedSet, Stream, String, StringBuffer, StringBuilder, SuppressWarnings, Throwable, TreeMap, TreeSet, UnsupportedOperationException, Void, boolean, byte, char, double, float, int, long, short, var, void"/>
       <property name="excludedPackages" value=""/>
+      <property name="max" value="20"/>
     </module> 
     -->
     <!-- 
@@ -499,9 +498,9 @@
     -->
     <!-- 
     <module name="JavaNCSS">
-      <property name="methodMaximum" value="50"/>
       <property name="classMaximum" value="1500"/>
       <property name="fileMaximum" value="2000"/>
+      <property name="methodMaximum" value="50"/>
       <property name="recordMaximum" value="150"/>
     </module> 
     -->
@@ -517,8 +516,8 @@
       <property name="javaStyle" value="true"/>
     </module>
     <module name="AvoidEscapedUnicodeCharacters">
-      <property name="allowEscapesForControlCharacters" value="false"/>
       <property name="allowByTailComment" value="false"/>
+      <property name="allowEscapesForControlCharacters" value="false"/>
       <property name="allowIfAllCharactersEscaped" value="false"/>
       <property name="allowNonPrintableEscapes" value="false"/>
     </module>
@@ -528,13 +527,13 @@
     <!-- 
     <module name="DescendantToken">
       <property name="limitedTokens" value=""/>
-      <property name="minimumDepth" value="0"/>
       <property name="maximumDepth" value="2147483647"/>
-      <property name="minimumNumber" value="0"/>
-      <property name="maximumNumber" value="2147483647"/>
-      <property name="sumTokenCounts" value="false"/>
-      <property name="minimumMessage" value=""/>
       <property name="maximumMessage" value=""/>
+      <property name="maximumNumber" value="2147483647"/>
+      <property name="minimumDepth" value="0"/>
+      <property name="minimumMessage" value=""/>
+      <property name="minimumNumber" value="0"/>
+      <property name="sumTokenCounts" value="false"/>
       <property name="tokens" value=""/>
     </module> 
     -->
@@ -544,13 +543,13 @@
     </module>
     <!-- TODO
     <module name="Indentation">
+      <property name="arrayInitIndent" value="2"/>
       <property name="basicOffset" value="2"/>
       <property name="braceAdjustment" value="1"/>
       <property name="caseIndent" value="2"/>
-      <property name="throwsIndent" value="2"/>
-      <property name="arrayInitIndent" value="2"/>
-      <property name="lineWrappingIndentation" value="2"/>
       <property name="forceStrictCondition" value="false"/>
+      <property name="lineWrappingIndentation" value="2"/>
+      <property name="throwsIndent" value="2"/>
     </module>
     -->
     <module name="NoCodeInFile">
@@ -585,12 +584,12 @@
     </module>
     -->
     <module name="InterfaceMemberImpliedModifier">
-      <property name="violateImpliedPublicField" value="false"/>
-      <property name="violateImpliedStaticField" value="false"/>
-      <property name="violateImpliedFinalField" value="false"/>
-      <property name="violateImpliedPublicMethod" value="false"/>
       <property name="violateImpliedAbstractMethod" value="false"/>
+      <property name="violateImpliedFinalField" value="false"/>
+      <property name="violateImpliedPublicField" value="false"/>
+      <property name="violateImpliedPublicMethod" value="false"/>
       <property name="violateImpliedPublicNested" value="false"/>
+      <property name="violateImpliedStaticField" value="false"/>
       <property name="violateImpliedStaticNested" value="false"/>
     </module>
     <module name="ModifierOrder">
@@ -607,9 +606,9 @@
       <property name="allowedAbbreviationLength" value="3"/>
       <property name="allowedAbbreviations" value=""/>
       <property name="ignoreFinal" value="true"/>
+      <property name="ignoreOverriddenMethods" value="true"/>
       <property name="ignoreStatic" value="true"/>
       <property name="ignoreStaticFinal" value="true"/>
-      <property name="ignoreOverriddenMethods" value="true"/>
       <property name="tokens" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF, PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF, PATTERN_VARIABLE_DEF, RECORD_DEF, RECORD_COMPONENT_DEF"/>
     </module> 
     -->
@@ -626,11 +625,11 @@
     </module>
     <module name="ConstantName">
       <property name="severity" value="warning"/>
-      <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
-      <property name="applyToPublic" value="true"/>
-      <property name="applyToProtected 	" value="true"/>
       <property name="applyToPackage" value="true"/>
       <property name="applyToPrivate" value="true"/>
+      <property name="applyToProtected  " value="true"/>
+      <property name="applyToPublic" value="true"/>
+      <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
     </module>
     <module name="IllegalIdentifierName">
       <property name="format" value="(?i)^(?!(record|yield|var|permits|sealed|_)$).+$"/>
@@ -649,25 +648,25 @@
     </module>
     <module name="LocalVariableName">
       <property name="severity" value="warning"/>
-      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
       <property name="allowOneCharVarInForLoop" value="false"/>
+      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
     </module>
     <module name="MemberName">
       <property name="severity" value="warning"/>
-      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
-      <property name="applyToPublic" value="true"/>
-      <property name="applyToProtected" value="true"/>
       <property name="applyToPackage" value="true"/>
       <property name="applyToPrivate" value="true"/>
+      <property name="applyToProtected" value="true"/>
+      <property name="applyToPublic" value="true"/>
+      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
     </module>
     <module name="MethodName">
       <property name="severity" value="warning"/>
-      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
       <property name="allowClassName" value="false"/>
-      <property name="applyToPublic" value="true"/>
-      <property name="applyToProtected" value="true"/>
       <property name="applyToPackage" value="true"/>
       <property name="applyToPrivate" value="true"/>
+      <property name="applyToProtected" value="true"/>
+      <property name="applyToPublic" value="true"/>
+      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
     </module>
     <module name="MethodTypeParameterName">
       <property name="format" value="^[A-Z]$"/>
@@ -678,9 +677,9 @@
     </module>
     <module name="ParameterName">
       <property name="severity" value="warning"/>
+      <property name="accessModifiers" value="public, protected, package, private"/>
       <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
       <property name="ignoreOverridden 	" value="false"/>
-      <property name="accessModifiers" value="public, protected, package, private"/>
     </module>
     <module name="PatternVariableName">
       <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
@@ -693,71 +692,71 @@
     </module>
     <module name="StaticVariableName">
       <property name="severity" value="warning"/>
-      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
-      <property name="applyToPublic" value="true"/>
-      <property name="applyToProtected" value="true"/>
       <property name="applyToPackage" value="true"/>
       <property name="applyToPrivate" value="true"/>
+      <property name="applyToProtected" value="true"/>
+      <property name="applyToPublic" value="true"/>
+      <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
     </module>
     <module name="TypeName">
       <property name="severity" value="warning"/>
-      <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
-      <property name="applyToPublic" value="true"/>
-      <property name="applyToProtected" value="true"/>
       <property name="applyToPackage" value="true"/>
       <property name="applyToPrivate" value="true"/>
+      <property name="applyToProtected" value="true"/>
+      <property name="applyToPublic" value="true"/>
+      <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
       <property name="tokens" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF"/>
     </module>
 
     <!-- Regexp -->
     <!-- 
     <module name="Regexp">
-      <property name="format" value="^$"/>
-      <property name="message" value=""/>
-      <property name="illegalPattern" value="false"/>
       <property name="duplicateLimit" value="0"/>
       <property name="errorLimit" value="100"/>
+      <property name="format" value="^$"/>
       <property name="ignoreComments" value="false"/>
+      <property name="illegalPattern" value="false"/>
+      <property name="message" value=""/>
     </module> 
     -->
     <!-- 
     <module name="RegexpMultiline">
-      <property name="format" value="$."/>
-      <property name="message" value=""/>
-      <property name="ignoreCase" value="false"/>
-      <property name="minimum" value="0"/>
-      <property name="maximum" value="0"/>
-      <property name="matchAcrossLines" value="false"/>
       <property name="fileExtensions" value="*"/>
+      <property name="format" value="$."/>
+      <property name="ignoreCase" value="false"/>
+      <property name="matchAcrossLines" value="false"/>
+      <property name="maximum" value="0"/>
+      <property name="message" value=""/>
+      <property name="minimum" value="0"/>
     </module>
     -->
     <!-- 
     <module name="RegexpOnFilename">
-      <property name="folderPattern" value=""/>
-      <property name="fileNamePattern" value=""/>
-      <property name="match" value="true"/>
-      <property name="ignoreFileNameExtensions" value="false"/>
       <property name="fileExtensions" value="*"/>
+      <property name="fileNamePattern" value=""/>
+      <property name="folderPattern" value=""/>
+      <property name="ignoreFileNameExtensions" value="false"/>
+      <property name="match" value="true"/>
     </module>
     -->
     <!-- 
     <module name="RegexpSingleline">
-      <property name="format" value="$."/>
-      <property name="message" value=""/>
-      <property name="ignoreCase" value="false"/>
-      <property name="minimum" value="0"/>
-      <property name="maximum" value="0"/>
       <property name="fileExtensions" value="*"/>
+      <property name="format" value="$."/>
+      <property name="ignoreCase" value="false"/>
+      <property name="maximum" value="0"/>
+      <property name="message" value=""/>
+      <property name="minimum" value="0"/>
     </module> 
     -->
     <!-- 
     <module name="RegexpSinglelineJava">
       <property name="format" value="$."/>
-      <property name="message" value=""/>
       <property name="ignoreCase" value="false"/>
-      <property name="minimum" value="0"/>
-      <property name="maximum" value="0"/>
       <property name="ignoreComments" value="false"/>
+      <property name="maximum" value="0"/>
+      <property name="message" value=""/>
+      <property name="minimum" value="0"/>
     </module> 
     -->
 
@@ -775,17 +774,17 @@
       <property name="max" value="16"/>
     </module>
     <module name="MethodCount">
-      <property name="maxTotal" value="110"/>
-      <property name="maxPrivate" value="100"/>
       <property name="maxPackage" value="100"/>
+      <property name="maxPrivate" value="100"/>
       <property name="maxProtected" value="100"/>
       <property name="maxPublic" value="110"/>
+      <property name="maxTotal" value="110"/>
       <property name="tokens" value="CLASS_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, INTERFACE_DEF, ANNOTATION_DEF, RECORD_DEF"/>
     </module>
     <module name="MethodLength">
       <property name="severity" value="warning"/>
+      <property name="countEmpty" value="false"/>
       <property name="max" value="260"/>
-      <property name="countEmpty" value="true"/>
       <property name="tokens" value="METHOD_DEF, CTOR_DEF, COMPACT_CTOR_DEF"/>
     </module>
     <module name="OuterTypeNumber">
@@ -793,13 +792,13 @@
     </module>
     <module name="ParameterNumber">
       <property name="severity" value="warning"/>
-      <property name="max" value="31"/>
       <property name="ignoreOverriddenMethods" value="false"/>
+      <property name="max" value="31"/>
       <property name="tokens" value="METHOD_DEF , CTOR_DEF"/>
     </module>
     <module name="RecordComponentNumber">
-      <property name="max" value="8"/>
       <property name="accessModifiers" value="public, protected, package, private"/>
+      <property name="max" value="8"/>
     </module>
 
     <!-- Whitespace  -->
@@ -811,9 +810,9 @@
       <property name="option" value="nospace"/>
     </module>
     <module name="EmptyLineSeparator">
-      <property name="allowNoEmptyLineBetweenFields" value="false"/>
       <property name="allowMultipleEmptyLines" value="true"/>
       <property name="allowMultipleEmptyLinesInsideClassMembers" value="false"/>
+      <property name="allowNoEmptyLineBetweenFields" value="false"/>
       <property name="tokens" value="IMPORT, CLASS_DEF, INTERFACE_DEF, ENUM_DEF, STATIC_INIT, INSTANCE_INIT, METHOD_DEF, CTOR_DEF, VARIABLE_DEF"/>
     </module>
     <module name="GenericWhitespace">
@@ -864,41 +863,35 @@
     </module>
     <module name="WhitespaceAround">
       <property name="severity" value="warning"/>
+      <property name="allowEmptyCatches" value="false"/>
       <property name="allowEmptyConstructors 	" value="false"/>
+      <property name="allowEmptyLambdas" value="false"/>
+      <property name="allowEmptyLoops" value="false"/>
       <property name="allowEmptyMethods" value="false"/>
       <property name="allowEmptyTypes" value="false"/>
-      <property name="allowEmptyLoops" value="false"/>
-      <property name="allowEmptyLambdas" value="false"/>
-      <property name="allowEmptyCatches" value="false"/>
       <property name="ignoreEnhancedForColon" value="true"/>
       <property name="tokens" value="ASSIGN,BAND,BAND_ASSIGN,BOR,BOR_ASSIGN,BSR,BSR_ASSIGN,BXOR,BXOR_ASSIGN,COLON,DIV,DIV_ASSIGN,DO_WHILE,EQUAL,GE,GT,LAMBDA,LAND,LCURLY,LE,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE,LOR,LT,MINUS,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,RCURLY,SL,SLIST,SL_ASSIGN,SR,SR_ASSIGN,STAR,STAR_ASSIGN,TYPE_EXTENSION_AND"/>
     </module>
 
   </module>
 
-  <!-- Miscellaneous -->
-  <!-- 
-  <module name="OrderedProperties">
-    <property name="fileExtensions" value=".properties"/>
-  </module>
-  -->
-
   <!-- Headers -->
   <!-- 
   <module name="Header">
-    <!- - <property name="headerFile" value=""/> - ->
     <!- - <property name="charset" value=""/> - ->
-    <property name="header" value=""/>
-    <property name="ignoreLines" value=""/>
     <property name="fileExtensions" value="java"/>
+    <property name="header" value=""/>
+    <!- - <property name="headerFile" value=""/> - ->
+    <property name="ignoreLines" value=""/>
   </module>
   -->
    <module name="RegexpHeader">
-    <!-- <property name="headerFile" value=""/> -->  
     <!-- <property name="charset" value="UTF-8"/> -->
-    <property name="header" value="^/\*\n \* Copyright \(C\) (\d\d\d\d)(-(\d\d\d\d))?(,(\d\d\d\d)(-(\d\d\d\d))?)* Dipl.-Inform. Kai Hofmann. All rights reserved!\n \*/$"/>
-    <!-- <property name="multiLines" value=""/> -->
     <property name="fileExtensions" value="java"/>
+    <!-- <property name="headerFile" value=""/> -->  
+    <property name="header" value="^/\*\n \* Copyright \(C\) (\d\d\d\d)(-(\d\d\d\d))?(,(\d\d\d\d)(-(\d\d\d\d))?)* Dipl.-Inform. Kai Hofmann. All rights reserved!\n \*/$"/>
+    <!-- <property name="headerFile" value=""/> -->
+    <!-- <property name="multiLines" value=""/> -->
   </module>
 
   <!-- Javadoc comments -->
@@ -907,14 +900,19 @@
     <property name="fileExtensions" value=".java"/>
   </module>
 
-  <!-- Misc -->
+  <!-- Miscellaneous -->
   <module name="NewlineAtEndOfFile">
-    <property name="lineSeparator" value="lf"/>
     <property name="fileExtensions" value="java,xml,dtd,properties,txt"/>
+    <property name="lineSeparator" value="lf"/>
   </module>
-  <module name="Translation">
+  <!--
+  <module name="OrderedProperties">
     <property name="fileExtensions" value=".properties"/>
+  </module>
+  -->
+  <module name="Translation">
     <property name="baseName" value="^messages.*$"/>
+    <property name="fileExtensions" value=".properties"/>
     <property name="requiredTranslations" value="en, de"/>
   </module>
   <module name="UniqueProperties">
@@ -954,16 +952,16 @@
   -->
 
   <!-- Size violations -->
+  <module name="FileLength">
+    <property name="severity" value="warning"/>
+    <!-- <property name="fileExtensions" value="*"/> -->
+    <property name="max" value="20000"/>
+  </module>
   <module name="LineLength">
     <property name="severity" value="warning"/>
     <!-- <property name="fileExtensions" value="*"/> -->
     <!-- <property name="ignorePattern" value="^(package|import) .*"/> -->
     <property name="max" value="332"/>
-  </module>
-  <module name="FileLength">
-    <property name="severity" value="warning"/>
-    <property name="max" value="20000"/>
-    <!-- <property name="fileExtensions" value="*"/> -->
   </module>
 
   <!-- Whitespace -->
