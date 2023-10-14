@@ -5,7 +5,7 @@
   <parent>
     <groupId>de.powerstat.toolbaseline</groupId>
     <artifactId>tbl-java-parent</artifactId>
-    <version>11.0.0</version>
+    <version>11.0.1-SNAPSHOT</version>
   </parent>
 
   <groupId>de.powerstat.phplib</groupId>
@@ -19,6 +19,9 @@
 
   <properties>
     <license.inceptionYear>2015</license.inceptionYear>
+    
+    <sonarTypeHost>oss.sonatype.org</sonarTypeHost>
+
   </properties>
 
   <distributionManagement>
