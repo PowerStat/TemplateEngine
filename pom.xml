@@ -45,7 +45,6 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <!-- <Build-Number>${buildNumber}</Build-Number> -->
               <Version>${project.version}</Version>
               <GIT>https://github.com/PowerStat/TemplateEngine.git</GIT>
               <SCM-Revision>${buildNumber}</SCM-Revision>
@@ -62,11 +61,9 @@
         <version>3.1.2</version>
         <configuration>
           <module>de.powerstat.phplib.templateengine</module>
-          <multiRelease>11</multiRelease>
+          <multiRelease>${javaRelease}</multiRelease>
         </configuration>
       </plugin>
-
-      <!-- TODO pandoc -> epub, markdown, odt, ... -->
 
     </plugins>
   </build>

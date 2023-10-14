@@ -459,7 +459,7 @@ public final class TemplateEngine
    }
 
 
-  /* *
+  /**
    * Substitute variable with its content.
    *
    * @param varname Variable name
