@@ -14,7 +14,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import de.powerstat.phplib.templateengine.intern.BlockManager;
@@ -78,7 +77,7 @@ public final class TemplateEngine
   /**
    * Varname regexp pattern.
    */
-  private static final Pattern VARNAME_REGEXP = Pattern.compile("^[a-zA-Z0-9_]{1,64}$"); //$NON-NLS-1$
+  private static final Pattern VARNAME_REGEXP = Pattern.compile("^\\w{1,64}$", Pattern.UNICODE_CHARACTER_CLASS); //$NON-NLS-1$
 
   /**
    * Block matcher regexp.
@@ -178,6 +177,7 @@ public final class TemplateEngine
    * @throws IllegalArgumentException When the given file is null
    * @throws NullPointerException If file is null
    */
+  @SuppressWarnings("java:S1162")
   public static TemplateEngine newInstance(final File file) throws IOException
    {
     Objects.requireNonNull(file, "file"); //$NON-NLS-1$
@@ -195,7 +195,7 @@ public final class TemplateEngine
      {
       throw new IOException("file to large: " + fileLen); //$NON-NLS-1$
      }
-    final TemplateEngine templ = new TemplateEngine();
+    final var templ = new TemplateEngine();
     /*
     String filename = file.getName();
     final int extPos = filename.lastIndexOf('.');
@@ -225,8 +225,8 @@ public final class TemplateEngine
   public static TemplateEngine newInstance(final InputStream stream) throws IOException
    {
     Objects.requireNonNull(stream, "stream"); //$NON-NLS-1$
-    final StringBuilder fileBuffer = new StringBuilder();
-    try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)))
+    final var fileBuffer = new StringBuilder();
+    try (var reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8)))
      {
       String line = reader.readLine();
       while (line != null)
@@ -240,7 +240,7 @@ public final class TemplateEngine
      {
       throw new IllegalStateException("Empty stream"); //$NON-NLS-1$
      }
-    final TemplateEngine templ = new TemplateEngine();
+    final var templ = new TemplateEngine();
     templ.setVar(TemplateEngine.TEMPLATE, fileBuffer.toString());
     return templ;
    }
@@ -266,7 +266,7 @@ public final class TemplateEngine
       throw new IllegalArgumentException("template to large"); //$NON-NLS-1$
      }
     // if (!template.matches("^.+$"))
-    final TemplateEngine templ = new TemplateEngine();
+    final var templ = new TemplateEngine();
     templ.setVar(TemplateEngine.TEMPLATE, template);
     return templ;
    }
@@ -609,7 +609,7 @@ public final class TemplateEngine
      }
     // if (!template.matches("^.+$"))
     String result = template;
-    final Matcher matcher = TemplateEngine.BLOCK_MATCHER_REGEXP.matcher(result);
+    final var matcher = TemplateEngine.BLOCK_MATCHER_REGEXP.matcher(result);
     switch (this.unknowns)
      {
       case KEEP:

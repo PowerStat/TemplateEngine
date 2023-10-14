@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +24,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 /**
  * Variable manager tests.
  */
-public class VariableManagerTests
+final class VariableManagerTests
  {
   /**
    * Construction failed constant.
@@ -86,7 +85,7 @@ public class VariableManagerTests
   /**
    * Default constructor.
    */
-  public VariableManagerTests()
+  /* default */ VariableManagerTests()
    {
     super();
    }
@@ -96,7 +95,7 @@ public class VariableManagerTests
    * Constructor test.
    */
   @Test
-  public void constructor1()
+  /* default */ void testConstructor1()
    {
     final VariableManager vm1 = new VariableManager();
     assertNotNull(vm1, CONSTRUCTION_FAILED);
@@ -107,7 +106,7 @@ public class VariableManagerTests
    * Constructor test.
    */
   @Test
-  public void constructor2()
+  /* default */ void testConstructor2()
    {
     final VariableManager vm1 = new VariableManager();
     final VariableManager vm2 = new VariableManager(vm1);
@@ -119,7 +118,7 @@ public class VariableManagerTests
    * setVar test.
    */
   @Test
-  public void setVar1()
+  /* default */ void testSetVar1()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, TEST);
@@ -131,7 +130,7 @@ public class VariableManagerTests
    * setVar test.
    */
   @Test
-  public void setVar2()
+  /* default */ void testSetVar2()
    {
     final VariableManager vm1 = new VariableManager();
     assertThrows(NullPointerException.class, () ->
@@ -146,7 +145,7 @@ public class VariableManagerTests
    * setVar test.
    */
   @Test
-  public void setVar3()
+  /* default */ void testSetVar3()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, null);
@@ -158,7 +157,7 @@ public class VariableManagerTests
    * existsVar test.
    */
   @Test
-  public void existsVar1()
+  /* default */ void testExistsVar1()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, TEST);
@@ -171,7 +170,7 @@ public class VariableManagerTests
    * existsVar test.
    */
   @Test
-  public void existsVar2()
+  /* default */ void testExistsVar2()
    {
     final VariableManager vm1 = new VariableManager();
     final boolean result = vm1.existsVar(TESTVAR);
@@ -183,7 +182,7 @@ public class VariableManagerTests
    * existsVar test.
    */
   @Test
-  public void existsVar3()
+  /* default */ void testExistsVar3()
    {
     final VariableManager vm1 = new VariableManager();
     final boolean result = vm1.existsVar("");
@@ -196,7 +195,7 @@ public class VariableManagerTests
    */
   @Test
   @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
-  public void existsVar4()
+  /* default */ void testExistsVar4()
    {
     final VariableManager vm1 = new VariableManager();
     assertThrows(NullPointerException.class, () ->
@@ -211,7 +210,7 @@ public class VariableManagerTests
    * getVar test.
    */
   @Test
-  public void getVar1()
+  /* default */ void testGetVar1()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, TEST);
@@ -224,7 +223,7 @@ public class VariableManagerTests
    * getVar test.
    */
   @Test
-  public void getVar2()
+  /* default */ void testGetVar2()
    {
     final VariableManager vm1 = new VariableManager();
     final String result = vm1.getVar(TESTVAR);
@@ -236,7 +235,7 @@ public class VariableManagerTests
    * getVar test.
    */
   @Test
-  public void getVar3()
+  /* default */ void testGetVar3()
    {
     final VariableManager vm1 = new VariableManager();
     final String result = vm1.getVar("");
@@ -249,7 +248,7 @@ public class VariableManagerTests
    */
   @Test
   @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
-  public void getVar4()
+  /* default */ void testGetVar4()
    {
     final VariableManager vm1 = new VariableManager();
     assertThrows(NullPointerException.class, () ->
@@ -264,7 +263,7 @@ public class VariableManagerTests
    * unsetVar test.
    */
   @Test
-  public void unsetVar1()
+  /* default */ void testUnsetVar1()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, TEST);
@@ -278,7 +277,7 @@ public class VariableManagerTests
    * unsetVar test.
    */
   @Test
-  public void unsetVar2()
+  /* default */ void testUnsetVar2()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.unsetVar(TESTVAR);
@@ -291,7 +290,7 @@ public class VariableManagerTests
    * unsetVar test.
    */
   @Test
-  public void unsetVar3()
+  /* default */ void testUnsetVar3()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.unsetVar("");
@@ -304,7 +303,7 @@ public class VariableManagerTests
    * unsetVar test.
    */
   @Test
-  public void unsetVar4()
+  /* default */ void testUnsetVar4()
    {
     final VariableManager vm1 = new VariableManager();
     assertThrows(NullPointerException.class, () ->
@@ -319,7 +318,7 @@ public class VariableManagerTests
    * getVars test.
    */
   @Test
-  public void getVars1()
+  /* default */ void testGetVars1()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, TEST);
@@ -333,7 +332,7 @@ public class VariableManagerTests
    * getVars test.
    */
   @Test
-  public void getVars2()
+  /* default */ void testGetVars2()
    {
     final VariableManager vm1 = new VariableManager();
     final List<String> results = vm1.getVars();
@@ -344,11 +343,9 @@ public class VariableManagerTests
 
   /**
    * getUndefined test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void getUndefined1() throws IOException
+  /* default */ void testGetUndefined1()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, "before{undefined}after");
@@ -360,11 +357,9 @@ public class VariableManagerTests
 
   /**
    * getUndefined test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void getUndefined2() throws IOException
+  /* default */ void testGetUndefined2()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, TEST);
@@ -376,11 +371,9 @@ public class VariableManagerTests
 
   /**
    * getUndefined test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void getUndefined3() throws IOException
+  /* default */ void testGetUndefined3()
    {
     final VariableManager vm1 = new VariableManager();
     final List<String> results = vm1.getUndefined("");
@@ -391,11 +384,9 @@ public class VariableManagerTests
 
   /**
    * getUndefined test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void getUndefined4() throws IOException
+  /* default */ void testGetUndefined4()
    {
     final VariableManager vm1 = new VariableManager();
     assertThrows(NullPointerException.class, () ->
@@ -408,11 +399,9 @@ public class VariableManagerTests
 
   /**
    * subst test.
-   *
-   * @throws IOException IO exeption
    */
   @Test
-  public void subst1() throws IOException
+  /* default */ void testSubst1()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, BEFORE_SUBSTITUTE_AFTER);
@@ -424,11 +413,9 @@ public class VariableManagerTests
 
   /**
    * subst test.
-   *
-   * @throws IOException IO exeption
    */
   @Test
-  public void subst2() throws IOException
+  /* default */ void testSubst2()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, BEFORE_SUBSTITUTE_AFTER);
@@ -439,11 +426,9 @@ public class VariableManagerTests
 
   /**
    * subst test.
-   *
-   * @throws IOException IO exeption
    */
   @Test
-  public void subst3() throws IOException
+  /* default */ void testSubst3()
    {
     final VariableManager vm1 = new VariableManager();
     final String result = vm1.subst(TESTVAR);
@@ -453,11 +438,9 @@ public class VariableManagerTests
 
   /**
    * subst test.
-   *
-   * @throws IOException IO exeption
    */
   @Test
-  public void subst4() throws IOException
+  /* default */ void testSubst4()
    {
     final VariableManager vm1 = new VariableManager();
     final String result = vm1.subst("");
@@ -467,11 +450,9 @@ public class VariableManagerTests
 
   /**
    * subst test.
-   *
-   * @throws IOException IO exeption
    */
   @Test
-  public void subst5() throws IOException
+  /* default */ void testSubst5()
    {
     final VariableManager vm1 = new VariableManager();
     assertThrows(NullPointerException.class, () ->
@@ -484,11 +465,9 @@ public class VariableManagerTests
 
   /**
    * parse test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void parse1() throws IOException
+  /* default */ void testParse1()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, BEFORE_SUBSTITUTE_AFTER);
@@ -503,11 +482,9 @@ public class VariableManagerTests
 
   /**
    * parse test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void parse2() throws IOException
+  /* default */ void testParse2()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, BEFORE_SUBSTITUTE_AFTER);
@@ -522,11 +499,9 @@ public class VariableManagerTests
 
   /**
    * parse test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void parse3() throws IOException
+  /* default */ void testParse3()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TARGET, DEFAULT);
@@ -539,11 +514,9 @@ public class VariableManagerTests
 
   /**
    * parse test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void parse4() throws IOException
+  /* default */ void testParse4()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TARGET, DEFAULT);
@@ -557,11 +530,9 @@ public class VariableManagerTests
 
   /**
    * parse test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void parse5() throws IOException
+  /* default */ void testParse5()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, BEFORE_SUBSTITUTE_AFTER);
@@ -576,11 +547,9 @@ public class VariableManagerTests
 
   /**
    * parse test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void parse6() throws IOException
+  /* default */ void testParse6()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, BEFORE_SUBSTITUTE_AFTER);
@@ -598,7 +567,7 @@ public class VariableManagerTests
    * Test toString.
    */
   @Test
-  public void testToString()
+  /* default */ void testToString()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(TESTVAR, TEST);
@@ -611,7 +580,7 @@ public class VariableManagerTests
    * Test hash code.
    */
   @Test
-  public void testHashCode()
+  /* default */ void testHashCode()
    {
     final VariableManager vm1 = new VariableManager();
     final VariableManager vm2 = new VariableManager();
@@ -629,8 +598,8 @@ public class VariableManagerTests
    */
   @Test
   @SuppressFBWarnings({"EC_NULL_ARG", "CE_CLASS_ENVY"})
-  @SuppressWarnings("PMD.EqualsNull")
-  public void testEquals()
+  @SuppressWarnings({"PMD.EqualsNull", "java:S5785"})
+  /* default */ void testEquals()
    {
     final VariableManager vm1 = new VariableManager();
     final VariableManager vm2 = new VariableManager();

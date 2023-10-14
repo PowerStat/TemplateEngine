@@ -26,7 +26,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 /**
  * Template file manager.
  */
-public class FileManager
+public final class FileManager
  {
   /**
    * Logger.
@@ -141,7 +141,7 @@ public class FileManager
    */
   public boolean existsFile(final String varname)
    {
-    final File file = this.files.get(varname);
+    final var file = this.files.get(varname);
     return (file != null);
    }
 
@@ -162,7 +162,7 @@ public class FileManager
      {
       return true;
      }
-    final File file = this.files.get(varname);
+    final var file = this.files.get(varname);
     if (file == null)
      {
       return false;
@@ -172,8 +172,8 @@ public class FileManager
      {
       istream = Files.newInputStream(this.files.get(varname).toPath(), StandardOpenOption.READ); // Read from filesystem
      }
-    final StringBuilder fileBuffer = new StringBuilder();
-    try (BufferedReader reader = new BufferedReader(new InputStreamReader(istream, StandardCharsets.UTF_8)))
+    final var fileBuffer = new StringBuilder();
+    try (var reader = new BufferedReader(new InputStreamReader(istream, StandardCharsets.UTF_8)))
      {
       String line = reader.readLine();
       while (line != null)

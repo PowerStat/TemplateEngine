@@ -4,9 +4,7 @@
 package de.powerstat.phplib.templateengine.intern;
 
 
-import java.io.IOException;
 import java.util.Objects;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -15,7 +13,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 /**
  * Template block manager.
  */
-public class BlockManager
+public final class BlockManager
  {
   /* *
    * Logger.
@@ -78,13 +76,12 @@ public class BlockManager
    * @param varname Name of template block
    * @param name Name of variable in which the block will be placed - if empty will be the same as varname
    * @return true on sucess otherwise false
-   * @throws IOException IO exception
    * @throws IllegalStateException When no block with varname is found.
    * @throws NullPointerException If parent or varname is null
    * @throws IllegalArgumentException If parent or varname is empty
    */
   @SuppressWarnings({"PMD.LinguisticNaming", "PMD.AvoidLiteralsInIfCondition"})
-  public boolean setBlock(final String parent, final String varname, final String name) throws IOException
+  public boolean setBlock(final String parent, final String varname, final String name)
    {
     // asserts
     String internName = name;
@@ -92,8 +89,8 @@ public class BlockManager
      {
       internName = varname;
      }
-    final Pattern pattern = Pattern.compile("<!--\\s+BEGIN " + varname + "\\s+-->(.*)<!--\\s+END " + varname + "\\s+-->", Pattern.DOTALL | Pattern.MULTILINE); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-    final Matcher matcher = pattern.matcher(this.variableManager.getVar(parent));
+    final var pattern = Pattern.compile("<!--\\s+BEGIN " + varname + "\\s+-->(.*)<!--\\s+END " + varname + "\\s+-->", Pattern.DOTALL | Pattern.MULTILINE); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+    final var matcher = pattern.matcher(this.variableManager.getVar(parent));
     final String str = matcher.replaceFirst("{" + internName + "}"); //$NON-NLS-1$ //$NON-NLS-2$
     this.variableManager.setVar(varname, matcher.group(1));
     this.variableManager.setVar(parent, str);

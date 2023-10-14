@@ -4,7 +4,6 @@
 package de.powerstat.phplib.templateengine.intern;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
@@ -24,7 +22,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * Template variable manager.
  */
-public class VariableManager
+public final class VariableManager
  {
   /* *
    * Logger.
@@ -122,6 +120,7 @@ public class VariableManager
    * @throws NullPointerException If varname is null
    * @throws IllegalArgumentException If varname is empty
    */
+  @SuppressWarnings("java:S1120")
   public void unsetVar(final String varname)
    {
     /* String value = */ this.vars.remove(varname);
@@ -133,14 +132,13 @@ public class VariableManager
    *
    * @param varname Variable to parse for undefined variables
    * @return List with undefined template variables names
-   * @throws IOException  File not found or IO exception
    * @throws NullPointerException If varname is null
    * @throws IllegalArgumentException If varname is empty
    */
-  public List<String> getUndefined(final String varname) throws IOException
+  public List<String> getUndefined(final String varname)
    {
     // TODO asserts
-    final Matcher matcher = VariableManager.BLOCK_MATCHER_REGEXP.matcher(getVar(varname));
+    final var matcher = VariableManager.BLOCK_MATCHER_REGEXP.matcher(getVar(varname));
     boolean result = matcher.find();
     final List<String> undefvars = new ArrayList<>();
     while (result)
@@ -192,11 +190,11 @@ public class VariableManager
     // assert (block != null) && !block.isEmpty();
     // assert block.matches("^.+$")
     // Get variable names to replace from varname
-    final Matcher matcherTemplate = VariableManager.TEMPLATE_MATCHER_REGEXP.matcher(block);
+    final var matcherTemplate = VariableManager.TEMPLATE_MATCHER_REGEXP.matcher(block);
     final Set<String> varsSetTemplate = new TreeSet<>();
     while (matcherTemplate.find())
      {
-      final String varnameTemplate = block.substring(matcherTemplate.start() + 1, matcherTemplate.end() - 1);
+      final var varnameTemplate = block.substring(matcherTemplate.start() + 1, matcherTemplate.end() - 1);
       if (this.vars.containsKey(varnameTemplate))
        {
         varsSetTemplate.add(varnameTemplate);
@@ -216,11 +214,10 @@ public class VariableManager
    *
    * @param varname Variable name
    * @return Replaced variable content or empty string
-   * @throws IOException File not found or IO exception
    * @throws NullPointerException If varname is null
    * @throws IllegalArgumentException If varname is empty
    */
-  public String subst(final String varname) throws IOException
+  public String subst(final String varname)
    {
     // return replaceVarsOld(getVar(varname));
     return replaceVarsNew(getVar(varname));
@@ -234,21 +231,20 @@ public class VariableManager
    * @param varname Parse the content of this variable
    * @param append true for appending blocks to target, otherwise false for replacing targets content
    * @return Variables content after parsing
-   * @throws IOException File not found or IO exception
    * @throws NullPointerException If target or varname is null
    * @throws IllegalArgumentException If target or varname is empty
    */
   @SuppressWarnings("java:S2301")
-  public String parse(final String target, final String varname, final boolean append) throws IOException
+  public String parse(final String target, final String varname, final boolean append)
    {
     if (LOGGER.isDebugEnabled())
      {
-      LOGGER.debug("varname: " + varname);
+      LOGGER.debug("varname: {}", varname);
      }
     final String str = subst(varname);
     if (LOGGER.isDebugEnabled())
      {
-      LOGGER.debug("str: " + str);
+      LOGGER.debug("str: {}", str);
      }
     setVar(target, (append ? getVar(target) : "") + str); //$NON-NLS-1$
     return str;

@@ -481,7 +481,7 @@
   </rule>
   <rule ref="category/java/design.xml/TooManyMethods">
     <properties>
-      <property name="maxmethods" value="80" />
+      <property name="maxmethods" value="100" />
     </properties>
   </rule>
   <rule ref="category/java/design.xml/UselessOverridingMethod">

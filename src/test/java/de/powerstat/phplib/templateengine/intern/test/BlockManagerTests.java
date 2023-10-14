@@ -12,8 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
 
 import de.powerstat.phplib.templateengine.intern.BlockManager;
@@ -24,7 +22,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 /**
  * Block manager tests.
  */
-public class BlockManagerTests
+final class BlockManagerTests
  {
   /**
    * Not constructed constant.
@@ -85,7 +83,7 @@ public class BlockManagerTests
   /**
    * Default constructor.
    */
-  public BlockManagerTests()
+  /* default */ BlockManagerTests()
    {
     super();
    }
@@ -95,7 +93,7 @@ public class BlockManagerTests
    * Constructor test.
    */
   @Test
-  public void constructor1()
+  /* default */ void testConstructor1()
    {
     final VariableManager vm1 = new VariableManager();
     final BlockManager bm1 = new BlockManager(vm1);
@@ -107,7 +105,7 @@ public class BlockManagerTests
    * Constructor test.
    */
   @Test
-  public void constructor2()
+  /* default */ void testConstructor2()
    {
     final VariableManager vm1 = new VariableManager();
     final BlockManager bm1 = new BlockManager(vm1);
@@ -118,11 +116,9 @@ public class BlockManagerTests
 
   /**
    * Set block test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void setBlock1() throws IOException
+  /* default */ void testSetBlock1()
    {
     final VariableManager vm1 = new VariableManager();
     final BlockManager bm1 = new BlockManager(vm1);
@@ -138,11 +134,9 @@ public class BlockManagerTests
 
   /**
    * Set block test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void setBlock2() throws IOException
+  /* default */ void testSetBlock2()
    {
     final VariableManager vm1 = new VariableManager();
     final BlockManager bm1 = new BlockManager(vm1);
@@ -157,11 +151,9 @@ public class BlockManagerTests
 
   /**
    * Set block test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void setBlock3() throws IOException
+  /* default */ void testSetBlock3()
    {
     final VariableManager vm1 = new VariableManager();
     final BlockManager bm1 = new BlockManager(vm1);
@@ -176,11 +168,9 @@ public class BlockManagerTests
 
   /**
    * Set block test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void setBlock4() throws IOException
+  /* default */ void testSetBlock4()
    {
     final VariableManager vm1 = new VariableManager();
     final BlockManager bm1 = new BlockManager(vm1);
@@ -196,11 +186,9 @@ public class BlockManagerTests
 
   /**
    * Set block test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void setBlock5() throws IOException
+  /* default */ void testSetBlock5()
    {
     final VariableManager vm1 = new VariableManager();
     final BlockManager bm1 = new BlockManager(vm1);
@@ -215,11 +203,9 @@ public class BlockManagerTests
 
   /**
    * Set block test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void setBlock6() throws IOException
+  /* default */ void testSetBlock6()
    {
     final VariableManager vm1 = new VariableManager();
     final BlockManager bm1 = new BlockManager(vm1);
@@ -234,11 +220,9 @@ public class BlockManagerTests
 
   /**
    * Set block test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void setBlock7() throws IOException
+  /* default */ void testSetBlock7()
    {
     final VariableManager vm1 = new VariableManager();
     final BlockManager bm1 = new BlockManager(vm1);
@@ -254,11 +238,9 @@ public class BlockManagerTests
 
   /**
    * Test toString.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void testToString() throws IOException
+  /* default */ void testToString()
    {
     final VariableManager vm1 = new VariableManager();
     final BlockManager bm1 = new BlockManager(vm1);
@@ -273,7 +255,7 @@ public class BlockManagerTests
    * Test hash code.
    */
   @Test
-  public void testHashCode()
+  /* default */ void testHashCode()
    {
     final VariableManager vm1 = new VariableManager();
     vm1.setVar(PARENT, BLKSTRING);
@@ -293,8 +275,8 @@ public class BlockManagerTests
    */
   @Test
   @SuppressFBWarnings("EC_NULL_ARG")
-  @SuppressWarnings("PMD.EqualsNull")
-  public void testEquals()
+  @SuppressWarnings({"PMD.EqualsNull", "java:S5785"})
+  /* default */ void testEquals()
    {
     final VariableManager vm1 = new VariableManager();
     final VariableManager vm2 = new VariableManager();

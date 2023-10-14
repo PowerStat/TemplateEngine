@@ -15,12 +15,12 @@ import de.powerstat.phplib.templateengine.HandleUndefined;
 /**
  * HandleUndefined tests.
  */
-public class HandleUndefinedTests
+final class HandleUndefinedTests
  {
   /**
-   * Default onstructor.
+   * Default constructor.
    */
-  public HandleUndefinedTests()
+  /* default */ HandleUndefinedTests()
    {
     super();
    }
@@ -30,7 +30,7 @@ public class HandleUndefinedTests
    * Test getAction.
    */
   @Test
-  public void getAction()
+  /* default */ void testGetAction()
    {
     assertAll("getAction", //$NON-NLS-1$
       () -> assertEquals(0, HandleUndefined.REMOVE.getAction(), "REMOVE action not as expected"), //$NON-NLS-1$

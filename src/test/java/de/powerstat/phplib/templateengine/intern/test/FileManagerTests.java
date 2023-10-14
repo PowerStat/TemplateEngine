@@ -25,7 +25,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 /**
  * File manager tests.
  */
-public class FileManagerTests
+final class FileManagerTests
  {
   /**
    * Not constructed constant.
@@ -71,7 +71,7 @@ public class FileManagerTests
   /**
    * Default constructor.
    */
-  public FileManagerTests()
+  /* default */ FileManagerTests()
    {
     super();
    }
@@ -81,7 +81,7 @@ public class FileManagerTests
    * Constructor test.
    */
   @Test
-  public void constructor1()
+  /* default */ void testConstructor1()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -93,7 +93,7 @@ public class FileManagerTests
    * Constructor test.
    */
   @Test
-  public void constructor2()
+  /* default */ void testConstructor2()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -106,7 +106,7 @@ public class FileManagerTests
    * addFile test.
    */
   @Test
-  public void addFile1()
+  /* default */ void testAddFile1()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -120,13 +120,14 @@ public class FileManagerTests
    * addFile test.
    */
   @Test
-  public void addFile2()
+  /* default */ void testAddFile2()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
+    final File tmplFile = new File(TEMPLATE1_FILE);
     assertThrows(NullPointerException.class, () ->
      {
-      /* final boolean result = */ fm1.addFile(null, new File(TEMPLATE1_FILE));
+      /* final boolean result = */ fm1.addFile(null, tmplFile);
      }, NULL_POINTER_EXCEPTION
     );
    }
@@ -136,7 +137,7 @@ public class FileManagerTests
    * addFile test.
    */
   @Test
-  public void addFile3()
+  /* default */ void testAddFile3()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -150,7 +151,7 @@ public class FileManagerTests
    * addFile test.
    */
   @Test
-  public void addFile4()
+  /* default */ void testAddFile4()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -164,7 +165,7 @@ public class FileManagerTests
    * addFile test.
    */
   @Test
-  public void addFile5()
+  /* default */ void testAddFile5()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -181,7 +182,7 @@ public class FileManagerTests
    * existsFile test.
    */
   @Test
-  public void existsFile1()
+  /* default */ void testExistsFile1()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -195,7 +196,7 @@ public class FileManagerTests
    * existsFile test.
    */
   @Test
-  public void existsFile2()
+  /* default */ void testExistsFile2()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -210,7 +211,7 @@ public class FileManagerTests
    * existsFile test.
    */
   @Test
-  public void existsFile3()
+  /* default */ void testExistsFile3()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -224,7 +225,7 @@ public class FileManagerTests
    * existsFile test.
    */
   @Test
-  public void existsFile4()
+  /* default */ void testExistsFile4()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -240,7 +241,7 @@ public class FileManagerTests
    */
   @Test
   @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
-  public void existsFile5()
+  /* default */ void testExistsFile5()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -259,7 +260,7 @@ public class FileManagerTests
    * @throws IOException IO exception
    */
   @Test
-  public void loadFile1() throws IOException
+  /* default */ void testLoadFile1() throws IOException
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -275,7 +276,7 @@ public class FileManagerTests
    * @throws IOException IO exception
    */
   @Test
-  public void loadFile2() throws IOException
+  /* default */ void testLoadFile2() throws IOException
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -287,11 +288,9 @@ public class FileManagerTests
 
   /**
    * loadFile test.
-   *
-   * @throws IOException IO exception
    */
   @Test
-  public void loadFile3() throws IOException
+  /* default */ void testLoadFile3()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -310,7 +309,7 @@ public class FileManagerTests
    * @throws IOException IO exception
    */
   @Test
-  public void loadFile4() throws IOException
+  /* default */ void testLoadFile4() throws IOException
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -325,7 +324,7 @@ public class FileManagerTests
    * Test toString.
    */
   @Test
-  public void testToString1()
+  /* default */ void testToString1()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -339,7 +338,7 @@ public class FileManagerTests
    * Test toString.
    */
   @Test
-  public void testToString2()
+  /* default */ void testToString2()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -354,7 +353,7 @@ public class FileManagerTests
    * Test hash code.
    */
   @Test
-  public void testHashCode()
+  /* default */ void testHashCode()
    {
     final VariableManager vm1 = new VariableManager();
     final FileManager fm1 = new FileManager(vm1);
@@ -373,8 +372,8 @@ public class FileManagerTests
    */
   @Test
   @SuppressFBWarnings("EC_NULL_ARG")
-  @SuppressWarnings("PMD.EqualsNull")
-  public void testEquals()
+  @SuppressWarnings({"PMD.EqualsNull", "java:S5785"})
+  /* default */ void testEquals()
    {
     final VariableManager vm1 = new VariableManager();
     final VariableManager vm2 = new VariableManager();
@@ -402,8 +401,5 @@ public class FileManagerTests
       () -> assertFalse(fm1.equals(fm6), "FileManager16 is equal") //$NON-NLS-1$
     );
    }
-
-
-  // boolean equals(final Object obj)
 
  }
