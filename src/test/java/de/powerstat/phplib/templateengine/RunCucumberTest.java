@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Copyright (C) 2022-2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
 package de.powerstat.phplib.templateengine;
 
