@@ -24,7 +24,7 @@ import org.apache.logging.log4j.Logger;
  */
 public final class VariableManager
  {
-  /* *
+  /**
    * Logger.
    */
   private static final Logger LOGGER = LogManager.getLogger(VariableManager.class);

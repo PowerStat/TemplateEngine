@@ -103,14 +103,14 @@ public final class TemplateEngine
    */
   private final VariableManager variableManager;
 
-    /**
+  /**
    * File manager.
-     */
+   */
   private final FileManager fileManager;
 
-    /**
+  /**
    * Block manager.
-     */
+   */
   private final BlockManager blockManager;
 
 
