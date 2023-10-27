@@ -283,9 +283,7 @@
   </rule>
   <rule ref="category/java/codestyle.xml/LongVariable">
     <properties>
-      <property name="minimum">
-        <value>35</value>
-      </property>
+      <property name="minimum value="35" />
     </properties>
   </rule>
   <rule ref="category/java/codestyle.xml/MDBAndSessionBeanNamingConvention" />
@@ -409,12 +407,12 @@
   </rule>
   <rule ref="category/java/design.xml/ExcessiveParameterList">
     <properties>
-      <property name="minimum" value="10.0" />
+      <property name="minimum" value="10" />
     </properties>
   </rule>
   <rule ref="category/java/design.xml/ExcessivePublicCount">
     <properties>
-      <property name="minimum" value="93.0" />
+      <property name="minimum" value="93" />
     </properties>
   </rule>
   <rule ref="category/java/design.xml/FinalFieldCouldBeStatic" />
@@ -567,7 +565,7 @@
   <rule ref="category/java/errorprone.xml/AvoidInstanceofChecksInCatchClause" />
   <rule ref="category/java/errorprone.xml/AvoidLiteralsInIfCondition">
     <properties>
-      <property name="ignoreMagicNumbers" value="-1, 0" />
+      <property name="ignoreMagicNumbers" value="-1, 0, 1" />
       <property name="ignoreExpressions" value="true" />
     </properties>
   </rule>

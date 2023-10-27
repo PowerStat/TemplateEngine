@@ -219,7 +219,7 @@
     </module>
     <module name="MultipleStringLiterals">
       <property name="allowedDuplicates" value="1"/>
-      <property name="ignoreOccurrenceContext" value="ANNOTATION  "/>
+      <property name="ignoreOccurrenceContext" value="ANNOTATION"/>
       <property name="ignoreStringsRegexp" value="^&quot;&quot;$"/>
     </module>
     <module name="MultipleVariableDeclarations">
@@ -627,7 +627,7 @@
       <property name="severity" value="warning"/>
       <property name="applyToPackage" value="true"/>
       <property name="applyToPrivate" value="true"/>
-      <property name="applyToProtected  " value="true"/>
+      <property name="applyToProtected" value="true"/>
       <property name="applyToPublic" value="true"/>
       <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
     </module>
