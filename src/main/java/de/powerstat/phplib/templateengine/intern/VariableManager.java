@@ -237,15 +237,9 @@ public final class VariableManager
   @SuppressWarnings("java:S2301")
   public String parse(final String target, final String varname, final boolean append)
    {
-    if (LOGGER.isDebugEnabled())
-     {
-      LOGGER.debug("varname: {}", varname);
-     }
+    LOGGER.debug("varname: {}", varname);
     final String str = subst(varname);
-    if (LOGGER.isDebugEnabled())
-     {
-      LOGGER.debug("str: {}", str);
-     }
+    LOGGER.debug("str: {}", str);
     setVar(target, (append ? getVar(target) : "") + str); //$NON-NLS-1$
     return str;
    }

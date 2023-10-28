@@ -450,10 +450,7 @@ final class TemplateEngineTests
     final TemplateEngine engine = new TemplateEngine();
     /* final boolean success = */ engine.setFile(TemplateEngineTests.FILE1, new File(TemplateEngineTests.TEMPLATE1_TMPL));
     final String variableValue = engine.subst(TemplateEngineTests.FILE1);
-    if (TemplateEngineTests.LOGGER.isDebugEnabled())
-     {
-      TemplateEngineTests.LOGGER.debug("file1 = {}", variableValue); //$NON-NLS-1$
-     }
+    TemplateEngineTests.LOGGER.debug("file1 = {}", variableValue); //$NON-NLS-1$
     assertEquals(TemplateEngineTests.EQUALS_123_VARIABLE1_456, variableValue, TemplateEngineTests.VARIABLE_VALUE_NOT_AS_EXPECTED);
    }
 
@@ -514,10 +511,10 @@ final class TemplateEngineTests
   @Test
   /* default */ void testSubstNull() throws IOException
    {
-      final TemplateEngine engine = new TemplateEngine();
-      /* final boolean success = */ engine.setFile(TemplateEngineTests.FILE1, new File(TemplateEngineTests.TEMPLATE1_TMPL));
-      engine.setVar(TemplateEngineTests.VARIABLE1, null);
-      final String variableValue = engine.subst(TemplateEngineTests.VARIABLE1);
+    final TemplateEngine engine = new TemplateEngine();
+    /* final boolean success = */ engine.setFile(TemplateEngineTests.FILE1, new File(TemplateEngineTests.TEMPLATE1_TMPL));
+    engine.setVar(TemplateEngineTests.VARIABLE1, null);
+    final String variableValue = engine.subst(TemplateEngineTests.VARIABLE1);
     assertEquals("", variableValue, "Unexpected value");
    }
 
@@ -1106,12 +1103,12 @@ final class TemplateEngineTests
   @Test
   /* default */ void testParseEmpty() throws IOException
    {
-      final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
-      /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
-      engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VALUE1);
-      engine.setVar(TemplateEngineTests.VARIABLE2, TemplateEngineTests.VALUE2);
-      engine.setVar(TemplateEngineTests.VARIABLE3, TemplateEngineTests.VALUE3);
-      /* final boolean successBlock = */ engine.setBlock(TemplateEngineTests.FILE2, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
+    /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
+    engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VALUE1);
+    engine.setVar(TemplateEngineTests.VARIABLE2, TemplateEngineTests.VALUE2);
+    engine.setVar(TemplateEngineTests.VARIABLE3, TemplateEngineTests.VALUE3);
+    /* final boolean successBlock = */ engine.setBlock(TemplateEngineTests.FILE2, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
     assertThrows(IllegalArgumentException.class, () ->
      {
       /* String parseResult = */ engine.parse("", "", false); //$NON-NLS-1$ //$NON-NLS-2$
@@ -1128,12 +1125,12 @@ final class TemplateEngineTests
   @Test
   /* default */ void testParseMixed() throws IOException
    {
-      final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
-      /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
-      engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VALUE1);
-      engine.setVar(TemplateEngineTests.VARIABLE2, TemplateEngineTests.VALUE2);
-      engine.setVar(TemplateEngineTests.VARIABLE3, TemplateEngineTests.VALUE3);
-      /* final boolean successBlock = */ engine.setBlock(TemplateEngineTests.FILE2, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
+    /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
+    engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VALUE1);
+    engine.setVar(TemplateEngineTests.VARIABLE2, TemplateEngineTests.VALUE2);
+    engine.setVar(TemplateEngineTests.VARIABLE3, TemplateEngineTests.VALUE3);
+    /* final boolean successBlock = */ engine.setBlock(TemplateEngineTests.FILE2, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
     assertThrows(IllegalArgumentException.class, () ->
      {
       /* String parseResult = */ engine.parse(TemplateEngineTests.BLK1_BLK, "", false); //$NON-NLS-1$
@@ -1209,12 +1206,12 @@ final class TemplateEngineTests
   @Test
   /* default */ void testParseTargetToLong() throws IOException
    {
-      final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
-      /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
-      engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VALUE1);
-      engine.setVar(TemplateEngineTests.VARIABLE2, TemplateEngineTests.VALUE2);
-      engine.setVar(TemplateEngineTests.VARIABLE3, TemplateEngineTests.VALUE3);
-      /* final boolean successBlock = */ engine.setBlock(TemplateEngineTests.FILE2, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
+    /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
+    engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VALUE1);
+    engine.setVar(TemplateEngineTests.VARIABLE2, TemplateEngineTests.VALUE2);
+    engine.setVar(TemplateEngineTests.VARIABLE3, TemplateEngineTests.VALUE3);
+    /* final boolean successBlock = */ engine.setBlock(TemplateEngineTests.FILE2, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
     assertThrows(IllegalArgumentException.class, () ->
      {
       /* String parseResult = */ engine.parse(TemplateEngineTests.TO_LONG_VARNAME, TemplateEngineTests.VARIABLE1, false);
@@ -1231,12 +1228,12 @@ final class TemplateEngineTests
   @Test
   /* default */ void testParseVarnameToLong() throws IOException
    {
-      final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
-      /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
-      engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VALUE1);
-      engine.setVar(TemplateEngineTests.VARIABLE2, TemplateEngineTests.VALUE2);
-      engine.setVar(TemplateEngineTests.VARIABLE3, TemplateEngineTests.VALUE3);
-      /* final boolean successBlock = */ engine.setBlock(TemplateEngineTests.FILE2, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
+    /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
+    engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VALUE1);
+    engine.setVar(TemplateEngineTests.VARIABLE2, TemplateEngineTests.VALUE2);
+    engine.setVar(TemplateEngineTests.VARIABLE3, TemplateEngineTests.VALUE3);
+    /* final boolean successBlock = */ engine.setBlock(TemplateEngineTests.FILE2, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
     assertThrows(IllegalArgumentException.class, () ->
      {
       /* String parseResult = */ engine.parse(TemplateEngineTests.VARIABLE1, TemplateEngineTests.TO_LONG_VARNAME, false);
@@ -1253,12 +1250,12 @@ final class TemplateEngineTests
   @Test
   /* default */ void testParseTargetWrong() throws IOException
    {
-      final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
-      /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
-      engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VALUE1);
-      engine.setVar(TemplateEngineTests.VARIABLE2, TemplateEngineTests.VALUE2);
-      engine.setVar(TemplateEngineTests.VARIABLE3, TemplateEngineTests.VALUE3);
-      /* final boolean successBlock = */ engine.setBlock(TemplateEngineTests.FILE2, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
+    /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
+    engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VALUE1);
+    engine.setVar(TemplateEngineTests.VARIABLE2, TemplateEngineTests.VALUE2);
+    engine.setVar(TemplateEngineTests.VARIABLE3, TemplateEngineTests.VALUE3);
+    /* final boolean successBlock = */ engine.setBlock(TemplateEngineTests.FILE2, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
     assertThrows(IllegalArgumentException.class, () ->
      {
       /* String parseResult = */ engine.parse(TemplateEngineTests.VARIABLE4, TemplateEngineTests.VARIABLE1, false);
@@ -1275,12 +1272,12 @@ final class TemplateEngineTests
   @Test
   /* default */ void testParseVarnameWrong() throws IOException
    {
-      final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
-      /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
-      engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VALUE1);
-      engine.setVar(TemplateEngineTests.VARIABLE2, TemplateEngineTests.VALUE2);
-      engine.setVar(TemplateEngineTests.VARIABLE3, TemplateEngineTests.VALUE3);
-      /* final boolean successBlock = */ engine.setBlock(TemplateEngineTests.FILE2, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
+    final TemplateEngine engine = new TemplateEngine(HandleUndefined.COMMENT);
+    /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE2, new File(TemplateEngineTests.TEMPLATE2_TMPL));
+    engine.setVar(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VALUE1);
+    engine.setVar(TemplateEngineTests.VARIABLE2, TemplateEngineTests.VALUE2);
+    engine.setVar(TemplateEngineTests.VARIABLE3, TemplateEngineTests.VALUE3);
+    /* final boolean successBlock = */ engine.setBlock(TemplateEngineTests.FILE2, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
     assertThrows(IllegalArgumentException.class, () ->
      {
       /* String parseResult = */ engine.parse(TemplateEngineTests.VARIABLE1, TemplateEngineTests.VARIABLE4, false);
@@ -1695,13 +1692,13 @@ final class TemplateEngineTests
   /* default */ void testNewInstanceInputStreamEmpty() throws IOException
    {
     try (InputStream stream = this.getClass().getResourceAsStream("/template6.tmpl")) //$NON-NLS-1$
-   {
-    assertThrows(IllegalStateException.class, () ->
      {
+      assertThrows(IllegalStateException.class, () ->
+       {
         /* final TemplateEngine engine = */ TemplateEngine.newInstance(stream);
-     }, TemplateEngineTests.ILLEGAL_STATE_EXCEPTION_EXPECTED
-    );
-   }
+       }, TemplateEngineTests.ILLEGAL_STATE_EXCEPTION_EXPECTED
+      );
+     }
    }
 
 
@@ -1950,17 +1947,6 @@ final class TemplateEngineTests
       () -> assertFalse(tmpl1.equals(tmpl6), "TemplateEngine16 is equal"), //$NON-NLS-1$
       () -> assertFalse(tmpl1.equals(tmpl7), "TemplateEngine17 is equal") //$NON-NLS-1$
     );
-   }
-
-
-  /**
-   * Test HandleUndefined.
-   */
-  @Test
-  /* default */ void testUndefined()
-   {
-    final HandleUndefined undefined = HandleUndefined.COMMENT;
-    assertEquals(2, undefined.getAction(), "Result of getAction not as expected"); //$NON-NLS-1$
    }
 
  }

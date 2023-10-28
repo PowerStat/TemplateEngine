@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Copyright (C) 2019-2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
  */
  
  
@@ -18,5 +18,6 @@ module de.powerstat.phplib.templateengine
   requires org.junit.jupiter.api;
   requires com.github.spotbugs.annotations;
   requires io.cucumber.java;
+  // requires nl.jqno.equalsverifier;
 
  }

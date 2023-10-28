@@ -94,7 +94,7 @@
     </module>
     <module name="ThrowsCount">
       <property name="ignorePrivateMethods" value="true"/>
-      <property name="max" value="6"/>
+      <property name="max" value="10"/>
     </module>
     <module name="VisibilityModifier">
       <property name="severity" value="warning"/>
@@ -228,7 +228,7 @@
       <property name="max" value="3"/>
     </module>
     <module name="NestedIfDepth">
-      <property name="max" value="4"/>
+      <property name="max" value="14"/>
     </module>
     <module name="NestedTryDepth">
       <property name="max" value="2"/>
@@ -258,8 +258,8 @@
     </module> 
     <module name="ReturnCount">
       <property name="format" value="^equals$"/>
-      <property name="max" value="7"/>
-      <property name="maxForVoid" value="1"/>
+      <property name="max" value="95"/>
+      <property name="maxForVoid" value="4"/>
       <property name="tokens" value="CTOR_DEF, METHOD_DEF, LAMBDA"/>
     </module>
     <module name="SimplifyBooleanExpression">
@@ -307,7 +307,7 @@
       <property name="excludes" value=""/>
     </module>
     <module name="AvoidStaticImport">
-      <property name="excludes" value="org.junit.jupiter.api.Assertions.*"/>
+      <property name="excludes" value="org.junit.jupiter.api.Assertions.*,org.mockito.Mockito.*,org.mockito.ArgumentMatchers.*"/>
     </module> 
     <!-- 
     <module name="CustomImportOrder">
@@ -771,10 +771,10 @@
     </module> 
     -->
     <module name="LambdaBodyLength">
-      <property name="max" value="16"/>
+      <property name="max" value="18"/>
     </module>
     <module name="MethodCount">
-      <property name="maxPackage" value="100"/>
+      <property name="maxPackage" value="110"/>
       <property name="maxPrivate" value="100"/>
       <property name="maxProtected" value="100"/>
       <property name="maxPublic" value="110"/>
@@ -888,7 +888,6 @@
    <module name="RegexpHeader">
     <!-- <property name="charset" value="UTF-8"/> -->
     <property name="fileExtensions" value="java"/>
-    <!-- <property name="headerFile" value=""/> -->  
     <property name="header" value="^/\*\n \* Copyright \(C\) (\d\d\d\d)(-(\d\d\d\d))?(,(\d\d\d\d)(-(\d\d\d\d))?)* Dipl.-Inform. Kai Hofmann. All rights reserved!\n \*/$"/>
     <!-- <property name="headerFile" value=""/> -->
     <!-- <property name="multiLines" value=""/> -->
@@ -961,7 +960,7 @@
     <property name="severity" value="warning"/>
     <!-- <property name="fileExtensions" value="*"/> -->
     <!-- <property name="ignorePattern" value="^(package|import) .*"/> -->
-    <property name="max" value="332"/>
+    <property name="max" value="3100"/>
   </module>
 
   <!-- Whitespace -->

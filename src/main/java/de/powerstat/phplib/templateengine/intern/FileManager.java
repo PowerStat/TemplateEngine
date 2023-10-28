@@ -123,10 +123,7 @@ public final class FileManager
       catch (final IOException ignored)
        {
         // exists is already false
-        if (FileManager.LOGGER.isWarnEnabled())
-         {
           FileManager.LOGGER.warn("File does not exist: " + newFile.getAbsolutePath(), ignored); //$NON-NLS-1$
-         }
        }
      }
     return exists;
