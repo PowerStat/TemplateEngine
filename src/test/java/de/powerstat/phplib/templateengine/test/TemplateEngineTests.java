@@ -1422,7 +1422,7 @@ final class TemplateEngineTests
     /* final boolean successFile = */ engine.setFile(TemplateEngineTests.FILE4, new File(TemplateEngineTests.TEMPLATE4_TMPL));
     final boolean successBlock = engine.setBlock(TemplateEngineTests.FILE4, TemplateEngineTests.BLK1, TemplateEngineTests.BLK1_BLK);
     assertFalse(successBlock, "Block could be cut out successfully from empty template!"); //$NON-NLS-1$
-     }
+   }
 
 
   /**

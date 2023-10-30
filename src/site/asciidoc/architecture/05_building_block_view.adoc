@@ -94,7 +94,7 @@ package de.powerstat.phplib.templateengine
       +toString() : String
       +hashCode() : int
       +equals(obj : Object) : boolean
-}
+     }
 
     class VariableManager 
      {

@@ -11,10 +11,10 @@
       <property name="allowSamelineParameterizedAnnotation" value="false"/>
       <property name="tokens" value="CLASS_DEF, INTERFACE_DEF, PACKAGE_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, RECORD_DEF, COMPACT_CTOR_DEF"/>
     </module>
-    <!-- 
+    <!--
     <module name="AnnotationOnSameLine">
       <property name="tokens" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF, RECORD_DEF, COMPACT_CTOR_DEF"/>
-    </module> 
+    </module>
     -->
     <module name="AnnotationUseStyle">
       <property name="closingParens" value="never"/>
@@ -108,18 +108,18 @@
     </module>
 
     <!-- Coding -->
-    <!-- 
+    <!--
     <module name="ArrayTrailingComma">
       <property name="alwaysDemandTrailingComma" value="false"/>
-    </module> 
+    </module>
     -->
     <module name="AvoidDoubleBraceInitialization">
     </module>
-    <!-- 
+    <!--
     <module name="AvoidInlineConditionals">
-    </module> 
+    </module>
     -->
-    <!-- 
+    <!--
     <module name="AvoidNoArgumentSuperConstructorCall">
     </module>
     -->
@@ -203,14 +203,14 @@
       <property name="ignoreNumbers" value="-1, 0, 1, 2"/>
       <property name="tokens" value="NUM_DOUBLE, NUM_FLOAT, NUM_INT, NUM_LONG"/>
     </module>
-    <!-- 
+    <!--
     <module name="MatchXpath">
       <property name="query" value="//METHOD_DEF[.//LITERAL_PRIVATE and following-sibling::METHOD_DEF[.//LITERAL_PUBLIC]]"/>
       <message key="matchxpath.match" value="Private methods must appear after public methods"/>
     </module>
     -->
     <module name="MissingCtor">
-    </module> 
+    </module>
     <module name="MissingSwitchDefault">
       <property name="severity" value="warning"/>
     </module>
@@ -255,7 +255,7 @@
       <property name="checkFields" value="true"/>
       <property name="checkMethods" value="false"/>
       <property name="validateOnlyOverlapping" value="true"/>
-    </module> 
+    </module>
     <module name="ReturnCount">
       <property name="format" value="^equals$"/>
       <property name="max" value="95"/>
@@ -274,10 +274,10 @@
     </module>
     <module name="SuperFinalize">
     </module>
-    <!-- 
+    <!--
     <module name="UnnecessaryParentheses">
       <property name="tokens" value="EXPR, IDENT, NUM_DOUBLE, NUM_FLOAT, NUM_INT, NUM_LONG, STRING_LITERAL, LITERAL_NULL, LITERAL_FALSE, LITERAL_TRUE, ASSIGN, BAND_ASSIGN, BOR_ASSIGN, BSR_ASSIGN, BXOR_ASSIGN, DIV_ASSIGN, MINUS_ASSIGN, MOD_ASSIGN, PLUS_ASSIGN, SL_ASSIGN, SR_ASSIGN, STAR_ASSIGN, LAMBDA, TEXT_BLOCK_LITERAL_BEGIN, LAND, LOR, LITERAL_INSTANCEOF, GT, LT, GE, LE, EQUAL, NOT_EQUAL, UNARY_MINUS, UNARY_PLUS, INC, DEC, LNOT, BNOT, POST_INC, POST_DEC"/>
-    </module> 
+    </module>
     -->
     <module name="UnnecessarySemicolonAfterOuterTypeDeclaration">
       <property name="tokens" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF"/>
@@ -308,8 +308,8 @@
     </module>
     <module name="AvoidStaticImport">
       <property name="excludes" value="org.junit.jupiter.api.Assertions.*,org.mockito.Mockito.*,org.mockito.ArgumentMatchers.*"/>
-    </module> 
-    <!-- 
+    </module>
+    <!--
     <module name="CustomImportOrder">
       <property name="customImportOrderRules" value=""/>
       <property name="separateLineBetweenGroups" value="true"/>
@@ -317,7 +317,7 @@
       <property name="specialImportsRegExp" value="^$"/>
       <property name="standardPackageRegExp" value="^(java|javax)\."/>
       <property name="thirdPartyPackageRegExp" value=".*"/>
-    </module> 
+    </module>
     -->
     <module name="IllegalImport">
       <property name="severity" value="warning"/>
@@ -325,13 +325,13 @@
       <property name="illegalPkgs" value="sun"/>
       <property name="regexp" value="false"/>
     </module>
-    <!-- 
+    <!--
     <module name="ImportControl">
       <property name="file" value=""/>
       <property name="path" value=".*"/>
-    </module> 
+    </module>
     -->
-    <!-- 
+    <!--
     <module name="ImportOrder">
       <property name="caseSensitive" value="true"/>
       <property name="groups" value=""/>
@@ -342,7 +342,7 @@
       <property name="sortStaticImportsAlphabetically" value="false"/>
       <property name="staticGroups" value=""/>
       <property name="useContainerOrderingForStatic" value="false"/>
-    </module> 
+    </module>
     -->
     <module name="RedundantImport">
       <property name="severity" value="warning"/>
@@ -382,13 +382,13 @@
     <module name="JavadocMissingWhitespaceAfterAsterisk">
       <property name="violateExecutionOnNonTightHtml" value="false"/>
     </module>
-    <!-- 
+    <!--
     <module name="JavadocParagraph">
       <property name="allowNewlineParagraph" value="true"/>
       <property name="violateExecutionOnNonTightHtml" value="false"/>
-    </module> 
+    </module>
     -->
-    <!-- 
+    <!--
     <module name="JavadocStyle">
       <property name="checkEmptyJavadoc" value="false"/>
       <property name="checkFirstSentence" value="true"/>
@@ -397,13 +397,13 @@
       <property name="excludeScope" value=""/>
       <property name="scope" value="private"/>
       <property name="tokens" value="ANNOTATION_DEF, ANNOTATION_FIELD_DEF, CLASS_DEF, CTOR_DEF, ENUM_CONSTANT_DEF, ENUM_DEF, INTERFACE_DEF, METHOD_DEF, PACKAGE_DEF, VARIABLE_DEF, RECORD_DEF, COMPACT_CTOR_DEF"/>
-    </module> 
+    </module>
     -->
-    <!-- 
+    <!--
     <module name="JavadocTagContinuationIndentation">
       <property name="offset" value="2"/>
       <property name="violateExecutionOnNonTightHtml" value="false"/>
-    </module> 
+    </module>
     -->
     <module name="JavadocType">
       <property name="severity" value="warning"/>
@@ -457,57 +457,57 @@
       <property name="period" value="."/>
       <property name="violateExecutionOnNonTightHtml" value="false"/>
     </module>
-    <!-- 
+    <!--
     <module name="WriteTag">
       <property name="tag" value=""/>
       <property name="tagFormat" value=""/>
       <property name="tagSeverity" value="info"/>
       <property name="tokens" value="INTERFACE_DEF, CLASS_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF"/>
-    </module> 
+    </module>
     -->
 
     <!-- Metrics -->
-    <!-- 
+    <!--
     <module name="BooleanExpressionComplexity">
       <property name="max" value="3"/>
       <property name="tokens" value="LAND, BAND, LOR, BOR, BXOR"/>
-    </module> 
+    </module>
     -->
-    <!-- 
+    <!--
     <module name="ClassDataAbstractionCoupling">
       <property name="excludeClassesRegexps" value="^$"/>
       <property name="excludedClasses" value="ArrayIndexOutOfBoundsException, ArrayList, Boolean, Byte, Character, Class, Collection, Deprecated, Deque, Double, DoubleStream, EnumSet, Exception, Float, FunctionalInterface, HashMap, HashSet, IllegalArgumentException, IllegalStateException, IndexOutOfBoundsException, IntStream, Integer, LinkedHashMap, LinkedHashSet, LinkedList, List, Long, LongStream, Map, NullPointerException, Object, Optional, OptionalDouble, OptionalInt, OptionalLong, Override, Queue, RuntimeException, SafeVarargs, SecurityException, Set, Short, SortedMap, SortedSet, Stream, String, StringBuffer, StringBuilder, SuppressWarnings, Throwable, TreeMap, TreeSet, UnsupportedOperationException, Void, boolean, byte, char, double, float, int, long, short, var, void"/>
       <property name="excludedPackages" value=""/>
       <property name="max" value="7"/>
-    </module> 
+    </module>
     -->
-    <!-- 
+    <!--
     <module name="ClassFanOutComplexity">
       <property name="excludeClassesRegexps" value="^$"/>
       <property name="excludedClasses" value="ArrayIndexOutOfBoundsException, ArrayList, Boolean, Byte, Character, Class, Collection, Deprecated, Deque, Double, DoubleStream, EnumSet, Exception, Float, FunctionalInterface, HashMap, HashSet, IllegalArgumentException, IllegalStateException, IndexOutOfBoundsException, IntStream, Integer, LinkedHashMap, LinkedHashSet, LinkedList, List, Long, LongStream, Map, NullPointerException, Object, Optional, OptionalDouble, OptionalInt, OptionalLong, Override, Queue, RuntimeException, SafeVarargs, SecurityException, Set, Short, SortedMap, SortedSet, Stream, String, StringBuffer, StringBuilder, SuppressWarnings, Throwable, TreeMap, TreeSet, UnsupportedOperationException, Void, boolean, byte, char, double, float, int, long, short, var, void"/>
       <property name="excludedPackages" value=""/>
       <property name="max" value="20"/>
-    </module> 
+    </module>
     -->
-    <!-- 
+    <!--
     <module name="CyclomaticComplexity">
       <property name="max" value="10"/>
       <property name="switchBlockAsSingleDecisionPoint" value="false"/>
       <property name="tokens" value="LITERAL_WHILE, LITERAL_DO, LITERAL_FOR, LITERAL_IF, LITERAL_SWITCH, LITERAL_CASE, LITERAL_CATCH, QUESTION, LAND, LOR"/>
-    </module> 
+    </module>
     -->
-    <!-- 
+    <!--
     <module name="JavaNCSS">
       <property name="classMaximum" value="1500"/>
       <property name="fileMaximum" value="2000"/>
       <property name="methodMaximum" value="50"/>
       <property name="recordMaximum" value="150"/>
-    </module> 
+    </module>
     -->
-    <!-- 
+    <!--
     <module name="NPathComplexity">
       <property name="max" value="200"/>
-    </module> 
+    </module>
     -->
 
     <!-- Miscellaneous -->
@@ -524,7 +524,7 @@
     <module name="CommentsIndentation">
       <property name="tokens" value="SINGLE_LINE_COMMENT, BLOCK_COMMENT_BEGIN"/>
     </module>
-    <!-- 
+    <!--
     <module name="DescendantToken">
       <property name="limitedTokens" value=""/>
       <property name="maximumDepth" value="2147483647"/>
@@ -535,7 +535,7 @@
       <property name="minimumNumber" value="0"/>
       <property name="sumTokenCounts" value="false"/>
       <property name="tokens" value=""/>
-    </module> 
+    </module>
     -->
     <module name="FinalParameters">
       <property name="ignorePrimitiveTypes" value="false"/>
@@ -576,7 +576,7 @@
     </module>
 
     <!-- Modifiers -->
-    <!-- 
+    <!--
     <module name="ClassMemberImpliedModifier">
       <property name="violateImpliedStaticOnNestedEnum" value="true"/>
       <property name="violateImpliedStaticOnNestedInterface" value="true"/>
@@ -601,7 +601,7 @@
     </module>
 
     <!-- Naming Conventions -->
-    <!-- 
+    <!--
     <module name="AbbreviationAsWordInName">
       <property name="allowedAbbreviationLength" value="3"/>
       <property name="allowedAbbreviations" value=""/>
@@ -610,7 +610,7 @@
       <property name="ignoreStatic" value="true"/>
       <property name="ignoreStaticFinal" value="true"/>
       <property name="tokens" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF, PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF, PATTERN_VARIABLE_DEF, RECORD_DEF, RECORD_COMPONENT_DEF"/>
-    </module> 
+    </module>
     -->
     <module name="AbstractClassName">
       <property name="format" value="^Abstract.+$"/>
@@ -679,7 +679,7 @@
       <property name="severity" value="warning"/>
       <property name="accessModifiers" value="public, protected, package, private"/>
       <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
-      <property name="ignoreOverridden 	" value="false"/>
+      <property name="ignoreOverridden" value="false"/>
     </module>
     <module name="PatternVariableName">
       <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
@@ -709,7 +709,7 @@
     </module>
 
     <!-- Regexp -->
-    <!-- 
+    <!--
     <module name="Regexp">
       <property name="duplicateLimit" value="0"/>
       <property name="errorLimit" value="100"/>
@@ -717,9 +717,9 @@
       <property name="ignoreComments" value="false"/>
       <property name="illegalPattern" value="false"/>
       <property name="message" value=""/>
-    </module> 
+    </module>
     -->
-    <!-- 
+    <!--
     <module name="RegexpMultiline">
       <property name="fileExtensions" value="*"/>
       <property name="format" value="$."/>
@@ -730,7 +730,7 @@
       <property name="minimum" value="0"/>
     </module>
     -->
-    <!-- 
+    <!--
     <module name="RegexpOnFilename">
       <property name="fileExtensions" value="*"/>
       <property name="fileNamePattern" value=""/>
@@ -739,7 +739,7 @@
       <property name="match" value="true"/>
     </module>
     -->
-    <!-- 
+    <!--
     <module name="RegexpSingleline">
       <property name="fileExtensions" value="*"/>
       <property name="format" value="$."/>
@@ -747,9 +747,9 @@
       <property name="maximum" value="0"/>
       <property name="message" value=""/>
       <property name="minimum" value="0"/>
-    </module> 
+    </module>
     -->
-    <!-- 
+    <!--
     <module name="RegexpSinglelineJava">
       <property name="format" value="$."/>
       <property name="ignoreCase" value="false"/>
@@ -757,18 +757,18 @@
       <property name="maximum" value="0"/>
       <property name="message" value=""/>
       <property name="minimum" value="0"/>
-    </module> 
+    </module>
     -->
 
     <!-- Size Violations -->
     <module name="AnonInnerLength">
       <property name="max" value="100"/>
     </module>
-    <!-- 
+    <!--
     <module name="ExecutableStatementCount">
       <property name="max" value="30"/>
       <property name="tokens" value="CTOR_DEF, METHOD_DEF, INSTANCE_INIT, STATIC_INIT, COMPACT_CTOR_DEF, LAMBDA"/>
-    </module> 
+    </module>
     -->
     <module name="LambdaBodyLength">
       <property name="max" value="18"/>
@@ -864,7 +864,7 @@
     <module name="WhitespaceAround">
       <property name="severity" value="warning"/>
       <property name="allowEmptyCatches" value="false"/>
-      <property name="allowEmptyConstructors 	" value="false"/>
+      <property name="allowEmptyConstructors" value="false"/>
       <property name="allowEmptyLambdas" value="false"/>
       <property name="allowEmptyLoops" value="false"/>
       <property name="allowEmptyMethods" value="false"/>
@@ -876,7 +876,7 @@
   </module>
 
   <!-- Headers -->
-  <!-- 
+  <!--
   <module name="Header">
     <!- - <property name="charset" value=""/> - ->
     <property name="fileExtensions" value="java"/>
@@ -885,7 +885,7 @@
     <property name="ignoreLines" value=""/>
   </module>
   -->
-   <module name="RegexpHeader">
+  <module name="RegexpHeader">
     <!-- <property name="charset" value="UTF-8"/> -->
     <property name="fileExtensions" value="java"/>
     <property name="header" value="^/\*\n \* Copyright \(C\) (\d\d\d\d)(-(\d\d\d\d))?(,(\d\d\d\d)(-(\d\d\d\d))?)* Dipl.-Inform. Kai Hofmann. All rights reserved!\n \*/$"/>
@@ -919,7 +919,7 @@
   </module>
 
   <!-- Regexp -->
-  <!-- 
+  <!--
   <module name="RegexpMultiline">
     <property name="format" value="$."/>
     <property name="message" value=""/>
@@ -928,18 +928,18 @@
     <property name="maximum" value="0"/>
     <property name="matchAcrossLines" value="false"/>
     <property name="fileExtensions" value="*"/>
-  </module> 
+  </module>
   -->
-  <!-- 
+  <!--
   <module name="RegexpOnFilename">
     <property name="folderPattern value=""/>
     <property name="fileNamePattern value=""/>
     <property name="match value="true"/>
     <property name="ignoreFileNameExtensions" value="false"/>
     <property name="fileExtensions" value="*"/>
-  </module> 
+  </module>
   -->
-  <!-- 
+  <!--
   <module name="RegexpSingleline">
     <property name="format" value="$."/>
     <property name="message" value=""/>
@@ -947,7 +947,7 @@
     <property name="minimum" value="0"/>
     <property name="maximum" value="0"/>
     <property name="fileExtensions" value="*"/>
-  </module> 
+  </module>
   -->
 
   <!-- Size violations -->
@@ -969,7 +969,7 @@
     <property name="eachLine" value="false"/>
     <property name="fileExtensions" value="java,xml,dtd"/>
   </module>
-  
+
   <!-- Filters -->
   <module name="SuppressWarningsFilter">
   </module>

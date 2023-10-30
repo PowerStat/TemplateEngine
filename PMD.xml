@@ -329,7 +329,7 @@
   </rule>
   <rule ref="category/java/codestyle.xml/UnnecessaryAnnotationValueElement" />
   <rule ref="category/java/codestyle.xml/UnnecessaryCast" />
-  <!-- 
+  <!--
   <rule ref="category/java/codestyle.xml/UnnecessaryConstructor">
     <properties>
       <property name="ignoredAnnotations" value="javax.inject.Inject" />
@@ -378,7 +378,7 @@
   <rule ref="category/java/design.xml/AvoidThrowingRawExceptionTypes" />
   <rule ref="category/java/design.xml/AvoidUncheckedExceptionsInSignatures" />
   <rule ref="category/java/design.xml/ClassWithOnlyPrivateConstructorsShouldBeFinal" />
-  <!-- 
+  <!--
   <rule ref="category/java/design.xml/CognitiveComplexity">
     <properties>
       <property name="reportLevel" value="15" />
@@ -431,13 +431,13 @@
     </properties>
   </rule>
   <rule ref="category/java/design.xml/LogicInversion" />
-  <!-- 
+  <!--
   <rule ref="category/java/design.xml/LoosePackageCoupling">
     <properties>
       <property name="packages" value="" />
       <property name="classes" value="" />
     </properties>
-  </rule> 
+  </rule>
   -->
   <rule ref="category/java/design.xml/MutableStaticState" />
   <rule ref="category/java/design.xml/NcssCount">
@@ -577,13 +577,13 @@
       <property name="strict" value="false" />
     </properties>
   </rule>
-  <!-- 
+  <!--
   <rule ref="category/java/errorprone.xml/BeanMembersShouldSerialize">
     <properties>
       <property name="ignoredAnnotations" value="lombok.Data|lombok.Getter|lombok.Value" />
       <property name="prefix" value="" />
     </properties>
-  </rule> 
+  </rule>
   -->
   <rule ref="category/java/errorprone.xml/BrokenNullCheck" />
   <rule ref="category/java/errorprone.xml/CallSuperFirst" />
@@ -768,7 +768,7 @@
 
   <!-- Maven POM Rules -->
   <!-- Maven error prone -->
-  
+
   <!-- Modelica Rules -->
   <!-- PLSQL Rules -->
   <!-- Salesforce VisualForce Rules -->
@@ -776,10 +776,10 @@
 
   <!-- XML Rules -->
   <!-- XML error prone -->
-  
+
   <!-- XSL Rules -->
   <!-- XSL code style-->
-  
+
   <!-- XSL performance-->
 
 </ruleset>
