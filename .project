@@ -31,7 +31,7 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>ch.acanda.eclipse.pmd.builder.PMDBuilder</name>
+			<name>net.sourceforge.pmd.eclipse.plugin.pmdBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -41,7 +41,7 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>net.sourceforge.pmd.eclipse.plugin.pmdBuilder</name>
+			<name>ch.acanda.eclipse.pmd.builder.PMDBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -52,6 +52,6 @@
 		<nature>net.sf.eclipsecs.core.CheckstyleNature</nature>
 		<nature>edu.umd.cs.findbugs.plugin.eclipse.findbugsNature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
-		<nature>net.sourceforge.pmd.eclipse.plugin.pmdNature</nature>
+		<nature>ch.acanda.eclipse.pmd.builder.PMDNature</nature>
 	</natures>
 </projectDescription>

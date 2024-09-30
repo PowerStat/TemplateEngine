@@ -28,6 +28,7 @@ pipeline
 
   environment
    {
+    DISABLE_AUTH = 'true'
     expectedRemoteUrl = "https://github.com/PowerStat/TemplateEngine.git"
    }
 

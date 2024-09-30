@@ -8,13 +8,7 @@
   <!-- Ecmascript Rules -->
   <!-- Ecmascript best practices -->
   <rule ref="category/ecmascript/bestpractices.xml/AvoidWithStatement" />
-  <rule ref="category/ecmascript/bestpractices.xml/ConsistentReturn">
-    <properties>
-      <property name="rhinoLanguageVersion" value="ES6" />
-      <property name="recordingLocalJsDocComments" value="true" />
-      <property name="recordingComments" value="true" />
-    </properties>
-  </rule>
+  <rule ref="category/ecmascript/bestpractices.xml/ConsistentReturn" />
   <rule ref="category/ecmascript/bestpractices.xml/GlobalVariable" />
   <rule ref="category/ecmascript/bestpractices.xml/ScopeForInVariable" />
   <rule ref="category/ecmascript/bestpractices.xml/UseBaseWithParseInt" />
@@ -78,7 +72,7 @@
   <rule ref="category/java/bestpractices.xml/AvoidStringBufferField" />
   <rule ref="category/java/bestpractices.xml/AvoidUsingHardCodedIP">
     <properties>
-      <property name="checkAddressTypes" value="IPv4 mapped IPv6|IPv6|IPv4" />
+      <property name="checkAddressTypes" value="IPv4,IPv6,IPv4 mapped IPv6" />
     </properties>
   </rule>
   <rule ref="category/java/bestpractices.xml/CheckResultSet" />
@@ -153,7 +147,7 @@
   <rule ref="category/java/bestpractices.xml/UnusedLocalVariable" />
   <rule ref="category/java/bestpractices.xml/UnusedPrivateField">
     <properties>
-      <property name="ignoredFieldNames" value="serialVersionUID|serialPersistentFields" />
+      <property name="ignoredFieldNames" value="serialVersionUID,serialPersistentFields" />
     </properties>
   </rule>
   <rule ref="category/java/bestpractices.xml/UnusedPrivateMethod">
@@ -174,7 +168,7 @@
   <!-- Java code style -->
   <rule ref="category/java/codestyle.xml/AtLeastOneConstructor">
     <properties>
-      <property name="ignoredAnnotations" value="lombok.Data|lombok.Value|lombok.Builder|lombok.NoArgsConstructor|lombok.RequiredArgsConstructor|lombok.AllArgsConstructor" />
+      <property name="ignoredAnnotations" value="lombok.Data,lombok.Value,lombok.Builder,lombok.NoArgsConstructor,lombok.RequiredArgsConstructor,lombok.AllArgsConstructor" />
     </properties>
   </rule>
   <rule ref="category/java/codestyle.xml/AvoidDollarSigns" />
@@ -199,7 +193,7 @@
   </rule>
   <rule ref="category/java/codestyle.xml/CommentDefaultAccessModifier">
     <properties>
-      <property name="ignoredAnnotations" value="com.google.common.annotations.VisibleForTesting | android.support.annotation.VisibleForTesting | org.junit.jupiter.api.Test | org.junit.jupiter.api.ParameterizedTest | org.junit.jupiter.api.RepeatedTest | org.junit.jupiter.api.TestFactory | org.junit.jupiter.api.TestTemplate | org.junit.jupiter.api.BeforeEach | org.junit.jupiter.api.BeforeAll | org.junit.jupiter.api.AfterEach | org.junit.jupiter.api.AfterAll" />
+      <property name="ignoredAnnotations" value="com.google.common.annotations.VisibleForTesting,android.support.annotation.VisibleForTesting,org.junit.jupiter.api.Test,org.junit.jupiter.api.ParameterizedTest,org.junit.jupiter.api.RepeatedTest,org.junit.jupiter.api.TestFactory,org.junit.jupiter.api.TestTemplate,org.junit.jupiter.api.BeforeEach,org.junit.jupiter.api.BeforeAll,org.junit.jupiter.api.AfterEach,org.junit.jupiter.api.AfterAll" />
       <property name="regex" value="\/\*\s+(default|package)\s+\*\/" />
       <property name="checkTopLevelTypes" value="false" />
     </properties>
@@ -238,7 +232,7 @@
       <property name="finalFieldPattern" value="[a-z][a-zA-Z0-9]*" />
       <property name="staticFieldPattern" value="[a-z][a-zA-Z0-9]*" />
       <property name="defaultFieldPattern" value="[a-z][a-zA-Z0-9]*" />
-      <property name="exclusions" value="serialVersionUID|serialPersistentFields" />
+      <property name="exclusions" value="serialVersionUID,serialPersistentFields" />
     </properties>
   </rule>
   <rule ref="category/java/codestyle.xml/FinalParameterInAbstractMethod" />
@@ -255,17 +249,17 @@
   <rule ref="category/java/codestyle.xml/IdenticalCatchBranches" />
   <rule ref="category/java/codestyle.xml/LinguisticNaming">
     <properties>
-      <property name="ignoredAnnotations" value="java.lang.Override|org.junit.jupiter.api.Test|org.junit.jupiter.params.ParameterizedTest" />
+      <property name="ignoredAnnotations" value="java.lang.Override,org.junit.jupiter.api.Test,org.junit.jupiter.params.ParameterizedTest" />
       <property name="checkBooleanMethod" value="true" />
       <property name="checkGetters" value="true" />
       <property name="checkSetters" value="true" />
       <property name="checkPrefixedTransformMethods" value="true" />
       <property name="checkTransformMethods" value="false" />
-      <property name="booleanMethodPrefixes" value="is|has|can|have|will|should" />
-      <property name="transformMethodNames" value="to|as" />
+      <property name="booleanMethodPrefixes" value="is,has,can,have,will,should" />
+      <property name="transformMethodNames" value="to,as" />
       <property name="checkFields" value="true" />
       <property name="checkVariables" value="true" />
-      <property name="booleanFieldPrefixes" value="is|has|can|have|will|should" />
+      <property name="booleanFieldPrefixes" value="is,has,can,have,will,should" />
     </properties>
   </rule>
   <rule ref="category/java/codestyle.xml/LocalHomeNamingConvention" />
@@ -346,11 +340,7 @@
   <rule ref="category/java/codestyle.xml/UnnecessaryModifier" />
   <rule ref="category/java/codestyle.xml/UnnecessaryReturn" />
   <rule ref="category/java/codestyle.xml/UnnecessarySemicolon" />
-  <rule ref="category/java/codestyle.xml/UseDiamondOperator">
-    <properties>
-      <property name="java7Compatibility" value="false" />
-    </properties>
-  </rule>
+  <rule ref="category/java/codestyle.xml/UseDiamondOperator" />
   <!-- 
   <rule ref="category/java/codestyle.xml/UselessParentheses" /> 
   -->
@@ -420,11 +410,7 @@
   <!-- 
   <rule ref="category/java/design.xml/GodClass" /> 
   -->
-  <rule ref="category/java/design.xml/ImmutableField">
-    <properties>
-      <property name="ignoredAnnotations" value="lombok.Setter|lombok.Getter|lombok.Builder|lombok.Data|lombok.RequiredArgsConstructor|lombok.AllArgsConstructor|lombok.Value|lombok.NoArgsConstructor" />
-    </properties>
-  </rule>
+  <rule ref="category/java/design.xml/ImmutableField" />
   <rule ref="category/java/design.xml/LawOfDemeter">
     <properties>
       <property name="violationSuppressRegex" value="Potential violation of Law of Demeter \((method chain calls|object not created locally|static property access)\)"/>
@@ -463,14 +449,12 @@
   <rule ref="category/java/design.xml/SimplifyConditional" />
   <rule ref="category/java/design.xml/SingularField">
     <properties>
-      <property name="ignoredAnnotations" value="lombok.Setter|lombok.Getter|lombok.Builder|lombok.Data|lombok.RequiredArgsConstructor|lombok.AllArgsConstructor|lombok.Value|lombok.NoArgsConstructor|lombok.experimental.Delegate|lombok.EqualsAndHashCode" />
-      <property name="checkInnerClasses" value="false" />
-      <property name="disallowNotAssignment" value="false" />
+      <property name="ignoredAnnotations" value="lombok.Setter,lombok.Getter,lombok.Builder,lombok.Data,lombok.RequiredArgsConstructor,lombok.AllArgsConstructor,lombok.Value,lombok.NoArgsConstructor,lombok.experimental.Delegate,lombok.EqualsAndHashCode" />
     </properties>
   </rule>
   <rule ref="category/java/design.xml/SwitchDensity">
     <properties>
-      <property name="minimum" value="10.0" />
+      <property name="minimum" value="10" />
     </properties>
   </rule>
   <rule ref="category/java/design.xml/TooManyFields">
@@ -489,17 +473,12 @@
     </properties>
   </rule>
   <rule ref="category/java/design.xml/UseObjectForClearerAPI" />
-  <rule ref="category/java/design.xml/UseUtilityClass">
-    <properties>
-      <property name="ignoredAnnotations" value="lombok.experimental.UtilityClass" />
-    </properties>
-  </rule>
+  <rule ref="category/java/design.xml/UseUtilityClass" />
 
   <!-- Java documentation -->
   <rule ref="category/java/documentation.xml/CommentContent">
     <properties>
-      <property name="caseSensitive" value="false" />
-      <property name="disallowedTerms" value="idiot|jerk" />
+      <property name="forbiddenRegex" value="idiot|jerk" />
     </properties>
   </rule>
   <rule ref="category/java/documentation.xml/CommentRequired">
@@ -542,9 +521,9 @@
   <rule ref="category/java/errorprone.xml/AvoidAssertAsIdentifier" />
   <rule ref="category/java/errorprone.xml/AvoidBranchingStatementAsLastInLoop">
     <properties>
-      <property name="checkBreakLoopTypes" value="for|do|while" />
-      <property name="checkContinueLoopTypes" value="for|do|while" />
-      <property name="checkReturnLoopTypes" value="for|do|while" />
+      <property name="checkBreakLoopTypes" value="for,do,while" />
+      <property name="checkContinueLoopTypes" value="for,do,while" />
+      <property name="checkReturnLoopTypes" value="for,do,while" />
     </properties>
   </rule>
   <rule ref="category/java/errorprone.xml/AvoidCallingFinalize" />
@@ -553,7 +532,6 @@
   <rule ref="category/java/errorprone.xml/AvoidDecimalLiteralsInBigDecimalConstructor" />
   <rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
     <properties>
-      <property name="separator" value="," />
       <property name="maxDuplicateLiterals" value="4" />
       <property name="minimumLength" value="3" />
       <property name="skipAnnotations" value="false" />
@@ -580,7 +558,7 @@
   <!--
   <rule ref="category/java/errorprone.xml/BeanMembersShouldSerialize">
     <properties>
-      <property name="ignoredAnnotations" value="lombok.Data|lombok.Getter|lombok.Value" />
+      <property name="ignoredAnnotations" value="lombok.Data,lombok.Getter,lombok.Value" />
       <property name="prefix" value="" />
     </properties>
   </rule>
@@ -598,7 +576,7 @@
       <property name="closeTargets" value="" />
       <property name="types" value="java.lang.AutoCloseable,java.sql.Connection,java.sql.Statement,java.sql.ResultSet" />
       <property name="closeAsDefaultTarget" value="true" />
-      <property name="allowedResourceTypes" value="java.io.ByteArrayOutputStream|java.io.ByteArrayInputStream|java.io.StringWriter|java.io.CharArrayWriter|java.util.stream.Stream|java.util.stream.IntStream|java.util.stream.LongStream|java.util.stream.DoubleStream" />
+      <property name="allowedResourceTypes" value="java.io.ByteArrayOutputStream,java.io.ByteArrayInputStream,java.io.StringWriter,java.io.CharArrayWriter,java.util.stream.Stream,java.util.stream.IntStream,java.util.stream.LongStream,java.util.stream.DoubleStream" />
       <property name="closeNotInFinally" value="false" />
     </properties>
   </rule>
