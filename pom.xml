@@ -5,7 +5,7 @@
   <parent>
     <groupId>de.powerstat.toolbaseline</groupId>
     <artifactId>tbl-java-parent</artifactId>
-    <version>17.1.0</version>
+    <version>17.1.1</version>
   </parent>
 
   <groupId>de.powerstat.phplib</groupId>
@@ -20,6 +20,7 @@
   <properties>
     <license.inceptionYear>2015</license.inceptionYear>
     
+    <sonarTypeServer>ossrh</sonarTypeServer>
     <sonarTypeHost>oss.sonatype.org</sonarTypeHost>
 
   </properties>
