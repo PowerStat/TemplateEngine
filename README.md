@@ -17,7 +17,7 @@ For example when using Apache Maven you could add the following dependency to yo
     <dependency>
       <groupId>de.powerstat.phplib</groupId>
       <artifactId>templateengine</artifactId>
-      <version>2.1.0</version>
+      <version>2.2.0</version>
     </dependency>
 
 Please add the following entry to your maven `settings.xml`:
