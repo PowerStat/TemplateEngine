@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2022-2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0.
  */
 package de.powerstat.phplib.templateengine;
 
@@ -95,7 +96,7 @@ public class StepDefinitions
   @Given("A template with a variable")
   public void a_template_with_a_variable() throws IOException
    {
-    this.engine = TemplateEngine.newInstance(new File(StepDefinitions.TEMPLATE1_TMPL));
+    this.engine = TemplateEngine.newInstance(new File(TEMPLATE1_TMPL));
    }
 
 
@@ -107,8 +108,8 @@ public class StepDefinitions
   @When("The template is processed to replace the variable")
   public void the_template_is_processed_to_replace_the_variable() throws IOException
    {
-    this.engine.setVar(StepDefinitions.VARIABLE1, StepDefinitions.HELLO_WORLD);
-    this.resultVar = this.engine.subst(StepDefinitions.TEMPLATE);
+    this.engine.setVar(VARIABLE1, HELLO_WORLD);
+    this.resultVar = this.engine.subst(TEMPLATE);
    }
 
 
@@ -118,7 +119,7 @@ public class StepDefinitions
   @Then("The variable is replaced with the value hello world")
   public void the_variable_is_replaced_with_the_value_hello_world()
    {
-    assertEquals("123\nhello world\n456\n", this.resultVar, StepDefinitions.RESULT_NOT_AS_EXPECTED); //$NON-NLS-1$
+    assertEquals("123\nhello world\n456\n", this.resultVar, RESULT_NOT_AS_EXPECTED); //$NON-NLS-1$
    }
 
 
@@ -130,7 +131,7 @@ public class StepDefinitions
   @Given("A template with a block")
   public void a_template_with_a_block() throws IOException
    {
-    this.engine = TemplateEngine.newInstance(new File(StepDefinitions.TEMPLATE2_TMPL));
+    this.engine = TemplateEngine.newInstance(new File(TEMPLATE2_TMPL));
    }
 
 
@@ -142,12 +143,12 @@ public class StepDefinitions
   @When("The template is processed to replace the block")
   public void the_template_is_processed_to_replace_the_block() throws IOException
    {
-    /* final boolean successBlock = */ this.engine.setBlock(StepDefinitions.TEMPLATE, StepDefinitions.BLK1, StepDefinitions.BLK1_BLK);
-    this.engine.setVar(StepDefinitions.BLK1, StepDefinitions.HELLO_WORLD);
-    this.engine.setVar(StepDefinitions.VARIABLE1, ""); //$NON-NLS-1$
+    /* final boolean successBlock = */ this.engine.setBlock(TEMPLATE, BLK1, BLK1_BLK);
+    this.engine.setVar(BLK1, HELLO_WORLD);
+    this.engine.setVar(VARIABLE1, ""); //$NON-NLS-1$
     this.engine.setVar("variable3", ""); //$NON-NLS-1$ //$NON-NLS-2$
-    /* String parseResult = */ this.engine.parse(StepDefinitions.BLK1_BLK, StepDefinitions.BLK1, false);
-    this.resultBlock = this.engine.subst(StepDefinitions.TEMPLATE);
+    /* String parseResult = */ this.engine.parse(BLK1_BLK, BLK1, false);
+    this.resultBlock = this.engine.subst(TEMPLATE);
    }
 
 
@@ -157,7 +158,7 @@ public class StepDefinitions
   @Then("The block is replaced with the value hello world")
   public void the_block_is_replaced_with_the_value_hello_world()
    {
-    assertEquals("123\n\n456\nhello world\ndef\n\nghi\n", this.resultBlock, StepDefinitions.RESULT_NOT_AS_EXPECTED); //$NON-NLS-1$
+    assertEquals("123\n\n456\nhello world\ndef\n\nghi\n", this.resultBlock, RESULT_NOT_AS_EXPECTED); //$NON-NLS-1$
    }
 
  }

@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2019-2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Copyright (C) 2019-2025 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0.
  */
 package de.powerstat.phplib.templateengine.intern.test;
 
@@ -16,10 +17,10 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
-
+import nl.jqno.equalsverifier.*;
+import de.powerstat.phplib.templateengine.TemplateEngine;
 import de.powerstat.phplib.templateengine.intern.FileManager;
 import de.powerstat.phplib.templateengine.intern.VariableManager;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 
 /**
@@ -240,7 +241,7 @@ final class FileManagerTests
    * existsFile test.
    */
   @Test
-  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
+  // @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   /* default */ void testExistsFile5()
    {
     final VariableManager vm1 = new VariableManager();
@@ -350,56 +351,12 @@ final class FileManagerTests
 
 
   /**
-   * Test hash code.
+   * Equalsverifier.
    */
   @Test
-  /* default */ void testHashCode()
+  public void equalsContract()
    {
-    final VariableManager vm1 = new VariableManager();
-    final FileManager fm1 = new FileManager(vm1);
-    final FileManager fm2 = new FileManager(vm1);
-    final FileManager fm3 = new FileManager(vm1);
-    /* final boolean result = */ fm3.addFile(FILENAME1, new File(TEMPLATE1_FILE));
-    assertAll("testHashCode", //$NON-NLS-1$
-      () -> assertEquals(fm1.hashCode(), fm2.hashCode(), "hashCodes are not equal"), //$NON-NLS-1$
-      () -> assertNotEquals(fm1.hashCode(), fm3.hashCode(), "hashCodes are equal") //$NON-NLS-1$
-    );
-   }
-
-
-  /**
-   * Test equals.
-   */
-  @Test
-  @SuppressFBWarnings("EC_NULL_ARG")
-  @SuppressWarnings({"PMD.EqualsNull", "java:S5785"})
-  /* default */ void testEquals()
-   {
-    final VariableManager vm1 = new VariableManager();
-    final VariableManager vm2 = new VariableManager();
-    vm2.setVar("test1", "test");
-    final VariableManager vm3 = new VariableManager();
-    final VariableManager vm4 = new VariableManager();
-    final FileManager fm1 = new FileManager(vm1);
-    final FileManager fm2 = new FileManager(vm1);
-    final FileManager fm3 = new FileManager(vm2);
-    final FileManager fm4 = new FileManager(vm1);
-    final FileManager fm5 = new FileManager(vm3);
-    /* final boolean result = */ fm5.addFile(FILENAME1, new File(TEMPLATE1_FILE));
-    final FileManager fm6 = new FileManager(vm4);
-    /* final boolean result = */ fm6.addFile("filename2", new File("target/test-classes/templates/template2.tmpl"));
-    assertAll("testEquals", //$NON-NLS-1$
-      () -> assertTrue(fm1.equals(fm1), "FileManager11 is not equal"), //$NON-NLS-1$
-      () -> assertTrue(fm1.equals(fm2), "FileManager12 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(fm2.equals(fm1), "FileManager21 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(fm2.equals(fm4), "FileManager24 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(fm1.equals(fm4), "FileManager14 are not equal"), //$NON-NLS-1$
-      () -> assertFalse(fm1.equals(fm3), "FileManager13 are equal"), //$NON-NLS-1$
-      () -> assertFalse(fm3.equals(fm1), "FileManager31 are equal"), //$NON-NLS-1$
-      () -> assertFalse(fm1.equals(null), "FileManager10 is equal"), //$NON-NLS-1$
-      () -> assertFalse(fm1.equals(fm5), "FileManager15 is equal"), //$NON-NLS-1$
-      () -> assertFalse(fm1.equals(fm6), "FileManager16 is equal") //$NON-NLS-1$
-    );
+    EqualsVerifier.forClass(FileManager.class).withNonnullFields("files", "variableManager").verify();
    }
 
  }

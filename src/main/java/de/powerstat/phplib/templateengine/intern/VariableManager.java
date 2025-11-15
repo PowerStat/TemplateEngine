@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2002-2003,2017-2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0.
  */
 package de.powerstat.phplib.templateengine.intern;
 
@@ -138,7 +139,7 @@ public final class VariableManager
   public List<String> getUndefined(final String varname)
    {
     // TODO asserts
-    final var matcher = VariableManager.BLOCK_MATCHER_REGEXP.matcher(getVar(varname));
+    final var matcher = BLOCK_MATCHER_REGEXP.matcher(getVar(varname));
     boolean result = matcher.find();
     final List<String> undefvars = new ArrayList<>();
     while (result)
@@ -190,7 +191,7 @@ public final class VariableManager
     // assert (block != null) && !block.isEmpty();
     // assert block.matches("^.+$")
     // Get variable names to replace from varname
-    final var matcherTemplate = VariableManager.TEMPLATE_MATCHER_REGEXP.matcher(block);
+    final var matcherTemplate = TEMPLATE_MATCHER_REGEXP.matcher(block);
     final Set<String> varsSetTemplate = new TreeSet<>();
     while (matcherTemplate.find())
      {
@@ -303,17 +304,17 @@ public final class VariableManager
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
+  @SuppressWarnings("PMD.SimplifyBooleanReturns")
   public boolean equals(final Object obj)
    {
     if (this == obj)
      {
       return true;
      }
-    if (!(obj instanceof VariableManager))
+    if (!(obj instanceof final VariableManager other))
      {
       return false;
      }
-    final VariableManager other = (VariableManager)obj;
     return this.vars.equals(other.vars);
    }
 

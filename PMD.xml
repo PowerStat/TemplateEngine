@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. -->
 <ruleset name="PowerStat Rules" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
   <description>This ruleset checks the code for discouraged programming constructs.</description>
 
@@ -41,7 +42,7 @@
     </properties>
   </rule>
   <rule ref="category/ecmascript/errorprone.xml/EqualComparison" />
-  <rule ref="category/ecmascript/errorprone.xml/InnaccurateNumericLiteral" />
+  <rule ref="category/ecmascript/errorprone.xml/InaccurateNumericLiteral" />
 
   <!-- HTML Rules -->
   <!-- HTML best practices -->
@@ -81,7 +82,7 @@
       <property name="ignoreIfHasMethods" value="true" />
     </properties>
   </rule>
-  <rule ref="category/java/bestpractices.xml/DefaultLabelNotLastInSwitchStmt" />
+  <rule ref="category/java/bestpractices.xml/DefaultLabelNotLastInSwitch" />
   <rule ref="category/java/bestpractices.xml/DoubleBraceInitialization" />
   <rule ref="category/java/bestpractices.xml/ForLoopCanBeForeach" />
   <rule ref="category/java/bestpractices.xml/ForLoopVariableCount">
@@ -98,9 +99,9 @@
   </rule>
   -->
   <rule ref="category/java/bestpractices.xml/JUnit4SuitesShouldUseSuiteAnnotation" />
-  <rule ref="category/java/bestpractices.xml/JUnit4TestShouldUseAfterAnnotation" />
-  <rule ref="category/java/bestpractices.xml/JUnit4TestShouldUseBeforeAnnotation" />
-  <rule ref="category/java/bestpractices.xml/JUnit4TestShouldUseTestAnnotation">
+  <rule ref="category/java/bestpractices.xml/UnitTestShouldUseAfterAnnotation" />
+  <rule ref="category/java/bestpractices.xml/UnitTestShouldUseBeforeAnnotation" />
+  <rule ref="category/java/bestpractices.xml/UnitTestShouldUseTestAnnotation">
     <properties>
       <property name="testClassPattern" value="Test" />
     </properties>
@@ -108,13 +109,13 @@
   <!-- 
   <rule ref="category/java/bestpractices.xml/JUnit5TestShouldBePackagePrivate" />
   -->
-  <rule ref="category/java/bestpractices.xml/JUnitAssertionsShouldIncludeMessage" />
-  <rule ref="category/java/bestpractices.xml/JUnitTestContainsTooManyAsserts">
+  <rule ref="category/java/bestpractices.xml/UnitTestAssertionsShouldIncludeMessage" />
+  <rule ref="category/java/bestpractices.xml/UnitTestContainsTooManyAsserts">
     <properties>
       <property name="maximumAsserts" value="26" />
     </properties>
   </rule>
-  <rule ref="category/java/bestpractices.xml/JUnitTestsShouldIncludeAssert" />
+  <rule ref="category/java/bestpractices.xml/UnitTestShouldIncludeAssert" />
   <rule ref="category/java/bestpractices.xml/JUnitUseExpected" />
   <rule ref="category/java/bestpractices.xml/LiteralsFirstInComparisons" />
   <rule ref="category/java/bestpractices.xml/LooseCoupling" />
@@ -131,7 +132,7 @@
   <rule ref="category/java/bestpractices.xml/ReplaceHashtableWithMap" />
   <rule ref="category/java/bestpractices.xml/ReplaceVectorWithList" />
   <rule ref="category/java/bestpractices.xml/SimplifiableTestAssertion" />
-  <rule ref="category/java/bestpractices.xml/SwitchStmtsShouldHaveDefault" />
+  <rule ref="category/java/bestpractices.xml/NonExhaustiveSwitch" />
   <rule ref="category/java/bestpractices.xml/SystemPrintln" />
   <rule ref="category/java/bestpractices.xml/UnusedAssignment">
     <properties>
@@ -623,7 +624,7 @@
     </properties>
   </rule>
   <rule ref="category/java/errorprone.xml/MoreThanOneLogger" />
-  <rule ref="category/java/errorprone.xml/NonCaseLabelInSwitchStatement" />
+  <rule ref="category/java/errorprone.xml/NonCaseLabelInSwitch" />
   <rule ref="category/java/errorprone.xml/NonStaticInitializer" />
   <rule ref="category/java/errorprone.xml/NullAssignment" />
   <rule ref="category/java/errorprone.xml/OverrideBothEqualsAndHashcode" />
@@ -703,7 +704,7 @@
   <rule ref="category/java/performance.xml/RedundantFieldInitializer" />
   <rule ref="category/java/performance.xml/StringInstantiation" />
   <rule ref="category/java/performance.xml/StringToString" />
-  <rule ref="category/java/performance.xml/TooFewBranchesForASwitchStatement">
+  <rule ref="category/java/performance.xml/TooFewBranchesForSwitch">
     <properties>
       <property name="minimumNumberCaseForASwitch" value="3" />
     </properties>

@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2002-2003,2017-2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Copyright (C) 2002-2003,2017-2025 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0.
  */
 package de.powerstat.phplib.templateengine.intern;
 
@@ -44,7 +45,7 @@ public final class BlockManager
     super();
     Objects.requireNonNull(vManager, "vManager"); //$NON-NLS-1$
     Objects.requireNonNull(bManager, "bManager"); //$NON-NLS-1$
-    this.variableManager = vManager;
+    variableManager = vManager;
     /*
     for (final Map.Entry<String, String> entry : bManager.blocks.entrySet())
      {
@@ -63,7 +64,8 @@ public final class BlockManager
   public BlockManager(final VariableManager vManager)
    {
     super();
-    this.variableManager = vManager;
+    Objects.requireNonNull(vManager, "vManager"); //$NON-NLS-1$
+    variableManager = vManager;
    }
 
 
@@ -90,10 +92,10 @@ public final class BlockManager
       internName = varname;
      }
     final var pattern = Pattern.compile("<!--\\s+BEGIN " + varname + "\\s+-->(.*)<!--\\s+END " + varname + "\\s+-->", Pattern.DOTALL | Pattern.MULTILINE); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-    final var matcher = pattern.matcher(this.variableManager.getVar(parent));
+    final var matcher = pattern.matcher(variableManager.getVar(parent));
     final String str = matcher.replaceFirst("{" + internName + "}"); //$NON-NLS-1$ //$NON-NLS-2$
-    this.variableManager.setVar(varname, matcher.group(1));
-    this.variableManager.setVar(parent, str);
+    variableManager.setVar(varname, matcher.group(1));
+    variableManager.setVar(parent, str);
     return true;
    }
 
@@ -111,7 +113,7 @@ public final class BlockManager
   @Override
   public String toString()
    {
-    return new StringBuilder().append("BlockManager[vars=").append(this.variableManager.getVars()).append(']').toString(); //$NON-NLS-1$
+    return new StringBuilder().append("BlockManager[vars=").append(variableManager.getVars()).append(']').toString(); //$NON-NLS-1$
    }
 
 
@@ -124,7 +126,7 @@ public final class BlockManager
   @Override
   public int hashCode()
    {
-    return Objects.hash(this.variableManager);
+    return Objects.hash(variableManager);
    }
 
 
@@ -136,18 +138,18 @@ public final class BlockManager
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
+  @SuppressWarnings("PMD.SimplifyBooleanReturns")
   public boolean equals(final Object obj)
    {
     if (this == obj)
      {
       return true;
      }
-    if (!(obj instanceof BlockManager))
+    if (!(obj instanceof final BlockManager other))
      {
       return false;
      }
-    final BlockManager other = (BlockManager)obj;
-    return this.variableManager.equals(other.variableManager);
+    return variableManager.equals(other.variableManager);
    }
 
  }

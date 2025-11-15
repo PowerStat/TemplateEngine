@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2019-2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Copyright (C) 2019-2025 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0.
  */
 package de.powerstat.phplib.templateengine.intern.test;
 
@@ -13,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-
+import nl.jqno.equalsverifier.*;
+import de.powerstat.phplib.templateengine.TemplateEngine;
 import de.powerstat.phplib.templateengine.intern.BlockManager;
 import de.powerstat.phplib.templateengine.intern.VariableManager;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 
 /**
@@ -252,57 +253,12 @@ final class BlockManagerTests
 
 
   /**
-   * Test hash code.
+   * Equalsverifier.
    */
   @Test
-  /* default */ void testHashCode()
+  public void equalsContract()
    {
-    final VariableManager vm1 = new VariableManager();
-    vm1.setVar(PARENT, BLKSTRING);
-    final VariableManager vm2 = new VariableManager();
-    final BlockManager bm1 = new BlockManager(vm1);
-    final BlockManager bm2 = new BlockManager(vm1);
-    final BlockManager bm3 = new BlockManager(vm2);
-    assertAll("testHashCode", //$NON-NLS-1$
-      () -> assertEquals(bm1.hashCode(), bm2.hashCode(), "hashCodes are not equal"), //$NON-NLS-1$
-      () -> assertNotEquals(bm1.hashCode(), bm3.hashCode(), "hashCodes are equal") //$NON-NLS-1$
-    );
-   }
-
-
-  /**
-   * Test equals.
-   */
-  @Test
-  @SuppressFBWarnings("EC_NULL_ARG")
-  @SuppressWarnings({"PMD.EqualsNull", "java:S5785"})
-  /* default */ void testEquals()
-   {
-    final VariableManager vm1 = new VariableManager();
-    final VariableManager vm2 = new VariableManager();
-    vm2.setVar(PARENT, BLKSTRING);
-    final VariableManager vm3 = new VariableManager();
-    vm3.setVar("parent2", "before<!-- BEGIN blktest2 -->content<!-- END blktest2 -->after");
-    final VariableManager vm4 = new VariableManager();
-    vm4.setVar("parent3", "before<!-- BEGIN blktest3 -->content<!-- END blktest3 -->after");
-    final BlockManager bm1 = new BlockManager(vm1);
-    final BlockManager bm2 = new BlockManager(vm1);
-    final BlockManager bm3 = new BlockManager(vm2);
-    final BlockManager bm4 = new BlockManager(vm1);
-    final BlockManager bm5 = new BlockManager(vm3);
-    final BlockManager bm6 = new BlockManager(vm4);
-    assertAll("testEquals", //$NON-NLS-1$
-      () -> assertTrue(bm1.equals(bm1), "BlockManager11 is not equal"), //$NON-NLS-1$
-      () -> assertTrue(bm1.equals(bm2), "BlockManager12 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(bm2.equals(bm1), "BlockManager21 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(bm2.equals(bm4), "BlockManager24 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(bm1.equals(bm4), "BlockManager14 are not equal"), //$NON-NLS-1$
-      () -> assertFalse(bm1.equals(bm3), "BlockManager13 are equal"), //$NON-NLS-1$
-      () -> assertFalse(bm3.equals(bm1), "BlockManager31 are equal"), //$NON-NLS-1$
-      () -> assertFalse(bm1.equals(null), "BlockManager10 is equal"), //$NON-NLS-1$
-      () -> assertFalse(bm1.equals(bm5), "BlockManager15 is equal"), //$NON-NLS-1$
-      () -> assertFalse(bm1.equals(bm6), "BlockManager16 is equal") //$NON-NLS-1$
-    );
+    EqualsVerifier.forClass(BlockManager.class).withNonnullFields("variableManager").verify();
    }
 
  }

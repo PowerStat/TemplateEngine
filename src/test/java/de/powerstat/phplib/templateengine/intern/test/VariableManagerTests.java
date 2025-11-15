@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2019-2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Copyright (C) 2019-2025 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0.
  */
 package de.powerstat.phplib.templateengine.intern.test;
 
@@ -15,8 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
+import nl.jqno.equalsverifier.*;
+import de.powerstat.phplib.templateengine.TemplateEngine;
 import de.powerstat.phplib.templateengine.intern.VariableManager;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -194,7 +197,7 @@ final class VariableManagerTests
    * existsVar test.
    */
   @Test
-  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
+  // @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   /* default */ void testExistsVar4()
    {
     final VariableManager vm1 = new VariableManager();
@@ -247,7 +250,6 @@ final class VariableManagerTests
    * getVar test.
    */
   @Test
-  @SuppressFBWarnings("RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT")
   /* default */ void testGetVar4()
    {
     final VariableManager vm1 = new VariableManager();
@@ -577,52 +579,12 @@ final class VariableManagerTests
 
 
   /**
-   * Test hash code.
+   * Equalsverifier.
    */
   @Test
-  /* default */ void testHashCode()
+  public void equalsContract()
    {
-    final VariableManager vm1 = new VariableManager();
-    final VariableManager vm2 = new VariableManager();
-    final VariableManager vm3 = new VariableManager();
-    vm3.setVar("testvar2", "test2");
-    assertAll("testHashCode", //$NON-NLS-1$
-      () -> assertEquals(vm1.hashCode(), vm2.hashCode(), "hashCodes are not equal"), //$NON-NLS-1$
-      () -> assertNotEquals(vm1.hashCode(), vm3.hashCode(), "hashCodes are equal") //$NON-NLS-1$
-    );
-   }
-
-
-  /**
-   * Test equals.
-   */
-  @Test
-  @SuppressFBWarnings({"EC_NULL_ARG", "CE_CLASS_ENVY"})
-  @SuppressWarnings({"PMD.EqualsNull", "java:S5785"})
-  /* default */ void testEquals()
-   {
-    final VariableManager vm1 = new VariableManager();
-    final VariableManager vm2 = new VariableManager();
-    final VariableManager vm3 = new VariableManager();
-    vm3.setVar("parent1", "before<!-- BEGIN blktest1 -->content<!-- END blktest1 -->after");
-    final VariableManager vm4 = new VariableManager();
-    final VariableManager vm5 = new VariableManager();
-    vm5.setVar("parent3", "before<!-- BEGIN blktest3 -->content<!-- END blktest3 -->after");
-    final VariableManager vm6 = new VariableManager();
-    vm6.setVar("parent4", "before<!-- BEGIN blktest4 -->content<!-- END blktest4 -->after");
-
-    assertAll("testEquals", //$NON-NLS-1$
-      () -> assertTrue(vm1.equals(vm1), "VariableManager11 is not equal"), //$NON-NLS-1$
-      () -> assertTrue(vm1.equals(vm2), "VariableManager12 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(vm2.equals(vm1), "VariableManager21 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(vm2.equals(vm4), "VariableManager24 are not equal"), //$NON-NLS-1$
-      () -> assertTrue(vm1.equals(vm4), "VariableManager14 are not equal"), //$NON-NLS-1$
-      () -> assertFalse(vm1.equals(vm3), "VariableManager13 are equal"), //$NON-NLS-1$
-      () -> assertFalse(vm3.equals(vm1), "VariableManager31 are equal"), //$NON-NLS-1$
-      () -> assertFalse(vm1.equals(null), "VariableManager10 is equal"), //$NON-NLS-1$
-      () -> assertFalse(vm1.equals(vm5), "VariableManager15 is equal"), //$NON-NLS-1$
-      () -> assertFalse(vm1.equals(vm6), "VariableManager16 is equal") //$NON-NLS-1$
-    );
+    EqualsVerifier.forClass(VariableManager.class).withNonnullFields("vars").verify();
    }
 
  }

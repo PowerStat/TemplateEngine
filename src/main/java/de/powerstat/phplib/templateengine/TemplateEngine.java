@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2002-2003,2017-2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0.
  */
 package de.powerstat.phplib.templateengine;
 
@@ -191,7 +192,7 @@ public final class TemplateEngine
       throw new AssertionError(file.getAbsolutePath() + " is a directory and not a file!"); //$NON-NLS-1$
      }
     final long fileLen = file.length();
-    if (fileLen > TemplateEngine.MAX_TEMPLATE_SIZE)
+    if (fileLen > MAX_TEMPLATE_SIZE)
      {
       throw new IOException("file to large: " + fileLen); //$NON-NLS-1$
      }
@@ -206,7 +207,7 @@ public final class TemplateEngine
     filename = filename.toLowerCase(Locale.getDefault());
     templ.setFile(filename, file);
     */
-    templ.setFile(TemplateEngine.TEMPLATE, file);
+    templ.setFile(TEMPLATE, file);
     return templ;
    }
 
@@ -231,8 +232,7 @@ public final class TemplateEngine
       String line = reader.readLine();
       while (line != null)
        {
-        fileBuffer.append(line);
-        fileBuffer.append('\n');
+        fileBuffer.append(line).append('\n');
         line = reader.readLine();
        }
      }
@@ -241,7 +241,7 @@ public final class TemplateEngine
       throw new IllegalStateException("Empty stream"); //$NON-NLS-1$
      }
     final var templ = new TemplateEngine();
-    templ.setVar(TemplateEngine.TEMPLATE, fileBuffer.toString());
+    templ.setVar(TEMPLATE, fileBuffer.toString());
     return templ;
    }
 
@@ -256,18 +256,18 @@ public final class TemplateEngine
    */
   public static TemplateEngine newInstance(final String template)
    {
-    Objects.requireNonNull(template, TemplateEngine.TEMPLATE);
+    Objects.requireNonNull(template, TEMPLATE);
     if (template.isEmpty())
      {
-      throw new IllegalArgumentException(TemplateEngine.TEMPLATE_IS_EMPTY);
+      throw new IllegalArgumentException(TEMPLATE_IS_EMPTY);
      }
-    if (template.length() > TemplateEngine.MAX_TEMPLATE_SIZE)
+    if (template.length() > MAX_TEMPLATE_SIZE)
      {
       throw new IllegalArgumentException("template to large"); //$NON-NLS-1$
      }
     // if (!template.matches("^.+$"))
     final var templ = new TemplateEngine();
-    templ.setVar(TemplateEngine.TEMPLATE, template);
+    templ.setVar(TEMPLATE, template);
     return templ;
    }
 
@@ -290,11 +290,11 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("newVarname is empty"); //$NON-NLS-1$
      }
-    if (newVarname.length() > TemplateEngine.MAX_VARNAME_SIZE)
+    if (newVarname.length() > MAX_VARNAME_SIZE)
      {
       throw new IllegalArgumentException("newVarname is to long"); //$NON-NLS-1$
      }
-    if (!TemplateEngine.VARNAME_REGEXP.matcher(newVarname).matches())
+    if (!VARNAME_REGEXP.matcher(newVarname).matches())
      {
       throw new IllegalArgumentException("newVarname does not match name pattern"); //$NON-NLS-1$
      }
@@ -312,18 +312,18 @@ public final class TemplateEngine
    */
   public String getVar(final String varname)
    {
-    Objects.requireNonNull(varname, TemplateEngine.VARNAME);
+    Objects.requireNonNull(varname, VARNAME);
     if (varname.isEmpty())
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_IS_EMPTY);
+      throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
-    if (varname.length() > TemplateEngine.MAX_VARNAME_SIZE)
+    if (varname.length() > MAX_VARNAME_SIZE)
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_IS_TO_LONG);
+      throw new IllegalArgumentException(VARNAME_IS_TO_LONG);
      }
-    if (!TemplateEngine.VARNAME_REGEXP.matcher(varname).matches())
+    if (!VARNAME_REGEXP.matcher(varname).matches())
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
+      throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
     return this.variableManager.getVar(varname);
    }
@@ -339,22 +339,22 @@ public final class TemplateEngine
    */
   public void setVar(final String varname, final String value)
    {
-    Objects.requireNonNull(varname, TemplateEngine.VARNAME);
+    Objects.requireNonNull(varname, VARNAME);
     if (varname.isEmpty())
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_IS_EMPTY);
+      throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
-    if (varname.length() > TemplateEngine.MAX_VARNAME_SIZE)
+    if (varname.length() > MAX_VARNAME_SIZE)
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_IS_TO_LONG);
+      throw new IllegalArgumentException(VARNAME_IS_TO_LONG);
      }
-    if ((value != null) && (value.length() > TemplateEngine.MAX_TEMPLATE_SIZE))
+    if ((value != null) && (value.length() > MAX_TEMPLATE_SIZE))
      {
       throw new IllegalArgumentException("value is to large"); //$NON-NLS-1$
      }
-    if (!TemplateEngine.VARNAME_REGEXP.matcher(varname).matches())
+    if (!VARNAME_REGEXP.matcher(varname).matches())
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
+      throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
     this.variableManager.setVar(varname, value);
    }
@@ -382,18 +382,18 @@ public final class TemplateEngine
    */
   public void unsetVar(final String varname)
    {
-    Objects.requireNonNull(varname, TemplateEngine.VARNAME);
+    Objects.requireNonNull(varname, VARNAME);
     if (varname.isEmpty())
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_IS_EMPTY);
+      throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
-    if (varname.length() > TemplateEngine.MAX_VARNAME_SIZE)
+    if (varname.length() > MAX_VARNAME_SIZE)
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_IS_TO_LONG);
+      throw new IllegalArgumentException(VARNAME_IS_TO_LONG);
      }
-    if (!TemplateEngine.VARNAME_REGEXP.matcher(varname).matches())
+    if (!VARNAME_REGEXP.matcher(varname).matches())
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
+      throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
     this.variableManager.unsetVar(varname);
    }
@@ -413,21 +413,21 @@ public final class TemplateEngine
    * @throws NullPointerException If parent or varname is null
    * @throws IllegalArgumentException If parent or varname is empty
    */
-  @SuppressWarnings("PMD.LinguisticNaming")
+  @SuppressWarnings({"PMD.LinguisticNaming", "PMD.SimplifyBooleanReturns"})
   public boolean setBlock(final String parent, final String varname, final String name) throws IOException
    {
     Objects.requireNonNull(parent, "parent"); //$NON-NLS-1$
-    Objects.requireNonNull(varname, TemplateEngine.VARNAME);
+    Objects.requireNonNull(varname, VARNAME);
     Objects.requireNonNull(name, "name"); //$NON-NLS-1$
     if (parent.isEmpty() || varname.isEmpty())
      {
       throw new IllegalArgumentException("parent or varname is empty"); //$NON-NLS-1$
      }
-    if ((parent.length() > TemplateEngine.MAX_VARNAME_SIZE) || (varname.length() > TemplateEngine.MAX_VARNAME_SIZE) || (name.length() > TemplateEngine.MAX_VARNAME_SIZE))
+    if ((parent.length() > MAX_VARNAME_SIZE) || (varname.length() > MAX_VARNAME_SIZE) || (name.length() > MAX_VARNAME_SIZE))
      {
       throw new IllegalArgumentException("parent, varname or name is to long"); //$NON-NLS-1$
      }
-    if (!TemplateEngine.VARNAME_REGEXP.matcher(parent).matches() || !TemplateEngine.VARNAME_REGEXP.matcher(varname).matches() || (!name.isEmpty() && (!TemplateEngine.VARNAME_REGEXP.matcher(name).matches())))
+    if (!VARNAME_REGEXP.matcher(parent).matches() || !VARNAME_REGEXP.matcher(varname).matches() || (!name.isEmpty() && (!VARNAME_REGEXP.matcher(name).matches())))
      {
       throw new IllegalArgumentException("parent, varname or name does not match name pattern"); //$NON-NLS-1$
      }
@@ -470,18 +470,18 @@ public final class TemplateEngine
    */
   public String subst(final String varname) throws IOException
    {
-    Objects.requireNonNull(varname, TemplateEngine.VARNAME);
+    Objects.requireNonNull(varname, VARNAME);
     if (varname.isEmpty())
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_IS_EMPTY);
+      throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
-    if (varname.length() > TemplateEngine.MAX_VARNAME_SIZE)
+    if (varname.length() > MAX_VARNAME_SIZE)
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_IS_TO_LONG);
+      throw new IllegalArgumentException(VARNAME_IS_TO_LONG);
      }
-    if (!TemplateEngine.VARNAME_REGEXP.matcher(varname).matches())
+    if (!VARNAME_REGEXP.matcher(varname).matches())
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
+      throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
     if (!this.fileManager.loadFile(varname))
      {
@@ -506,16 +506,16 @@ public final class TemplateEngine
   public String parse(final String target, final String varname, final boolean append) throws IOException
    {
     Objects.requireNonNull(target, "target"); //$NON-NLS-1$
-    Objects.requireNonNull(varname, TemplateEngine.VARNAME);
+    Objects.requireNonNull(varname, VARNAME);
     if (target.isEmpty() || varname.isEmpty())
      {
       throw new IllegalArgumentException("target or varname is empty"); //$NON-NLS-1$
      }
-    if ((target.length() > TemplateEngine.MAX_VARNAME_SIZE) || (varname.length() > TemplateEngine.MAX_VARNAME_SIZE))
+    if ((target.length() > MAX_VARNAME_SIZE) || (varname.length() > MAX_VARNAME_SIZE))
      {
       throw new IllegalArgumentException("target or varname is to long"); //$NON-NLS-1$
      }
-    if (!TemplateEngine.VARNAME_REGEXP.matcher(target).matches() || !TemplateEngine.VARNAME_REGEXP.matcher(varname).matches())
+    if (!VARNAME_REGEXP.matcher(target).matches() || !VARNAME_REGEXP.matcher(varname).matches())
      {
       throw new IllegalArgumentException("target or varname does not match name pattern"); //$NON-NLS-1$
      }
@@ -567,18 +567,18 @@ public final class TemplateEngine
    */
   public List<String> getUndefined(final String varname) throws IOException
    {
-    Objects.requireNonNull(varname, TemplateEngine.VARNAME);
+    Objects.requireNonNull(varname, VARNAME);
     if (varname.isEmpty())
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_IS_EMPTY);
+      throw new IllegalArgumentException(VARNAME_IS_EMPTY);
      }
-    if (varname.length() > TemplateEngine.MAX_VARNAME_SIZE)
+    if (varname.length() > MAX_VARNAME_SIZE)
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_IS_TO_LONG);
+      throw new IllegalArgumentException(VARNAME_IS_TO_LONG);
      }
-    if (!TemplateEngine.VARNAME_REGEXP.matcher(varname).matches())
+    if (!VARNAME_REGEXP.matcher(varname).matches())
      {
-      throw new IllegalArgumentException(TemplateEngine.VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
+      throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
     if (!this.fileManager.loadFile(varname))
      {
@@ -598,18 +598,18 @@ public final class TemplateEngine
    */
   public String finish(final String template)
    {
-    Objects.requireNonNull(template, TemplateEngine.TEMPLATE);
+    Objects.requireNonNull(template, TEMPLATE);
     if (template.isEmpty())
      {
-      throw new IllegalArgumentException(TemplateEngine.TEMPLATE_IS_EMPTY);
+      throw new IllegalArgumentException(TEMPLATE_IS_EMPTY);
      }
-    if (template.length() > TemplateEngine.MAX_TEMPLATE_SIZE)
+    if (template.length() > MAX_TEMPLATE_SIZE)
      {
       throw new IllegalArgumentException("template is to large"); //$NON-NLS-1$
      }
     // if (!template.matches("^.+$"))
     String result = template;
-    final var matcher = TemplateEngine.BLOCK_MATCHER_REGEXP.matcher(result);
+    final var matcher = BLOCK_MATCHER_REGEXP.matcher(result);
     switch (this.unknowns)
      {
       case KEEP:
@@ -685,11 +685,10 @@ public final class TemplateEngine
      {
       return true;
      }
-    if (!(obj instanceof TemplateEngine))
+    if (!(obj instanceof final TemplateEngine other))
      {
       return false;
      }
-    final TemplateEngine other = (TemplateEngine)obj;
     return (this.unknowns == other.unknowns) && this.variableManager.equals(other.variableManager) && this.fileManager.equals(other.fileManager) && this.blockManager.equals(other.blockManager);
    }
 

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2002-2003,2017-2023 Dipl.-Inform. Kai Hofmann. All rights reserved!
+ * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0.
  */
 package de.powerstat.phplib.templateengine.intern;
 
@@ -67,10 +68,10 @@ public final class FileManager
     super();
     Objects.requireNonNull(vManager, "vManager"); //$NON-NLS-1$
     Objects.requireNonNull(fManager, "fManager"); //$NON-NLS-1$
-    this.variableManager = vManager;
+    variableManager = vManager;
     for (final Map.Entry<String, File> entry : fManager.files.entrySet())
      {
-      this.files.put(entry.getKey(), entry.getValue());
+      files.put(entry.getKey(), entry.getValue());
      }
    }
 
@@ -84,7 +85,8 @@ public final class FileManager
   public FileManager(final VariableManager vManager)
    {
     super();
-    this.variableManager = vManager;
+    Objects.requireNonNull(vManager, "vManager"); //$NON-NLS-1$
+    variableManager = vManager;
    }
 
 
@@ -104,26 +106,26 @@ public final class FileManager
     boolean exists = newFile.exists();
     if (exists)
      {
-      if (newFile.length() > FileManager.MAX_TEMPLATE_SIZE)
+      if (newFile.length() > MAX_TEMPLATE_SIZE)
        {
         throw new IllegalArgumentException("newFile to large"); //$NON-NLS-1$
        }
-      this.files.put(newVarname, newFile);
+      files.put(newVarname, newFile);
      }
     else
      {
-      try (InputStream stream = this.getClass().getResourceAsStream(FileManager.FILEPATH_SEPARATOR + newFile.getName()))
+      try (InputStream stream = this.getClass().getResourceAsStream(FILEPATH_SEPARATOR + newFile.getName()))
        {
         if (stream != null)
          {
           exists = true;
-          this.files.put(newVarname, newFile);
+          files.put(newVarname, newFile);
          }
        }
       catch (final IOException ignored)
        {
         // exists is already false
-        FileManager.LOGGER.warn("File does not exist: " + newFile.getAbsolutePath(), ignored); //$NON-NLS-1$
+        LOGGER.warn("File does not exist: " + newFile.getAbsolutePath(), ignored); //$NON-NLS-1$
        }
      }
     return exists;
@@ -138,7 +140,7 @@ public final class FileManager
    */
   public boolean existsFile(final String varname)
    {
-    final var file = this.files.get(varname);
+    final var file = files.get(varname);
     return (file != null);
    }
 
@@ -155,19 +157,19 @@ public final class FileManager
   public boolean loadFile(final String varname) throws IOException
    {
     // assert (varname != null) && !varname.isEmpty() && (varname.length() <= TemplateEngine.MAX_VARNAME_SIZE);
-    if (this.variableManager.existsVar(varname)) // Already loaded?
+    if (variableManager.existsVar(varname)) // Already loaded?
      {
       return true;
      }
-    final var file = this.files.get(varname);
+    final var file = files.get(varname);
     if (file == null)
      {
       return false;
      }
-    InputStream istream = this.getClass().getResourceAsStream(FileManager.FILEPATH_SEPARATOR + file.getName()); // Read from classpath/jar
+    InputStream istream = this.getClass().getResourceAsStream(FILEPATH_SEPARATOR + file.getName()); // Read from classpath/jar
     if (istream == null)
      {
-      istream = Files.newInputStream(this.files.get(varname).toPath(), StandardOpenOption.READ); // Read from filesystem
+      istream = Files.newInputStream(files.get(varname).toPath(), StandardOpenOption.READ); // Read from filesystem
      }
     final var fileBuffer = new StringBuilder();
     try (var reader = new BufferedReader(new InputStreamReader(istream, StandardCharsets.UTF_8)))
@@ -175,8 +177,7 @@ public final class FileManager
       String line = reader.readLine();
       while (line != null)
        {
-        fileBuffer.append(line);
-        fileBuffer.append('\n');
+        fileBuffer.append(line).append('\n');
         line = reader.readLine();
        }
      }
@@ -184,7 +185,7 @@ public final class FileManager
      {
       return false;
      }
-    this.variableManager.setVar(varname, fileBuffer.toString());
+    variableManager.setVar(varname, fileBuffer.toString());
     return true;
    }
 
@@ -202,7 +203,7 @@ public final class FileManager
   @Override
   public String toString()
    {
-    return new StringBuilder().append("FileManager[").append("files=").append(this.files.values().stream().map(File::getName).reduce((s1, s2) -> s1 + ", " + s2)).append(']').toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+    return new StringBuilder().append("FileManager[").append("files=").append(files.values().stream().map(File::getName).reduce((s1, s2) -> s1 + ", " + s2)).append(']').toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
    }
 
 
@@ -215,7 +216,7 @@ public final class FileManager
   @Override
   public int hashCode()
    {
-    return Objects.hash(this.files);
+    return Objects.hash(files, variableManager);
    }
 
 
@@ -233,12 +234,11 @@ public final class FileManager
      {
       return true;
      }
-    if (!(obj instanceof FileManager))
+    if (!(obj instanceof final FileManager other))
      {
       return false;
      }
-    final FileManager other = (FileManager)obj;
-    return this.files.equals(other.files) && this.variableManager.equals(other.variableManager);
+    return files.equals(other.files) && variableManager.equals(other.variableManager);
    }
 
  }
