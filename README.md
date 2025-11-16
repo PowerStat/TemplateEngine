@@ -107,10 +107,6 @@ If you use [infer][https://fbinfer.com/]:
 
     infer run -- mvn clean compile
 
-To create a spdx:
-
-    mvn spdx:createSPDX
-
 To create a cycloneDX:
 
     mvn cyclonedx:makeBom

@@ -22,6 +22,11 @@ public final class BlockManager
   // private static final Logger LOGGER = LogManager.getLogger(BlockManager.class);
 
   /**
+   * VManager.
+   */
+  private static final String VMANAGER = "vManager";
+
+  /**
    * Variable manager reference.
    */
   private final VariableManager variableManager;
@@ -43,7 +48,7 @@ public final class BlockManager
   public BlockManager(final VariableManager vManager, final BlockManager bManager)
    {
     super();
-    Objects.requireNonNull(vManager, "vManager"); //$NON-NLS-1$
+    Objects.requireNonNull(vManager, VMANAGER);
     Objects.requireNonNull(bManager, "bManager"); //$NON-NLS-1$
     variableManager = vManager;
     /*
@@ -64,7 +69,7 @@ public final class BlockManager
   public BlockManager(final VariableManager vManager)
    {
     super();
-    Objects.requireNonNull(vManager, "vManager"); //$NON-NLS-1$
+    Objects.requireNonNull(vManager, VMANAGER);
     variableManager = vManager;
    }
 

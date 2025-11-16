@@ -5,17 +5,14 @@
 package de.powerstat.phplib.templateengine.intern.test;
 
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import nl.jqno.equalsverifier.*;
-import de.powerstat.phplib.templateengine.TemplateEngine;
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 import de.powerstat.phplib.templateengine.intern.BlockManager;
 import de.powerstat.phplib.templateengine.intern.VariableManager;
 

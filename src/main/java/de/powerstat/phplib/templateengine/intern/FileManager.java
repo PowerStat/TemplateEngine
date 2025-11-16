@@ -30,6 +30,11 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 public final class FileManager
  {
   /**
+   * VManager.
+   */
+  private static final String VMANAGER = "vManager";
+
+  /**
    * Logger.
    */
   private static final Logger LOGGER = LogManager.getLogger(FileManager.class);
@@ -66,7 +71,7 @@ public final class FileManager
   public FileManager(final VariableManager vManager, final FileManager fManager)
    {
     super();
-    Objects.requireNonNull(vManager, "vManager"); //$NON-NLS-1$
+    Objects.requireNonNull(vManager, VMANAGER);
     Objects.requireNonNull(fManager, "fManager"); //$NON-NLS-1$
     variableManager = vManager;
     for (final Map.Entry<String, File> entry : fManager.files.entrySet())
@@ -85,7 +90,7 @@ public final class FileManager
   public FileManager(final VariableManager vManager)
    {
     super();
-    Objects.requireNonNull(vManager, "vManager"); //$NON-NLS-1$
+    Objects.requireNonNull(vManager, VMANAGER);
     variableManager = vManager;
    }
 

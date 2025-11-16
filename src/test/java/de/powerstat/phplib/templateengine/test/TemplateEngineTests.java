@@ -8,7 +8,6 @@ package de.powerstat.phplib.templateengine.test;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,7 +24,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
-import nl.jqno.equalsverifier.*;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 import de.powerstat.phplib.templateengine.HandleUndefined;
 import de.powerstat.phplib.templateengine.TemplateEngine;
@@ -35,7 +34,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 /**
  * TemplateEngine tests.
  */
-@SuppressFBWarnings({"CE_CLASS_ENVY", "EC_NULL_ARG"})
+@SuppressFBWarnings({"CE_CLASS_ENVY"})
 @SuppressWarnings({"PMD.LinguisticNaming", "PMD.ExcessiveClassLength", "PMD.LongVariable", "PMD.ExcessivePublicCount"})
 final class TemplateEngineTests
  {

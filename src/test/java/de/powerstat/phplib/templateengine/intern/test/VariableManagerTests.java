@@ -5,23 +5,18 @@
 package de.powerstat.phplib.templateengine.intern.test;
 
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import nl.jqno.equalsverifier.*;
-import de.powerstat.phplib.templateengine.TemplateEngine;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import de.powerstat.phplib.templateengine.intern.VariableManager;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 
 /**
