@@ -186,7 +186,7 @@ public final class FileManager
         line = reader.readLine();
        }
      }
-    if (fileBuffer.length() == 0)
+    if (fileBuffer.isEmpty())
      {
       return false;
      }

@@ -577,7 +577,7 @@ final class VariableManagerTests
    * Equalsverifier.
    */
   @Test
-  public void equalsContract()
+  /* default */ void testEqualsContract()
    {
     EqualsVerifier.forClass(VariableManager.class).withNonnullFields("vars").verify();
    }

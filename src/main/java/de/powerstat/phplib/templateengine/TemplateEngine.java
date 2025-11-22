@@ -124,10 +124,10 @@ public final class TemplateEngine
   public TemplateEngine(final TemplateEngine engine)
    {
     Objects.requireNonNull(engine, "engine"); //$NON-NLS-1$
-    this.unknowns = engine.unknowns;
-    this.variableManager = new VariableManager(engine.variableManager);
-    this.fileManager = new FileManager(this.variableManager, engine.fileManager);
-    this.blockManager = new BlockManager(this.variableManager, engine.blockManager);
+    unknowns = engine.unknowns;
+    variableManager = new VariableManager(engine.variableManager);
+    fileManager = new FileManager(variableManager, engine.fileManager);
+    blockManager = new BlockManager(variableManager, engine.blockManager);
    }
 
 
@@ -140,9 +140,9 @@ public final class TemplateEngine
   public TemplateEngine(final HandleUndefined unknowns)
    {
     this.unknowns = unknowns;
-    this.variableManager = new VariableManager();
-    this.fileManager = new FileManager(this.variableManager);
-    this.blockManager = new BlockManager(this.variableManager);
+    variableManager = new VariableManager();
+    fileManager = new FileManager(variableManager);
+    blockManager = new BlockManager(variableManager);
    }
 
 
@@ -236,7 +236,7 @@ public final class TemplateEngine
         line = reader.readLine();
        }
      }
-    if (fileBuffer.length() == 0)
+    if (fileBuffer.isEmpty())
      {
       throw new IllegalStateException("Empty stream"); //$NON-NLS-1$
      }
@@ -298,7 +298,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("newVarname does not match name pattern"); //$NON-NLS-1$
      }
-    return this.fileManager.addFile(newVarname, newFile);
+    return fileManager.addFile(newVarname, newFile);
    }
 
 
@@ -325,7 +325,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
-    return this.variableManager.getVar(varname);
+    return variableManager.getVar(varname);
    }
 
 
@@ -356,7 +356,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
-    this.variableManager.setVar(varname, value);
+    variableManager.setVar(varname, value);
    }
 
 
@@ -395,7 +395,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
-    this.variableManager.unsetVar(varname);
+    variableManager.unsetVar(varname);
    }
 
 
@@ -431,11 +431,11 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("parent, varname or name does not match name pattern"); //$NON-NLS-1$
      }
-    if (!this.fileManager.loadFile(parent))
+    if (!fileManager.loadFile(parent))
      {
       return false;
      }
-    return this.blockManager.setBlock(parent, varname, name);
+    return blockManager.setBlock(parent, varname, name);
    }
 
 
@@ -483,11 +483,11 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
-    if (!this.fileManager.loadFile(varname))
+    if (!fileManager.loadFile(varname))
      {
       return ""; //$NON-NLS-1$
      }
-    return this.variableManager.subst(varname);
+    return variableManager.subst(varname);
    }
 
 
@@ -519,11 +519,11 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("target or varname does not match name pattern"); //$NON-NLS-1$
      }
-    if (!this.fileManager.loadFile(varname))
+    if (!fileManager.loadFile(varname))
      {
       return ""; //$NON-NLS-1$
      }
-    return this.variableManager.parse(target, varname, append);
+    return variableManager.parse(target, varname, append);
    }
 
 
@@ -552,7 +552,7 @@ public final class TemplateEngine
    */
   public List<String> getVars()
    {
-    return this.variableManager.getVars();
+    return variableManager.getVars();
    }
 
 
@@ -580,11 +580,11 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException(VARNAME_DOES_NOT_MATCH_NAME_PATTERN);
      }
-    if (!this.fileManager.loadFile(varname))
+    if (!fileManager.loadFile(varname))
      {
       return Collections.emptyList();
      }
-    return this.variableManager.getUndefined(varname);
+    return variableManager.getUndefined(varname);
    }
 
 
@@ -610,7 +610,7 @@ public final class TemplateEngine
     // if (!template.matches("^.+$"))
     String result = template;
     final var matcher = BLOCK_MATCHER_REGEXP.matcher(result);
-    switch (this.unknowns)
+    switch (unknowns)
      {
       case KEEP:
         break;
@@ -621,7 +621,7 @@ public final class TemplateEngine
         result = matcher.replaceAll("<!-- Template variable '$1' undefined -->"); //$NON-NLS-1$
         break;
       default: // For the case that enum HandleUndefined will be extended!
-        throw new AssertionError(this.unknowns);
+        throw new AssertionError(unknowns);
      }
     return result;
    }
@@ -654,7 +654,7 @@ public final class TemplateEngine
   @Override
   public String toString()
    {
-    return new StringBuilder().append("TemplateEngine[unknowns=").append(this.unknowns).append(", vManager=").append(this.variableManager).append(", fManager=").append(this.fileManager).append(", bManager=").append(this.blockManager).append(']').toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+    return new StringBuilder().append("TemplateEngine[unknowns=").append(unknowns).append(", vManager=").append(variableManager).append(", fManager=").append(fileManager).append(", bManager=").append(blockManager).append(']').toString(); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
    }
 
 
@@ -667,7 +667,7 @@ public final class TemplateEngine
   @Override
   public int hashCode()
    {
-    return Objects.hash(this.unknowns, this.variableManager, this.fileManager, this.blockManager);
+    return Objects.hash(unknowns, variableManager, fileManager, blockManager);
    }
 
 
@@ -689,7 +689,7 @@ public final class TemplateEngine
      {
       return false;
      }
-    return (this.unknowns == other.unknowns) && this.variableManager.equals(other.variableManager) && this.fileManager.equals(other.fileManager) && this.blockManager.equals(other.blockManager);
+    return (unknowns == other.unknowns) && variableManager.equals(other.variableManager) && fileManager.equals(other.fileManager) && blockManager.equals(other.blockManager);
    }
 
  }

@@ -288,11 +288,6 @@ final class TemplateEngineTests
    */
   private static final String NEW_INSTANCE_RESULT_NOT_AS_EXPECTED = "newInstance result not as expected"; //$NON-NLS-1$
 
-  /**
-   * Parent constant.
-   */
-  private static final String PARENT = "parent";
-
 
   /**
    * Default constructor.
@@ -1904,7 +1899,7 @@ final class TemplateEngineTests
    * Equalsverifier.
    */
   @Test
-  public void equalsContract()
+  /* default */ void testEqualsContract()
    {
     EqualsVerifier.forClass(TemplateEngine.class).withNonnullFields("variableManager", "fileManager", "blockManager").verify();
    }

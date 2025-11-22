@@ -351,7 +351,7 @@ final class FileManagerTests
    * Equalsverifier.
    */
   @Test
-  public void equalsContract()
+  /* default */ void testEqualsContract()
    {
     EqualsVerifier.forClass(FileManager.class).withNonnullFields("files", "variableManager").verify();
    }

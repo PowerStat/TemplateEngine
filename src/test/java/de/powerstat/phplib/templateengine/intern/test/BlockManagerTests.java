@@ -253,7 +253,7 @@ final class BlockManagerTests
    * Equalsverifier.
    */
   @Test
-  public void equalsContract()
+  /* default */ void testEqualsContract()
    {
     EqualsVerifier.forClass(BlockManager.class).withNonnullFields("variableManager").verify();
    }
