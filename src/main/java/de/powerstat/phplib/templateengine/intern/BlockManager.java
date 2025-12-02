@@ -8,6 +8,8 @@ package de.powerstat.phplib.templateengine.intern;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 
@@ -144,7 +146,7 @@ public final class BlockManager
    */
   @Override
   @SuppressWarnings("PMD.SimplifyBooleanReturns")
-  public boolean equals(final Object obj)
+  public boolean equals(final @Nullable Object obj)
    {
     if (this == obj)
      {

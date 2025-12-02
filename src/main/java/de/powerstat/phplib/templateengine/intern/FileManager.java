@@ -20,6 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -174,7 +175,7 @@ public final class FileManager
     InputStream istream = this.getClass().getResourceAsStream(FILEPATH_SEPARATOR + file.getName()); // Read from classpath/jar
     if (istream == null)
      {
-      istream = Files.newInputStream(files.get(varname).toPath(), StandardOpenOption.READ); // Read from filesystem
+      istream = Files.newInputStream(file.toPath(), StandardOpenOption.READ); // Read from filesystem
      }
     final var fileBuffer = new StringBuilder();
     try (var reader = new BufferedReader(new InputStreamReader(istream, StandardCharsets.UTF_8)))
@@ -233,7 +234,7 @@ public final class FileManager
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
-  public boolean equals(final Object obj)
+  public boolean equals(final @Nullable Object obj)
    {
     if (this == obj)
      {

@@ -21,6 +21,7 @@ import de.powerstat.phplib.templateengine.intern.BlockManager;
 import de.powerstat.phplib.templateengine.intern.FileManager;
 import de.powerstat.phplib.templateengine.intern.VariableManager;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 
 /**
@@ -337,7 +338,7 @@ public final class TemplateEngine
    * @throws NullPointerException If varname is null
    * @throws IllegalArgumentException If varname is empty
    */
-  public void setVar(final String varname, final String value)
+  public void setVar(final String varname, final @Nullable String value)
    {
     Objects.requireNonNull(varname, VARNAME);
     if (varname.isEmpty())
@@ -427,7 +428,7 @@ public final class TemplateEngine
      {
       throw new IllegalArgumentException("parent, varname or name is to long"); //$NON-NLS-1$
      }
-    if (!VARNAME_REGEXP.matcher(parent).matches() || !VARNAME_REGEXP.matcher(varname).matches() || (!name.isEmpty() && (!VARNAME_REGEXP.matcher(name).matches())))
+    if (!VARNAME_REGEXP.matcher(parent).matches() || !VARNAME_REGEXP.matcher(varname).matches() || (!name.isEmpty() && !VARNAME_REGEXP.matcher(name).matches()))
      {
       throw new IllegalArgumentException("parent, varname or name does not match name pattern"); //$NON-NLS-1$
      }
@@ -608,22 +609,14 @@ public final class TemplateEngine
       throw new IllegalArgumentException("template is to large"); //$NON-NLS-1$
      }
     // if (!template.matches("^.+$"))
-    String result = template;
-    final var matcher = BLOCK_MATCHER_REGEXP.matcher(result);
-    switch (unknowns)
+    final var matcher = BLOCK_MATCHER_REGEXP.matcher(template);
+    return switch (unknowns)
      {
-      case KEEP:
-        break;
-      case REMOVE:
-        result = matcher.replaceAll(""); //$NON-NLS-1$
-        break;
-      case COMMENT:
-        result = matcher.replaceAll("<!-- Template variable '$1' undefined -->"); //$NON-NLS-1$
-        break;
-      default: // For the case that enum HandleUndefined will be extended!
-        throw new AssertionError(unknowns);
-     }
-    return result;
+      case KEEP -> template;
+      case REMOVE -> matcher.replaceAll(""); //$NON-NLS-1$
+      case COMMENT -> matcher.replaceAll("<!-- Template variable '$1' undefined -->"); //$NON-NLS-1$
+      default -> throw new AssertionError(unknowns); // For the case that enum HandleUndefined will be extended!
+     };
    }
 
 
@@ -679,7 +672,7 @@ public final class TemplateEngine
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
-  public boolean equals(final Object obj)
+  public boolean equals(final @Nullable Object obj)
    {
     if (this == obj)
      {

@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 
 /**
@@ -58,7 +59,7 @@ public final class VariableManager
     Objects.requireNonNull(vManager, "vManager"); //$NON-NLS-1$
     for (final Map.Entry<String, String> entry : vManager.vars.entrySet())
      {
-      this.vars.put(entry.getKey(), entry.getValue());
+      vars.put(entry.getKey(), entry.getValue());
      }
    }
 
@@ -80,7 +81,7 @@ public final class VariableManager
    */
   public boolean existsVar(final String varname)
    {
-    return this.vars.containsKey(varname);
+    return vars.containsKey(varname);
    }
 
 
@@ -94,7 +95,7 @@ public final class VariableManager
    */
   public String getVar(final String varname)
    {
-    final String value = this.vars.get(varname);
+    final String value = vars.get(varname);
     return (value == null) ? "" : value; //$NON-NLS-1$
    }
 
@@ -103,14 +104,14 @@ public final class VariableManager
    * Set template variables value.
    *
    * @param varname Template variable name
-   * @param value Template variable value, could  be null
+   * @param value Template variable value, could be null
    * @throws NullPointerException If varname is null
    * @throws IllegalArgumentException If varname is empty
    */
-  public void setVar(final String varname, final String value)
+  public void setVar(final String varname, final @Nullable String value)
    {
     // if (!value.matches("^.+$"))
-    this.vars.put(varname, (value == null) ? "" : value); //$NON-NLS-1$
+    vars.put(varname, (value == null) ? "" : value); //$NON-NLS-1$
    }
 
 
@@ -124,7 +125,7 @@ public final class VariableManager
   @SuppressWarnings("java:S1120")
   public void unsetVar(final String varname)
    {
-    /* String value = */ this.vars.remove(varname);
+    /* String value = */ vars.remove(varname);
    }
 
 
@@ -145,7 +146,7 @@ public final class VariableManager
     while (result)
      {
       final String vname = matcher.group(1);
-      if (!this.vars.containsKey(vname) && !undefvars.contains(vname))
+      if ((vname != null) && !vars.containsKey(vname) && !undefvars.contains(vname))
        {
         undefvars.add(vname);
        }
@@ -196,7 +197,7 @@ public final class VariableManager
     while (matcherTemplate.find())
      {
       final var varnameTemplate = block.substring(matcherTemplate.start() + 1, matcherTemplate.end() - 1);
-      if (this.vars.containsKey(varnameTemplate))
+      if (vars.containsKey(varnameTemplate))
        {
         varsSetTemplate.add(varnameTemplate);
        }
@@ -253,12 +254,12 @@ public final class VariableManager
    */
   public List<String> getVars()
    {
-    if (this.vars.isEmpty())
+    if (vars.isEmpty())
      {
       return Collections.emptyList();
      }
-    final List<String> result = new ArrayList<>(this.vars.size());
-    for (final Entry<String, String> entry : this.vars.entrySet())
+    final List<String> result = new ArrayList<>(vars.size());
+    for (final Entry<String, String> entry : vars.entrySet())
      {
       result.add(entry.getKey()); // entry.getValue();
      }
@@ -292,7 +293,7 @@ public final class VariableManager
   @Override
   public int hashCode()
    {
-    return Objects.hash(this.vars);
+    return Objects.hash(vars);
    }
 
 
@@ -305,7 +306,7 @@ public final class VariableManager
    */
   @Override
   @SuppressWarnings("PMD.SimplifyBooleanReturns")
-  public boolean equals(final Object obj)
+  public boolean equals(final @Nullable Object obj)
    {
     if (this == obj)
      {
@@ -315,7 +316,7 @@ public final class VariableManager
      {
       return false;
      }
-    return this.vars.equals(other.vars);
+    return vars.equals(other.vars);
    }
 
  }

@@ -1,1 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="false" context="catchblock_context" deleted="false" description="Code in new catch blocks" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.catchblock" name="catchblock"/></templates>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements; and to You under the Apache License, Version 2.0. -->
+<templates>
+	<template autoinsert="false" context="catchblock_context"
+		deleted="false" description="Code in new catch blocks" enabled="true"
+		id="org.eclipse.jdt.ui.text.codetemplates.catchblock"
+		name="catchblock" />
+</templates>
