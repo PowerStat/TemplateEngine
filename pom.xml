@@ -50,6 +50,7 @@
         <configuration>
           <archive>
             <manifestEntries>
+              <!-- <Build-Number>${buildNumber}</Build-Number> -->
               <Version>${project.version}</Version>
               <GIT>https://github.com/PowerStat/TemplateEngine.git</GIT>
               <SCM-Revision>${buildNumber}</SCM-Revision>
